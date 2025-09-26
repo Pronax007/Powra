@@ -1,35 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vodafone / National Grid POWRA</title>
 <style>
-  :root{ --sheet-w: 794px; }
-  body { font-family: Arial, sans-serif; background:#f0f0f0; margin:0; padding:20px 0; }
-  #sheet { width: var(--sheet-w); margin:0 auto; background:#fff; padding:16px; box-shadow:0 0 8px rgba(0,0,0,0.08); }
-  .header { text-align:center; }
-  .header img { height:60px; margin:0 20px; vertical-align:middle; }
-  .divider { border-top:2px solid #ccc; margin:10px 0 15px 0; }
-  h1 { margin:8px 0 6px 0; font-size:1.5em; }
-  .version { text-align:center; font-size:0.9em; color:#666; margin:4px 0 16px; }
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  .header { text-align: center; }
+  .header img { height: 70px; margin: 0 30px; vertical-align: middle; }
+  .divider { border-top: 2px solid #ccc; margin: 10px 0 15px 0; }
+  .version { font-weight: bold; margin-top: 5px; color: #444; text-align: center; }
+  h1 { font-size: 22px; margin: 10px 0; }
+  label { display: block; margin-top: 10px; font-weight: bold; }
+  input[type=text], textarea, select { width: 100%; padding: 6px; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+  th, td { border: 1px solid #ccc; padding: 8px; }
+  th { background: #f0f0f0; }
+  .checklist { margin: 10px 0; }
+  .signature-pad { border: 1px solid #ccc; width: 100%; height: 150px; }
+  .sig-container { margin-top: 10px; }
+  button { margin-top: 10px; padding: 8px 16px; font-weight: bold; }
 </style>
 </head>
 <body>
 <div id="sheet">
   <div class="header">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" alt="Vodafone Logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" alt="National Grid Logo">
+    <!-- Vodafone Logo -->
+    <img src="data:image/jpeg;base64,INSERT_VODAFONE_BASE64_HERE" alt="Vodafone Logo">
+    <!-- National Grid Logo -->
+    <img src="data:image/png;base64,INSERT_NG_BASE64_HERE" alt="National Grid Logo">
     <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
   </div>
   <div class="divider"></div>
-  <div class="version">Version 18 • embedded logos</div>
+  <div class="version">Version 20 • full form with official logos</div>
 
+  <!-- Date/Time -->
   <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
+  <!-- Job Details -->
+  <h2>Job Details</h2>
+  <label>Contract</label><input type="text">
+  <label>CBOL Number</label><input type="text">
+  <label>Supervisor Name & Contact</label><input type="text">
+  <label>CP in charge</label>
+  <select>
+    <option>Warren Barron</option>
+    <option>Carl Carlisle</option>
+    <option>Joe Smith</option>
+    <option>Matt Bodrozic</option>
+    <option>Bobby Rehman</option>
+    <option>Mick Waine</option>
+  </select>
+
+  <!-- GPS Location -->
+  <label>GPS Location</label>
+  <input type="text" id="gpsLocation" readonly>
+  <button type="button" onclick="getGPS()">Get Current Location</button>
+  <p><a id="gpsLink" href="#" target="_blank"></a></p>
+
+  <!-- Work Type -->
+  <label>Work Type</label>
+  <select>
+    <option>Overhead works</option>
+    <option>HV Substation</option>
+    <option>Telco Room</option>
+    <option>GDC</option>
+  </select>
+
+  <!-- Section A -->
+  <h2>Section A - Start Safe</h2>
+  <div class="checklist">
+    <label><input type="checkbox"> I have received a site induction</label>
+    <label><input type="checkbox"> I have reviewed the RAMS</label>
+    <label><input type="checkbox"> I have the correct PPE</label>
+  </div>
+
+  <!-- Section B -->
+  <h2>Section B - Site Specific Hazards</h2>
+  <textarea rows="4"></textarea>
+
+  <!-- Section C -->
+  <h2>Section C - Work Safe</h2>
+  <div class="checklist">
+    <label><input type="checkbox"> I will stop work if conditions change</label>
+    <label><input type="checkbox"> I will maintain site security</label>
+    <label><input type="checkbox"> I will report incidents</label>
+  </div>
+
+  <!-- Signatures -->
+  <h2>Team Signatures</h2>
+  <div id="signatures"></div>
+  <button type="button" onclick="addSignature()">Add Team Member Signature</button>
+
+  <!-- Export -->
+  <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
 </div>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.0.0/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <script>
-document.getElementById("datetime").textContent = new Date().toLocaleString();
+// Date/Time
+document.getElementById('datetime').textContent = new Date().toLocaleString();
+
+// GPS Fetch
+function getGPS() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      const lat = pos.coords.latitude.toFixed(6);
+      const lng = pos.coords.longitude.toFixed(6);
+      const coords = lat + ", " + lng;
+      document.getElementById("gpsLocation").value = coords;
+      document.getElementById("gpsLink").href = "https://www.google.com/maps?q=" + coords;
+      document.getElementById("gpsLink").textContent = "Open in Google Maps";
+    }, function() {
+      alert("Unable to retrieve GPS.");
+    });
+  } else {
+    alert("Geolocation not supported.");
+  }
+}
+
+// Signatures
+function addSignature() {
+  const div = document.createElement("div");
+  div.className = "sig-container";
+  const canvas = document.createElement("canvas");
+  canvas.className = "signature-pad";
+  div.appendChild(canvas);
+  const clearBtn = document.createElement("button");
+  clearBtn.textContent = "Clear";
+  clearBtn.type = "button";
+  div.appendChild(clearBtn);
+  document.getElementById("signatures").appendChild(div);
+  const pad = new SignaturePad(canvas);
+  clearBtn.addEventListener("click", () => pad.clear());
+}
+
+// PDF Download
+function downloadPDF() {
+  const element = document.getElementById("sheet");
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  const filename = `POWRA_${dd}_${mm}_${yyyy}.pdf`;
+
+  const opt = {
+    margin: 10,
+    filename: filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, scrollX: 0, scrollY: 0 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['css', 'legacy'] }
+  };
+  html2pdf().set(opt).from(element).save();
+}
 </script>
 </body>
 </html>
