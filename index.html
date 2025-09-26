@@ -5,136 +5,155 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vodafone / National Grid POWRA</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 20px; background: #f7f7f7; }
-  h1 { text-align: center; margin-bottom: 4px; }
-  h2 { margin-top: 24px; }
+  :root{ --sheet-w: 794px; } /* A4 width at ~96dpi: 8.27in * 96 ≈ 794 */
+  html, body { background: #f0f0f0; }
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px 0; }
+  #sheet {
+    width: var(--sheet-w);
+    margin: 0 auto;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+  }
+  h1 { text-align: center; margin: 8px 0 6px 0; }
+  h2 { margin-top: 18px; margin-bottom: 8px; }
   .header { display: flex; justify-content: space-between; align-items: center; }
-  .header img { height: 50px; }
-  .version { text-align: center; font-size: 0.9em; color: #666; margin-bottom: 20px; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: #fff; }
-  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-  th { background: #eee; }
+  .header img { height: 50px; max-width: 40%; object-fit: contain; }
+  .version { text-align: center; font-size: 0.9em; color: #666; margin: 8px 0 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; background: #fff; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+  th { background: #eee; width: 32%; }
   textarea { width: 100%; height: 100px; }
   .checkbox-list label { display: block; margin: 4px 0; }
   .signature-pad { border: 1px solid #000; width: 100%; height: 120px; background:#fff; }
-  .sig-container { margin-bottom: 20px; }
+  .sig-container { margin-bottom: 12px; }
   button { padding: 6px 12px; margin-top: 5px; }
   a.link { display: inline-block; margin-left: 8px; color: blue; text-decoration: underline; }
-  .actions { margin-top: 16px; }
+  .actions { margin-top: 12px; }
   .note { font-size: 0.9em; color:#555; }
+  img { max-width: 100%; height: auto; }
+
+  /* Avoid bad splits in PDF */
+  table, .section, .sig-container { break-inside: avoid; page-break-inside: avoid; }
+  .header { break-inside: avoid; page-break-inside: avoid; }
+  .actions { break-inside: avoid; page-break-inside: avoid; }
 </style>
 </head>
-<body id="pdf-root">
+<body>
 
-<div class="header">
-  <img crossorigin="anonymous" referrerpolicy="no-referrer"
-       src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Vodafone_2017_logo.svg" alt="Vodafone">
-  <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
-  <img crossorigin="anonymous" referrerpolicy="no-referrer"
-       src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
-</div>
+<div id="sheet">
+  <div class="header">
+    <img crossorigin="anonymous" referrerpolicy="no-referrer"
+         src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Vodafone_2017_logo.svg" alt="Vodafone">
+    <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
+    <img crossorigin="anonymous" referrerpolicy="no-referrer"
+         src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
+  </div>
 
-<div class="version">Version 13 • direct PDF export</div>
+  <div class="version">Version 14 • A4 layout & pagebreak fixes</div>
 
-<p><strong>Date/Time:</strong> <span id="datetime"></span></p>
+  <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
-<h2>Job Details</h2>
-<table>
-  <tr><th>Contract</th><td><input type="text" style="width:100%"></td></tr>
-  <tr><th>CBOL Number</th><td><input type="text" style="width:100%"></td></tr>
-  <tr><th>Supervisor Name & Contact</th><td><input type="text" style="width:100%"></td></tr>
-  <tr>
-    <th>CP in charge</th>
-    <td>
-      <select style="width:100%">
-        <option value="">-- Select CP --</option>
-        <option>Warren Barron</option>
-        <option>Carl Carlisle</option>
-        <option>Joe Smith</option>
-        <option>Matt Bodrozic</option>
-        <option>Bobby Rehman</option>
-        <option>Mick Waine</option>
-      </select>
-    </td>
-  </tr>
+  <h2>Job Details</h2>
+  <div class="section">
+  <table>
+    <tr><th>Contract</th><td><input type="text" style="width:100%"></td></tr>
+    <tr><th>CBOL Number</th><td><input type="text" style="width:100%"></td></tr>
+    <tr><th>Supervisor Name & Contact</th><td><input type="text" style="width:100%"></td></tr>
+    <tr>
+      <th>CP in charge</th>
+      <td>
+        <select style="width:100%">
+          <option value="">-- Select CP --</option>
+          <option>Warren Barron</option>
+          <option>Carl Carlisle</option>
+          <option>Joe Smith</option>
+          <option>Matt Bodrozic</option>
+          <option>Bobby Rehman</option>
+          <option>Mick Waine</option>
+        </select>
+      </td>
+    </tr>
 
-  <!-- GPS-based Location (lat,lng) with Google Maps -->
-  <tr>
-    <th>Location</th>
-    <td>
-      <input id="locField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
-      <button type="button" onclick="getCoords()">Get Current Location</button>
-      <a id="locLink" class="link" href="#" target="_blank" style="display:none;">Open in Google Maps</a>
-    </td>
-  </tr>
+    <tr>
+      <th>Location</th>
+      <td>
+        <input id="locField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
+        <button type="button" onclick="getCoords()">Get Current Location</button>
+        <a id="locLink" class="link" href="#" target="_blank" style="display:none;">Open in Google Maps</a>
+      </td>
+    </tr>
 
-  <!-- what3words -->
-  <tr>
-    <th>W3W Location</th>
-    <td>
-      <input id="w3wField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
-      <button type="button" onclick="getW3W()">Get Current W3W</button>
-      <a id="w3wLink" class="link" href="#" target="_blank" style="display:none;">Open in What3Words</a>
-    </td>
-  </tr>
+    <tr>
+      <th>W3W Location</th>
+      <td>
+        <input id="w3wField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
+        <button type="button" onclick="getW3W()">Get Current W3W</button>
+        <a id="w3wLink" class="link" href="#" target="_blank" style="display:none;">Open in What3Words</a>
+      </td>
+    </tr>
 
-  <tr>
-    <th>Work Type</th>
-    <td>
-      <select style="width:100%">
-        <option value="">-- Select Work Type --</option>
-        <option>Overhead works</option>
-        <option>HV Substation</option>
-        <option>Telco Room</option>
-        <option>GDC</option>
-      </select>
-    </td>
-  </tr>
-</table>
+    <tr>
+      <th>Work Type</th>
+      <td>
+        <select style="width:100%">
+          <option value="">-- Select Work Type --</option>
+          <option>Overhead works</option>
+          <option>HV Substation</option>
+          <option>Telco Room</option>
+          <option>GDC</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+  </div>
 
-<h2>Section A – Start Safe</h2>
-<div class="checkbox-list">
-  <label><input type="checkbox"> Correct location confirmed</label>
-  <label><input type="checkbox"> Vehicles/plant parked safely</label>
-  <label><input type="checkbox"> Job Pack discussed</label>
-  <label><input type="checkbox"> Risk Assessments referenced</label>
-  <label><input type="checkbox"> Work area inspected for hazards</label>
-  <label><input type="checkbox"> Precautions (trees, dust, nests, etc)</label>
-  <label><input type="checkbox"> NOC notified</label>
-  <label><input type="checkbox"> Permit boards available</label>
-  <label><input type="checkbox"> Work area demarcated</label>
-  <label><input type="checkbox"> PPE checked</label>
-  <label><input type="checkbox"> Tools & plant inspected</label>
-  <label><input type="checkbox"> Gas detector checked</label>
-  <label><input type="checkbox"> Rescue kit available</label>
-  <label><input type="checkbox"> Team members competent</label>
-  <label><input type="checkbox"> First Aid / COSHH sheets available</label>
-  <label><input type="checkbox"> Pre-start geo-sight images taken</label>
-</div>
+  <h2>Section A – Start Safe</h2>
+  <div class="section checkbox-list">
+    <label><input type="checkbox"> Correct location confirmed</label>
+    <label><input type="checkbox"> Vehicles/plant parked safely</label>
+    <label><input type="checkbox"> Job Pack discussed</label>
+    <label><input type="checkbox"> Risk Assessments referenced</label>
+    <label><input type="checkbox"> Work area inspected for hazards</label>
+    <label><input type="checkbox"> Precautions (trees, dust, nests, etc)</label>
+    <label><input type="checkbox"> NOC notified</label>
+    <label><input type="checkbox"> Permit boards available</label>
+    <label><input type="checkbox"> Work area demarcated</label>
+    <label><input type="checkbox"> PPE checked</label>
+    <label><input type="checkbox"> Tools & plant inspected</label>
+    <label><input type="checkbox"> Gas detector checked</label>
+    <label><input type="checkbox"> Rescue kit available</label>
+    <label><input type="checkbox"> Team members competent</label>
+    <label><input type="checkbox"> First Aid / COSHH sheets available</label>
+    <label><input type="checkbox"> Pre-start geo-sight images taken</label>
+  </div>
 
-<h2>Section B – Other Significant Info</h2>
-<textarea placeholder="Enter site-specific hazards and controls here..."></textarea>
+  <h2>Section B – Other Significant Info</h2>
+  <div class="section">
+    <textarea placeholder="Enter site-specific hazards and controls here..."></textarea>
+  </div>
 
-<h2>Section C – Work Safe</h2>
-<div class="checkbox-list">
-  <label><input type="checkbox"> Wayleaves checked</label>
-  <label><input type="checkbox"> Correct lifting equipment</label>
-  <label><input type="checkbox"> Gas detector in use</label>
-  <label><input type="checkbox"> Climbing harness inspected</label>
-  <label><input type="checkbox"> Hospital location briefed</label>
-  <label><input type="checkbox"> COSHH sheets available</label>
-  <label><input type="checkbox"> Site geo-sight images taken</label>
-  <label><input type="checkbox"> Vehicles locked & secured</label>
-  <label><input type="checkbox"> Team briefed on risks/controls</label>
-</div>
+  <h2>Section C – Work Safe</h2>
+  <div class="section checkbox-list">
+    <label><input type="checkbox"> Wayleaves checked</label>
+    <label><input type="checkbox"> Correct lifting equipment</label>
+    <label><input type="checkbox"> Gas detector in use</label>
+    <label><input type="checkbox"> Climbing harness inspected</label>
+    <label><input type="checkbox"> Hospital location briefed</label>
+    <label><input type="checkbox"> COSHH sheets available</label>
+    <label><input type="checkbox"> Site geo-sight images taken</label>
+    <label><input type="checkbox"> Vehicles locked & secured</label>
+    <label><input type="checkbox"> Team briefed on risks/controls</label>
+  </div>
 
-<h2>Team Signatures</h2>
-<div id="signatures"></div>
-<button onclick="addSignature()">Add Team Member Signature</button>
+  <h2>Team Signatures</h2>
+  <div id="signatures" class="section"></div>
+  <button onclick="addSignature()">Add Team Member Signature</button>
 
-<div class="actions">
-  <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
-  <p class="note">If the download doesn’t start, it will try to open in a new tab or print.</p>
+  <div class="actions">
+    <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
+    <p class="note">If the download doesn’t start, it will try to open in a new tab or print.</p>
+  </div>
 </div>
 
 <!-- libs -->
@@ -229,26 +248,33 @@ function waitForImagesWithTimeout(root=document, timeoutMs=1200) {
   return Promise.all(pend);
 }
 
-// ---- Direct DOM export (no snapshot) ----
+// ---- Direct DOM export with A4-friendly options ----
 async function downloadPDF() {
   try {
     if (typeof html2pdf === 'undefined') {
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
-    await waitForImagesWithTimeout(document, 1200);
+    const root = document.getElementById('sheet');
+    await waitForImagesWithTimeout(root, 1200);
 
-    const root = document.getElementById('pdf-root');
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
 
-    // 1) Normal attempt from live DOM
+    // 1) Normal attempt from A4 #sheet
     try {
       await html2pdf().set({
-        margin:10,
+        margin: 5, /* tight margins because #sheet already padded */
         filename: filename,
-        image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
-        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
+        pagebreak: { mode: ['css','legacy'] },
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          scrollX: 0, scrollY: 0,
+          windowWidth: 900 /* keeps layout stable regardless of phone width */
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       }).from(root).save();
       return;
     } catch(e1) {}
@@ -256,15 +282,21 @@ async function downloadPDF() {
     // 2) Fallback: open in new tab
     try {
       const worker = html2pdf().set({
-        margin:10,
-        image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
-        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
+        margin: 5,
+        pagebreak: { mode: ['css','legacy'] },
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          scrollX: 0, scrollY: 0,
+          windowWidth: 900
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       }).from(root).toPdf();
       const pdf = await worker.get('pdf');
       const blob = pdf.output('blob');
       const url = URL.createObjectURL(blob);
-
       const w = window.open(url, '_blank');
       if (w) return;
       const a = document.createElement('a');
