@@ -180,7 +180,7 @@ label:has(input[disabled]){ opacity:0.55; }
 <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
 </div>
 <div class="divider"></div>
-<div class="version">Version 102</div>
+<div class="version">Version 107</div>
 <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 <h2>Job Details</h2>
 <label>Contract</label><input type="text">
@@ -699,43 +699,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 <script>
-(function(){
-  function fillGPS(){
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(function(pos){
-      var coords = pos.coords.latitude.toFixed(6) + ", " + pos.coords.longitude.toFixed(6);
-      var f = document.getElementById("gpsLocation");
-      if (f) f.value = coords;
-    }, function(err){ console.log("GPS error:", err && err.message); });
-  }
-  var btn = document.getElementById("gpsButton");
-  if (btn) btn.addEventListener("click", fillGPS);
-  window.addEventListener("load", fillGPS);
-
-  function fillDateTime(){
-    var now = new Date();
-    function pad(n){ return (n<10?'0':'') + n; }
-    var formatted = pad(now.getDate()) + "/" + pad(now.getMonth()+1) + "/" + now.getFullYear() +
-                    " " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
-    var span = document.getElementById("datetime");
-    if (span) span.textContent = formatted;
-  }
-  window.addEventListener("load", fillDateTime);
-})();
 </script>
-
-
-<hr>
-<hr>
-<h3>Reference Documents</h3>
-<ul>
-  <li><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf" target="_blank">📄 JHG Method Statements (PDF)</a></li>
-  <li><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Risk%20Assessments.pdf" target="_blank">📄 JHG Risk Assessments (PDF)</a></li>
-</ul>
 
 
 <script>
 const msLinks = {
+  "RA01": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS24.pdf",
   "RA02": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS01.pdf",
   "RA05": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
   "RA06": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS07.pdf",
@@ -770,82 +739,37 @@ const msLinks = {
   "RA50": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
   "RA51": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS17.pdf",
   "RA52": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
-  "RA54": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA54": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf"
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-  const dropdown = document.getElementById("riskAssessmentDropdown");
-  const linkDiv = document.getElementById("msLink");
-  if (dropdown && linkDiv) {
-    dropdown.addEventListener("change", function() {
-      const selected = this.value;
-      if (msLinks[selected]) {
-        linkDiv.innerHTML = `<a href="${msLinks[selected]}" target="_blank">📄 Open Related Method Statement</a>`;
-      } else {
-        linkDiv.innerHTML = "";
-      }
-    });
+  var dd = document.getElementById("riskAssessmentDropdown");
+  var container = document.getElementById("msLink");
+  if(!dd || !container) return;
+
+  function renderLink(raCode) {
+    var url = msLinks[raCode];
+    container.innerHTML = "";
+    if(!url) return;
+    var a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = "📄 Open Related Method Statement";
+    var small = document.createElement("small");
+    small.style.display = "block";
+    small.style.opacity = "0.75";
+    small.style.marginTop = "4px";
+    small.textContent = url;
+    container.appendChild(a);
+    container.appendChild(small);
   }
+
+  dd.addEventListener("change", function() { renderLink(this.value); });
+
+  // Initialize if preselected
+  if(dd.value) renderLink(dd.value);
 });
-</script>
-
-
-<script>
-(function(){
-  // msLinks is already defined earlier in the file; we keep it.
-  function setMsLinkFor(raCode){
-    var container = document.getElementById("msLink");
-    if(!container) return;
-    // Remove any inline handlers that might hijack clicks
-    container.onclick = null;
-    container.removeAttribute("onclick");
-
-    var url = msLinks && msLinks[raCode] ? msLinks[raCode] : "";
-    if(url){
-      // Build anchor with fully-qualified URL
-      var a = document.createElement("a");
-      a.id = "msLinkAnchor";
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.textContent = "📄 Open Related Method Statement";
-      a.style.display = "inline-block";
-      a.style.marginRight = "8px";
-
-      // Show small URL preview for verification
-      var small = document.createElement("small");
-      small.id = "msLinkUrlPreview";
-      small.textContent = url;
-      small.style.opacity = "0.7";
-
-      container.innerHTML = "";
-      container.appendChild(a);
-      container.appendChild(small);
-
-      // Safety: re-assert the absolute URL after next tick in case other scripts overwrite it
-      setTimeout(function(){
-        var anchor = document.getElementById("msLinkAnchor");
-        if(anchor && anchor.href !== url){
-          anchor.href = url;
-        }
-      }, 0);
-    } else {
-      container.innerHTML = "";
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function(){
-    var dd = document.getElementById("riskAssessmentDropdown");
-    if(!dd) return;
-    dd.addEventListener("change", function(){
-      setMsLinkFor(this.value);
-    });
-    // If a value is preselected on load, populate the link
-    if(dd.value){
-      setMsLinkFor(dd.value);
-    }
-  });
-})();
 </script>
 
 </body></html>
