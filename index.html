@@ -9,4 +9,214 @@
   h1 { text-align: center; }
   .header { display: flex; justify-content: space-between; align-items: center; }
   .header img { height: 50px; }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 20px;
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: #fff; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  th { background: #eee; }
+  textarea { width: 100%; height: 100px; }
+  .checkbox-list label { display: block; margin: 4px 0; }
+  .signature-pad { border: 1px solid #000; width: 100%; height: 120px; background:#fff; }
+  .sig-container { margin-bottom: 20px; }
+  button { padding: 6px 12px; margin-top: 5px; }
+  a.link { display: inline-block; margin-left: 8px; color: blue; text-decoration: underline; }
+  .actions { margin-top: 16px; }
+</style>
+</head>
+<body id="pdf-root">
+
+<div class="header">
+  <img crossOrigin="anonymous" referrerpolicy="no-referrer"
+       src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Vodafone_2017_logo.svg" alt="Vodafone">
+  <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
+  <img crossOrigin="anonymous" referrerpolicy="no-referrer"
+       src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
+</div>
+
+<p><strong>Date/Time:</strong> <span id="datetime"></span></p>
+
+<h2>Job Details</h2>
+<table>
+  <tr><th>Contract</th><td><input type="text" style="width:100%"></td></tr>
+  <tr><th>CBOL Number</th><td><input type="text" style="width:100%"></td></tr>
+  <tr><th>Supervisor Name & Contact</th><td><input type="text" style="width:100%"></td></tr>
+  <tr>
+    <th>CP in charge</th>
+    <td>
+      <select style="width:100%">
+        <option value="">-- Select CP --</option>
+        <option>Warren Barron</option>
+        <option>Carl Carlisle</option>
+        <option>Joe Smith</option>
+        <option>Matt Bodrozic</option>
+        <option>Bobby Rehman</option>
+        <option>Mick Waine</option>
+      </select>
+    </td>
+  </tr>
+
+  <!-- GPS-based Location (lat,lng) with Google Maps -->
+  <tr>
+    <th>Location</th>
+    <td>
+      <input id="locField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
+      <button type="button" onclick="getCoords()">Get Current Location</button>
+      <a id="locLink" class="link" href="#" target="_blank" style="display:none;">Open in Google Maps</a>
+    </td>
+  </tr>
+
+  <!-- what3words -->
+  <tr>
+    <th>W3W Location</th>
+    <td>
+      <input id="w3wField" type="text" style="width:80%" readonly placeholder="Press button to fetch">
+      <button type="button" onclick="getW3W()">Get Current W3W</button>
+      <a id="w3wLink" class="link" href="#" target="_blank" style="display:none;">Open in What3Words</a>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Work Type</th>
+    <td>
+      <select style="width:100%">
+        <option value="">-- Select Work Type --</option>
+        <option>Overhead works</option>
+        <option>HV Substation</option>
+        <option>Telco Room</option>
+        <option>GDC</option>
+      </select>
+    </td>
+  </tr>
+</table>
+
+<h2>Section A – Start Safe</h2>
+<div class="checkbox-list">
+  <label><input type="checkbox"> Correct location confirmed</label>
+  <label><input type="checkbox"> Vehicles/plant parked safely</label>
+  <label><input type="checkbox"> Job Pack discussed</label>
+  <label><input type="checkbox"> Risk Assessments referenced</label>
+  <label><input type="checkbox"> Work area inspected for hazards</label>
+  <label><input type="checkbox"> Precautions (trees, dust, nests, etc)</label>
+  <label><input type="checkbox"> NOC notified</label>
+  <label><input type="checkbox"> Permit boards available</label>
+  <label><input type="checkbox"> Work area demarcated</label>
+  <label><input type="checkbox"> PPE checked</label>
+  <label><input type="checkbox"> Tools & plant inspected</label>
+  <label><input type="checkbox"> Gas detector checked</label>
+  <label><input type="checkbox"> Rescue kit available</label>
+  <label><input type="checkbox"> Team members competent</label>
+  <label><input type="checkbox"> First Aid / COSHH sheets available</label>
+  <label><input type="checkbox"> Pre-start geo-sight images taken</label>
+</div>
+
+<h2>Section B – Other Significant Info</h2>
+<textarea placeholder="Enter site-specific hazards and controls here..."></textarea>
+
+<h2>Section C – Work Safe</h2>
+<div class="checkbox-list">
+  <label><input type="checkbox"> Wayleaves checked</label>
+  <label><input type="checkbox"> Correct lifting equipment</label>
+  <label><input type="checkbox"> Gas detector in use</label>
+  <label><input type="checkbox"> Climbing harness inspected</label>
+  <label><input type="checkbox"> Hospital location briefed</label>
+  <label><input type="checkbox"> COSHH sheets available</label>
+  <label><input type="checkbox"> Site geo-sight images taken</label>
+  <label><input type="checkbox"> Vehicles locked & secured</label>
+  <label><input type="checkbox"> Team briefed on risks/controls</label>
+</div>
+
+<h2>Team Signatures</h2>
+<div id="signatures"></div>
+<button onclick="addSignature()">Add Team Member Signature</button>
+
+<div class="actions">
+  <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<!-- libs -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+
+<script>
+// ---- Basics ----
+document.getElementById("datetime").textContent = new Date().toLocaleString();
+
+// Shared geolocation helper
+function getPosition(opts = { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }) {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) return reject(new Error("Geolocation not supported"));
+    navigator.geolocation.getCurrentPosition(resolve, reject, opts);
+  });
+}
+
+// ---- GPS-based Location (lat,lng) + Google Maps link ----
+async function getCoords() {
+  try {
+    const pos = await getPosition();
+    const lat = pos.coords.latitude.toFixed(6);
+    const lng = pos.coords.longitude.toFixed(6);
+    const field = document.getElementById("locField");
+    const link  = document.getElementById("locLink");
+    field.value = `${lat}, ${lng}`;
+    link.href = `https://maps.google.com/?q=${lat},${lng}`;
+    link.style.display = "inline";
+  } catch (e) {
+    alert("Unable to retrieve location for coordinates. Check site permissions (HTTPS) and try again.");
+  }
+}
+
+// ---- what3words (separate button) + link ----
+const W3W_API_KEY = "0OHVUL46";
+async function getW3W() {
+  try {
+    const pos = await getPosition();
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+    const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${lat},${lng}&key=${W3W_API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data && data.words) {
+      const field = document.getElementById("w3wField");
+      const link  = document.getElementById("w3wLink");
+      field.value = data.words;
+      link.href   = "https://what3words.com/" + data.words;
+      link.style.display = "inline";
+    } else {
+      alert("Could not fetch W3W address. (Tip: check API key / quota.)");
+    }
+  } catch (e) {
+    alert("Unable to retrieve location for W3W. Check site permissions (HTTPS) and try again.");
+  }
+}
+
+// ---- Signature pads ----
+let sigCount = 0;
+function addSignature() {
+  sigCount++;
+  const container = document.createElement("div");
+  container.className = "sig-container";
+  container.innerHTML = `
+    <p><strong>Team Member ${sigCount}</strong></p>
+    <canvas id="sig${sigCount}" class="signature-pad"></canvas>
+    <button type="button" onclick="clearSig(${sigCount})">Clear</button>
+  `;
+  document.getElementById("signatures").appendChild(container);
+  const canvas = document.getElementById("sig" + sigCount);
+  const pad = new SignaturePad(canvas);
+  canvas.width = canvas.offsetWidth;
+  canvas.height = 120;
+  pad.clear();
+  window["pad" + sigCount] = pad;
+}
+function clearSig(n) {
+  if (window["pad" + n]) window["pad" + n].clear();
+}
+
+// ---- Download PDF (whole page) ----
+function downloadPDF() {
+  const element = document.getElementById('pdf-root'); // whole page
+  const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
+  const opt = {
+    margin:       10,
+    filename:     filename,
+    image:        { type: 'jpeg', quality: 0.95 },
+    html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
