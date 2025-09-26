@@ -11,12 +11,10 @@
   .divider { border-top: 2px solid #ccc; margin: 10px 0 15px 0; }
   .version { font-weight: bold; margin-top: 5px; color: #444; text-align: center; }
   h1 { font-size: 22px; margin: 10px 0; }
-  label { display: block; margin-top: 10px; font-weight: bold; }
+  h2 { margin-top: 20px; font-size: 18px; }
+  label { display: block; margin-top: 8px; font-weight: bold; }
   input[type=text], textarea, select { width: 100%; padding: 6px; margin-top: 4px; }
-  table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-  th, td { border: 1px solid #ccc; padding: 8px; }
-  th { background: #f0f0f0; }
-  .checklist { margin: 10px 0; }
+  .checklist label { font-weight: normal; }
   .signature-pad { border: 1px solid #ccc; width: 100%; height: 150px; }
   .sig-container { margin-top: 10px; }
   button { margin-top: 10px; padding: 8px 16px; font-weight: bold; }
@@ -26,13 +24,13 @@
 <div id="sheet">
   <div class="header">
     <!-- Vodafone Logo -->
-    <img src="data:image/jpeg;base64,INSERT_VODAFONE_BASE64_HERE" alt="Vodafone Logo">
+    <img src="data:image/jpeg;base64,{{VODAFONE_BASE64}}" alt="Vodafone Logo">
     <!-- National Grid Logo -->
-    <img src="data:image/png;base64,INSERT_NG_BASE64_HERE" alt="National Grid Logo">
+    <img src="data:image/png;base64,{{NG_BASE64}}" alt="National Grid Logo">
     <h1>Daily Point of Work Risk Assessment (POWRA)</h1>
   </div>
   <div class="divider"></div>
-  <div class="version">Version 20 • full form with official logos</div>
+  <div class="version">Version 21 • full detailed checklist + logos</div>
 
   <!-- Date/Time -->
   <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
@@ -71,8 +69,21 @@
   <h2>Section A - Start Safe</h2>
   <div class="checklist">
     <label><input type="checkbox"> I have received a site induction</label>
-    <label><input type="checkbox"> I have reviewed the RAMS</label>
-    <label><input type="checkbox"> I have the correct PPE</label>
+    <label><input type="checkbox"> I have reviewed and understood the RAMS</label>
+    <label><input type="checkbox"> All PPE worn is in good condition and appropriate for the task</label>
+    <label><input type="checkbox"> Gas Detector Unit has been checked, is working and is within calibration</label>
+    <label><input type="checkbox"> I have the correct permit to work</label>
+    <label><input type="checkbox"> I have checked for underground/overhead services</label>
+    <label><input type="checkbox"> Site welfare and first aid arrangements are confirmed</label>
+    <label><input type="checkbox"> I know who the appointed First Aider is</label>
+    <label><input type="checkbox"> Fire extinguishers are available and in date</label>
+    <label><input type="checkbox"> I have identified site-specific hazards</label>
+    <label><input type="checkbox"> I have emergency contact numbers available</label>
+    <label><input type="checkbox"> Tools and equipment inspected and safe to use</label>
+    <label><input type="checkbox"> Access and egress routes are clear</label>
+    <label><input type="checkbox"> Work area is suitably lit and ventilated</label>
+    <label><input type="checkbox"> Lone working arrangements understood</label>
+    <label><input type="checkbox"> Environmental considerations addressed (spill kits, waste disposal)</label>
   </div>
 
   <!-- Section B -->
@@ -82,9 +93,18 @@
   <!-- Section C -->
   <h2>Section C - Work Safe</h2>
   <div class="checklist">
-    <label><input type="checkbox"> I will stop work if conditions change</label>
-    <label><input type="checkbox"> I will maintain site security</label>
-    <label><input type="checkbox"> I will report incidents</label>
+    <label><input type="checkbox"> I will stop work if conditions or scope of work changes</label>
+    <label><input type="checkbox"> I will maintain site security at all times</label>
+    <label><input type="checkbox"> I will report all near misses, incidents and accidents</label>
+    <label><input type="checkbox"> I will ensure tools and equipment are used safely</label>
+    <label><input type="checkbox"> I will keep my work area tidy and free from trip hazards</label>
+    <label><input type="checkbox"> I will dispose of waste safely and correctly</label>
+    <label><input type="checkbox"> I will not bypass or disable safety devices</label>
+    <label><input type="checkbox"> I will follow electrical safety rules and isolation procedures</label>
+    <label><input type="checkbox"> I will avoid manual handling where mechanical aids are available</label>
+    <label><input type="checkbox"> I will use correct access equipment (ladders, MEWPs, scaffolds)</label>
+    <label><input type="checkbox"> I will stop and seek clarification if unsure of any task</label>
+    <label><input type="checkbox"> I will challenge unsafe behaviour of others</label>
   </div>
 
   <!-- Signatures -->
