@@ -39,7 +39,7 @@
        src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
 </div>
 
-<div class="version">Version 9 • with on-page logs</div>
+<div class="version">Version 10 • log + PDF reliability</div>
 
 <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
@@ -253,14 +253,19 @@ function clearSig(n) {
 }
 
 // ---- PDF helpers ----
-function waitForImages(root=document) {
+function waitForImagesWithTimeout(root=document, timeoutMs=1200) {
   const imgs = Array.from(root.images || []);
   const pending = imgs
     .filter(img => !img.complete || img.naturalWidth === 0)
     .map(img => new Promise(res => {
-      img.addEventListener('load', res, { once:true });
-      img.addEventListener('error', res, { once:true });
+      let done = false;
+      const finish = () => { if (!done) { done = true; res(); } };
+      img.addEventListener('load', finish, { once:true });
+      img.addEventListener('error', finish, { once:true });
+      // last resort timeout per image
+      setTimeout(finish, timeoutMs);
     }));
+  // If no pending, still return a settled promise
   return Promise.all(pending);
 }
 
@@ -272,8 +277,10 @@ async function downloadPDF() {
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
-    await new Promise(r => setTimeout(r, 50));
-    await waitForImages(document);
+    await new Promise(r => setTimeout(r, 30));
+    addLog('[PDF] Waiting for images (with timeout)…');
+    await waitForImagesWithTimeout(document, 1200);
+    addLog('[PDF] Images stage done, generating…');
 
     const root = document.getElementById('pdf-root');
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
@@ -285,7 +292,7 @@ async function downloadPDF() {
         margin:10,
         filename: filename,
         image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff', logging:false},
         jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
       }).from(root).save();
       addLog('[PDF] SAVE_OK');
@@ -300,7 +307,7 @@ async function downloadPDF() {
       const worker = html2pdf().set({
         margin:10,
         image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff', logging:false},
         jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
       }).from(root).toPdf();
       const pdf = await worker.get('pdf');
@@ -312,7 +319,6 @@ async function downloadPDF() {
         addLog('[PDF] FALLBACK_TAB_OK');
         return;
       }
-      // Popup blocked → simulate download via anchor
       const a = document.createElement('a');
       a.href = url;
       a.download = filename;
