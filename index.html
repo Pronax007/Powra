@@ -128,7 +128,7 @@
 
 <div class="actions">
   <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
-  <p class="note">If the download doesn’t start, it will try a backup method without logos.</p>
+  <p class="note">If the download doesn’t start, it will try to open in a new tab or print.</p>
 </div>
 
 <!-- libs -->
@@ -217,40 +217,6 @@ function waitForImages(root=document) {
   return Promise.all(pending);
 }
 
-function cloneWithoutImages(node) {
-  const clone = node.cloneNode(true);
-  const images = clone.querySelectorAll('img');
-  images.forEach(img => {
-    const ph = document.createElement('div');
-    ph.style.width = (img.width || 120) + 'px';
-    ph.style.height = (img.height || 50) + 'px';
-    ph.style.border = '1px solid #ccc';
-    ph.style.display = 'inline-block';
-    ph.style.verticalAlign = 'middle';
-    ph.style.background = '#fafafa';
-    ph.textContent = img.alt ? `[${img.alt}]` : '[image]';
-    img.replaceWith(ph);
-  });
-  return clone;
-}
-
-async function runHtml2Pdf(element, filename) {
-  const opt = {
-    margin:       10,
-    filename:     filename,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  {
-      scale: 2,
-      useCORS: true,
-      allowTaint: false,
-      backgroundColor: '#ffffff',
-      logging: false
-    },
-    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-  return html2pdf().set(opt).from(element).save();
-}
-
 async function downloadPDF() {
   try {
     if (typeof html2pdf === 'undefined') {
@@ -263,22 +229,48 @@ async function downloadPDF() {
     const root = document.getElementById('pdf-root');
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
 
-    // Attempt with images
-    await runHtml2Pdf(root, filename);
+    // 1) Normal attempt
+    try {
+      await html2pdf().set({
+        margin:10,
+        filename: filename,
+        image:{type:'jpeg', quality:0.98},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
+        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
+      }).from(root).save();
+      return;
+    } catch(e1) { console.warn("Direct save failed", e1); }
+
+    // 2) Fallback: open in new tab
+    try {
+      const worker = html2pdf().set({
+        margin:10,
+        image:{type:'jpeg', quality:0.98},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
+        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
+      }).from(root).toPdf();
+      const pdf = await worker.get('pdf');
+      const blob = pdf.output('blob');
+      const url = URL.createObjectURL(blob);
+
+      const w = window.open(url, '_blank');
+      if (!w) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+      return;
+    } catch(e2) { console.warn("Blob open failed", e2); }
+
+    // 3) Last fallback: print
+    window.print();
 
   } catch (err) {
-    console.error('Primary export failed:', err);
-    try {
-      // Retry without images (avoids CORS/taint issues)
-      const root = document.getElementById('pdf-root');
-      const clone = cloneWithoutImages(root);
-      await runHtml2Pdf(clone, `POWRA_NoLogos_${new Date().toISOString().slice(0,10)}.pdf`);
-      alert('Downloaded fallback PDF without logos (image export was blocked on this device).');
-    } catch (e2) {
-      console.error('Fallback export failed:', e2);
-      try { window.print(); }
-      catch(e3) { alert('Could not generate PDF. Please try again.'); }
-    }
+    console.error("Download failed:", err);
+    alert("Could not generate PDF. Please reload and try again.");
   }
 }
 </script>
