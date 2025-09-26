@@ -34,7 +34,7 @@
        src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
 </div>
 
-<div class="version">Version 10 • clean build</div>
+<div class="version">Version 12 • snapshot export fix</div>
 
 <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
@@ -216,69 +216,126 @@ function clearSig(n) {
   if (window["pad" + n]) window["pad" + n].clear();
 }
 
-// ---- PDF helpers ----
-function waitForImagesWithTimeout(root=document, timeoutMs=1200) {
-  const imgs = Array.from(root.images || []);
-  const pending = imgs
-    .filter(img => !img.complete || img.naturalWidth === 0)
-    .map(img => new Promise(res => {
-      let done = false;
-      const finish = () => { if (!done) { done = true; res(); } };
-      img.addEventListener('load', finish, { once:true });
-      img.addEventListener('error', finish, { once:true });
-      setTimeout(finish, timeoutMs);
-    }));
-  return Promise.all(pending);
+// ---------- helpers to build a clean snapshot for PDF ----------
+function cloneForPdf(rootEl) {
+  const clone = rootEl.cloneNode(true);
+
+  // Sync form controls into the clone
+  const liveInputs  = rootEl.querySelectorAll('input, textarea, select');
+  const copyInputs  = clone.querySelectorAll('input, textarea, select');
+  for (let i = 0; i < liveInputs.length; i++) {
+    const src = liveInputs[i], dst = copyInputs[i];
+    if (!dst) continue;
+    if (src.tagName === 'INPUT') {
+      const type = (src.type || '').toLowerCase();
+      if (type === 'checkbox' || type === 'radio') {
+        dst.checked = src.checked;
+        if (src.checked) dst.setAttribute('checked', 'checked'); else dst.removeAttribute('checked');
+      } else {
+        dst.value = src.value;
+        dst.setAttribute('value', src.value);
+      }
+    } else if (src.tagName === 'TEXTAREA') {
+      dst.value = src.value;
+      dst.textContent = src.value;
+    } else if (src.tagName === 'SELECT') {
+      dst.value = src.value;
+      const opts = dst.querySelectorAll('option');
+      opts.forEach(o => o.removeAttribute('selected'));
+      const sel = Array.from(opts).find(o => o.value === src.value || o.textContent === src.value);
+      if (sel) sel.setAttribute('selected','selected');
+    }
+  }
+
+  // Replace signature canvases with images
+  const liveCanvases = rootEl.querySelectorAll('canvas.signature-pad');
+  const copyCanvases = clone.querySelectorAll('canvas.signature-pad');
+  for (let i = 0; i < liveCanvases.length; i++) {
+    const live = liveCanvases[i];
+    const dataURL = live.toDataURL('image/png');
+    const img = new Image();
+    img.src = dataURL;
+    img.style.width  = live.style.width  || (live.width  + 'px');
+    img.style.height = live.style.height || (live.height + 'px');
+    img.style.border = '1px solid #000';
+    copyCanvases[i].replaceWith(img);
+  }
+
+  // Remove action buttons on the PDF
+  const actions = clone.querySelector('.actions');
+  if (actions) actions.remove();
+
+  return clone;
 }
 
+// ---- wait for images but don’t hang forever ----
+function waitForImagesWithTimeout(root=document, timeoutMs=1200) {
+  const imgs = Array.from(root.images || []);
+  const pend = imgs.filter(img => !img.complete || img.naturalWidth === 0)
+    .map(img => new Promise(res => {
+      let done=false, finish=()=>{ if(!done){ done=true; res(); } };
+      img.addEventListener('load', finish, {once:true});
+      img.addEventListener('error', finish, {once:true});
+      setTimeout(finish, timeoutMs);
+    }));
+  return Promise.all(pend);
+}
+
+// ---- Snapshot-based PDF export (fixes repeat downloads) ----
 async function downloadPDF() {
   try {
     if (typeof html2pdf === 'undefined') {
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
-    await waitForImagesWithTimeout(document, 1200);
 
+    // Build a fresh snapshot so repeated downloads are identical
     const root = document.getElementById('pdf-root');
+    const snapshot = cloneForPdf(root);
+    snapshot.style.position = 'fixed';
+    snapshot.style.left = '-10000px';
+    snapshot.style.top = '0';
+    snapshot.style.width = root.offsetWidth + 'px';
+    document.body.appendChild(snapshot);
+
+    await waitForImagesWithTimeout(snapshot, 1200);
+
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
 
-    // 1) Normal attempt
+    // 1) Try normal save from the snapshot
     try {
       await html2pdf().set({
         margin:10,
-        filename: filename,
-        image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
-        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
-      }).from(root).save();
-      return;
-    } catch(e1) {}
-
-    // 2) Fallback: open in new tab
-    try {
-      const worker = html2pdf().set({
-        margin:10,
-        image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
-        jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
-      }).from(root).toPdf();
-      const pdf = await worker.get('pdf');
-      const blob = pdf.output('blob');
-      const url = URL.createObjectURL(blob);
-
-      const w = window.open(url, '_blank');
-      if (w) return;
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      return;
-    } catch(e2) {}
-
-    // 3) Last fallback: print
-    window.print();
+        filename,
+        image:{ type:'jpeg', quality:0.98 },
+        html2canvas:{ scale:2, useCORS:true, backgroundColor:'#fff' },
+        jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
+      }).from(snapshot).save();
+    } catch (e1) {
+      // 2) Fallback: open in new tab / anchor
+      try {
+        const worker = html2pdf().set({
+          margin:10,
+          image:{ type:'jpeg', quality:0.98 },
+          html2canvas:{ scale:2, useCORS:true, backgroundColor:'#fff' },
+          jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' }
+        }).from(snapshot).toPdf();
+        const pdf = await worker.get('pdf');
+        const blob = pdf.output('blob');
+        const url = URL.createObjectURL(blob);
+        const w = window.open(url, '_blank');
+        if (!w) {
+          const a = document.createElement('a');
+          a.href = url; a.download = filename;
+          document.body.appendChild(a); a.click(); a.remove();
+        }
+      } catch (e2) {
+        // 3) Last resort
+        window.print();
+      }
+    } finally {
+      snapshot.remove();
+    }
 
   } catch (err) {
     alert('Could not generate PDF. Please reload and try again.');
