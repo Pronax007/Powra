@@ -22,6 +22,11 @@
   a.link { display: inline-block; margin-left: 8px; color: blue; text-decoration: underline; }
   .actions { margin-top: 16px; }
   .note { font-size: 0.9em; color:#555; }
+  /* Log panel */
+  .log-wrap { margin-top: 22px; }
+  .log-head { display:flex; align-items:center; gap:8px; }
+  .log-toggle { padding: 4px 10px; }
+  .log { display:none; background:#0b1e12; color:#9cf4b3; padding:10px; border-radius:6px; white-space:pre-wrap; max-height:220px; overflow:auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; border:1px solid #083d1f; }
 </style>
 </head>
 <body id="pdf-root">
@@ -34,7 +39,7 @@
        src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
 </div>
 
-<div class="version">Version 7</div>
+<div class="version">Version 9 • with on-page logs</div>
 
 <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
@@ -134,7 +139,16 @@
 
 <div class="actions">
   <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
-  <p class="note">If the download doesn’t start, it will try to open in a new tab or print (check the console logs).</p>
+  <p class="note">If the download doesn’t start, it will try to open in a new tab or print.</p>
+</div>
+
+<!-- On-page log panel -->
+<div class="log-wrap">
+  <div class="log-head">
+    <strong>Debug Log</strong>
+    <button class="log-toggle" type="button" onclick="toggleLog()">Show / Hide</button>
+  </div>
+  <div id="log" class="log">[Log ready]</div>
 </div>
 
 <!-- libs -->
@@ -144,6 +158,18 @@
 <script>
 // ---- Basics ----
 document.getElementById("datetime").textContent = new Date().toLocaleString();
+
+// Log panel helpers
+function addLog(msg) {
+  const box = document.getElementById('log');
+  const time = new Date().toLocaleTimeString();
+  box.textContent += `\n[${time}] ${msg}`;
+  box.scrollTop = box.scrollHeight;
+}
+function toggleLog() {
+  const box = document.getElementById('log');
+  box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'block' : 'none';
+}
 
 // Shared geolocation helper
 function getPosition(opts = { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }) {
@@ -156,6 +182,7 @@ function getPosition(opts = { enableHighAccuracy: true, timeout: 15000, maximumA
 // ---- GPS-based Location (lat,lng) + Google Maps link ----
 async function getCoords() {
   try {
+    addLog('GetCoords: requesting position…');
     const pos = await getPosition();
     const lat = pos.coords.latitude.toFixed(6);
     const lng = pos.coords.longitude.toFixed(6);
@@ -164,7 +191,9 @@ async function getCoords() {
     field.value = `${lat}, ${lng}`;
     link.href = `https://maps.google.com/?q=${lat},${lng}`;
     link.style.display = "inline";
+    addLog(`GetCoords: OK → ${lat},${lng}`);
   } catch (e) {
+    addLog('GetCoords: ERROR → ' + (e && e.message ? e.message : e));
     alert("Unable to retrieve location for coordinates. Check site permissions (HTTPS) and try again.");
   }
 }
@@ -173,11 +202,15 @@ async function getCoords() {
 const W3W_API_KEY = "0OHVUL46";
 async function getW3W() {
   try {
+    addLog('W3W: requesting position…');
     const pos = await getPosition();
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
+    addLog(`W3W: coords ${lat},${lng}`);
     const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${lat},${lng}&key=${W3W_API_KEY}`;
+    addLog('W3W: fetch ' + url);
     const res = await fetch(url);
+    addLog('W3W: status ' + res.status);
     const data = await res.json();
     if (data && data.words) {
       const field = document.getElementById("w3wField");
@@ -185,10 +218,13 @@ async function getW3W() {
       field.value = data.words;
       link.href   = "https://what3words.com/" + data.words;
       link.style.display = "inline";
+      addLog('W3W: OK → ' + data.words);
     } else {
+      addLog('W3W: ERROR JSON → ' + JSON.stringify(data));
       alert("Could not fetch W3W address. (Tip: check API key / quota.)");
     }
   } catch (e) {
+    addLog('W3W: ERROR → ' + (e && e.message ? e.message : e));
     alert("Unable to retrieve location for W3W. Check site permissions (HTTPS) and try again.");
   }
 }
@@ -230,8 +266,9 @@ function waitForImages(root=document) {
 
 async function downloadPDF() {
   try {
+    addLog('[PDF] Start');
     if (typeof html2pdf === 'undefined') {
-      console.error('[PDF] LIB_MISSING');
+      addLog('[PDF] LIB_MISSING');
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
@@ -243,6 +280,7 @@ async function downloadPDF() {
 
     // 1) Normal attempt
     try {
+      addLog('[PDF] Attempt: SAVE');
       await html2pdf().set({
         margin:10,
         filename: filename,
@@ -250,14 +288,15 @@ async function downloadPDF() {
         html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
         jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
       }).from(root).save();
-      console.log('[PDF] SAVE_OK');
+      addLog('[PDF] SAVE_OK');
       return;
     } catch(e1) {
-      console.warn('[PDF] SAVE_FAIL → try open in new tab', e1);
+      addLog('[PDF] SAVE_FAIL → will try TAB. ' + e1);
     }
 
     // 2) Fallback: open in new tab (blob URL)
     try {
+      addLog('[PDF] Attempt: TAB');
       const worker = html2pdf().set({
         margin:10,
         image:{type:'jpeg', quality:0.98},
@@ -270,7 +309,7 @@ async function downloadPDF() {
 
       const w = window.open(url, '_blank');
       if (w) {
-        console.log('[PDF] FALLBACK_TAB_OK');
+        addLog('[PDF] FALLBACK_TAB_OK');
         return;
       }
       // Popup blocked → simulate download via anchor
@@ -280,18 +319,18 @@ async function downloadPDF() {
       document.body.appendChild(a);
       a.click();
       a.remove();
-      console.log('[PDF] FALLBACK_ANCHOR_OK');
+      addLog('[PDF] FALLBACK_ANCHOR_OK');
       return;
     } catch(e2) {
-      console.warn('[PDF] TAB_FAIL → try print fallback', e2);
+      addLog('[PDF] TAB_FAIL → will try PRINT. ' + e2);
     }
 
     // 3) Last fallback: print
     window.print();
-    console.log('[PDF] FALLBACK_PRINT');
+    addLog('[PDF] FALLBACK_PRINT');
 
   } catch (err) {
-    console.error('[PDF] UNHANDLED_ERROR', err);
+    addLog('[PDF] UNHANDLED_ERROR ' + err);
     alert('Could not generate PDF. Please reload and try again.');
   }
 }
