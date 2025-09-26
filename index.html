@@ -20,7 +20,7 @@
   .sig-container { margin-bottom: 20px; }
   button { padding: 6px 12px; margin-top: 5px; }
   a.link { display: inline-block; margin-left: 8px; color: blue; text-decoration: underline; }
-  .actions { margin-top: 16px; }
+  .actions { margin-top: 16px; display:flex; gap:8px; flex-wrap:wrap; }
   .note { font-size: 0.9em; color:#555; }
   /* Log panel */
   .log-wrap { margin-top: 22px; }
@@ -39,19 +39,19 @@
        src="https://upload.wikimedia.org/wikipedia/commons/7/75/National_Grid_logo.svg" alt="National Grid">
 </div>
 
-<div class="version">Version 10 • log + PDF reliability</div>
+<div class="version">Version 11 • adds “Fillable PDF (beta)”</div>
 
 <p><strong>Date/Time:</strong> <span id="datetime"></span></p>
 
 <h2>Job Details</h2>
 <table>
-  <tr><th>Contract</th><td><input type="text" style="width:100%"></td></tr>
-  <tr><th>CBOL Number</th><td><input type="text" style="width:100%"></td></tr>
-  <tr><th>Supervisor Name & Contact</th><td><input type="text" style="width:100%"></td></tr>
+  <tr><th>Contract</th><td><input id="fldContract" type="text" style="width:100%"></td></tr>
+  <tr><th>CBOL Number</th><td><input id="fldCBOL" type="text" style="width:100%"></td></tr>
+  <tr><th>Supervisor Name & Contact</th><td><input id="fldSupervisor" type="text" style="width:100%"></td></tr>
   <tr>
     <th>CP in charge</th>
     <td>
-      <select style="width:100%">
+      <select id="fldCP" style="width:100%">
         <option value="">-- Select CP --</option>
         <option>Warren Barron</option>
         <option>Carl Carlisle</option>
@@ -86,7 +86,7 @@
   <tr>
     <th>Work Type</th>
     <td>
-      <select style="width:100%">
+      <select id="fldWorkType" style="width:100%">
         <option value="">-- Select Work Type --</option>
         <option>Overhead works</option>
         <option>HV Substation</option>
@@ -99,38 +99,38 @@
 
 <h2>Section A – Start Safe</h2>
 <div class="checkbox-list">
-  <label><input type="checkbox"> Correct location confirmed</label>
-  <label><input type="checkbox"> Vehicles/plant parked safely</label>
-  <label><input type="checkbox"> Job Pack discussed</label>
-  <label><input type="checkbox"> Risk Assessments referenced</label>
-  <label><input type="checkbox"> Work area inspected for hazards</label>
-  <label><input type="checkbox"> Precautions (trees, dust, nests, etc)</label>
-  <label><input type="checkbox"> NOC notified</label>
-  <label><input type="checkbox"> Permit boards available</label>
-  <label><input type="checkbox"> Work area demarcated</label>
-  <label><input type="checkbox"> PPE checked</label>
-  <label><input type="checkbox"> Tools & plant inspected</label>
-  <label><input type="checkbox"> Gas detector checked</label>
-  <label><input type="checkbox"> Rescue kit available</label>
-  <label><input type="checkbox"> Team members competent</label>
-  <label><input type="checkbox"> First Aid / COSHH sheets available</label>
-  <label><input type="checkbox"> Pre-start geo-sight images taken</label>
+  <label><input id="a1" type="checkbox"> Correct location confirmed</label>
+  <label><input id="a2" type="checkbox"> Vehicles/plant parked safely</label>
+  <label><input id="a3" type="checkbox"> Job Pack discussed</label>
+  <label><input id="a4" type="checkbox"> Risk Assessments referenced</label>
+  <label><input id="a5" type="checkbox"> Work area inspected for hazards</label>
+  <label><input id="a6" type="checkbox"> Precautions (trees, dust, nests, etc)</label>
+  <label><input id="a7" type="checkbox"> NOC notified</label>
+  <label><input id="a8" type="checkbox"> Permit boards available</label>
+  <label><input id="a9" type="checkbox"> Work area demarcated</label>
+  <label><input id="a10" type="checkbox"> PPE checked</label>
+  <label><input id="a11" type="checkbox"> Tools & plant inspected</label>
+  <label><input id="a12" type="checkbox"> Gas detector checked</label>
+  <label><input id="a13" type="checkbox"> Rescue kit available</label>
+  <label><input id="a14" type="checkbox"> Team members competent</label>
+  <label><input id="a15" type="checkbox"> First Aid / COSHH sheets available</label>
+  <label><input id="a16" type="checkbox"> Pre-start geo-sight images taken</label>
 </div>
 
 <h2>Section B – Other Significant Info</h2>
-<textarea placeholder="Enter site-specific hazards and controls here..."></textarea>
+<textarea id="fldInfo" placeholder="Enter site-specific hazards and controls here..."></textarea>
 
 <h2>Section C – Work Safe</h2>
 <div class="checkbox-list">
-  <label><input type="checkbox"> Wayleaves checked</label>
-  <label><input type="checkbox"> Correct lifting equipment</label>
-  <label><input type="checkbox"> Gas detector in use</label>
-  <label><input type="checkbox"> Climbing harness inspected</label>
-  <label><input type="checkbox"> Hospital location briefed</label>
-  <label><input type="checkbox"> COSHH sheets available</label>
-  <label><input type="checkbox"> Site geo-sight images taken</label>
-  <label><input type="checkbox"> Vehicles locked & secured</label>
-  <label><input type="checkbox"> Team briefed on risks/controls</label>
+  <label><input id="c1" type="checkbox"> Wayleaves checked</label>
+  <label><input id="c2" type="checkbox"> Correct lifting equipment</label>
+  <label><input id="c3" type="checkbox"> Gas detector in use</label>
+  <label><input id="c4" type="checkbox"> Climbing harness inspected</label>
+  <label><input id="c5" type="checkbox"> Hospital location briefed</label>
+  <label><input id="c6" type="checkbox"> COSHH sheets available</label>
+  <label><input id="c7" type="checkbox"> Site geo-sight images taken</label>
+  <label><input id="c8" type="checkbox"> Vehicles locked & secured</label>
+  <label><input id="c9" type="checkbox"> Team briefed on risks/controls</label>
 </div>
 
 <h2>Team Signatures</h2>
@@ -139,7 +139,8 @@
 
 <div class="actions">
   <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
-  <p class="note">If the download doesn’t start, it will try to open in a new tab or print.</p>
+  <button id="downloadFillableBtn" type="button" onclick="downloadFillablePDF()">Download Fillable PDF (beta)</button>
+  <p class="note">“Fillable PDF” creates editable fields for the key items so others can type into the PDF.</p>
 </div>
 
 <!-- On-page log panel -->
@@ -154,6 +155,7 @@
 <!-- libs -->
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <script>
 // ---- Basics ----
@@ -252,20 +254,15 @@ function clearSig(n) {
   if (window["pad" + n]) window["pad" + n].clear();
 }
 
-// ---- PDF helpers ----
-function waitForImagesWithTimeout(root=document, timeoutMs=1200) {
+// ---- PDF helpers for normal (non-fillable) export ----
+function waitForImages(root=document) {
   const imgs = Array.from(root.images || []);
   const pending = imgs
     .filter(img => !img.complete || img.naturalWidth === 0)
     .map(img => new Promise(res => {
-      let done = false;
-      const finish = () => { if (!done) { done = true; res(); } };
-      img.addEventListener('load', finish, { once:true });
-      img.addEventListener('error', finish, { once:true });
-      // last resort timeout per image
-      setTimeout(finish, timeoutMs);
+      img.addEventListener('load', res, { once:true });
+      img.addEventListener('error', res, { once:true });
     }));
-  // If no pending, still return a settled promise
   return Promise.all(pending);
 }
 
@@ -277,10 +274,8 @@ async function downloadPDF() {
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
-    await new Promise(r => setTimeout(r, 30));
-    addLog('[PDF] Waiting for images (with timeout)…');
-    await waitForImagesWithTimeout(document, 1200);
-    addLog('[PDF] Images stage done, generating…');
+    await new Promise(r => setTimeout(r, 50));
+    await waitForImages(document);
 
     const root = document.getElementById('pdf-root');
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
@@ -292,7 +287,7 @@ async function downloadPDF() {
         margin:10,
         filename: filename,
         image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff', logging:false},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
         jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
       }).from(root).save();
       addLog('[PDF] SAVE_OK');
@@ -307,7 +302,7 @@ async function downloadPDF() {
       const worker = html2pdf().set({
         margin:10,
         image:{type:'jpeg', quality:0.98},
-        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff', logging:false},
+        html2canvas:{scale:2, useCORS:true, backgroundColor:'#fff'},
         jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
       }).from(root).toPdf();
       const pdf = await worker.get('pdf');
@@ -319,6 +314,7 @@ async function downloadPDF() {
         addLog('[PDF] FALLBACK_TAB_OK');
         return;
       }
+      // Popup blocked → simulate download via anchor
       const a = document.createElement('a');
       a.href = url;
       a.download = filename;
@@ -338,6 +334,161 @@ async function downloadPDF() {
   } catch (err) {
     addLog('[PDF] UNHANDLED_ERROR ' + err);
     alert('Could not generate PDF. Please reload and try again.');
+  }
+}
+
+// ---- Fillable PDF (editable) using pdf-lib ----
+async function downloadFillablePDF() {
+  try {
+    addLog('[FILLABLE] Start');
+    if (typeof PDFLib === 'undefined') {
+      addLog('[FILLABLE] LIB_MISSING');
+      alert('Fillable PDF engine not loaded. Check connection and try again.');
+      return;
+    }
+
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595.28, 841.89]); // A4 in points
+    const { width, height } = page.getSize();
+    const margin = 36;
+
+    // Fonts
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const bold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const fontSize = 11;
+
+    // Header text
+    page.drawText('Daily Point of Work Risk Assessment (POWRA)', { x: margin, y: height - margin - 10, size: 16, font: bold });
+    page.drawText('Generated: ' + new Date().toLocaleString(), { x: margin, y: height - margin - 30, size: 10, font });
+
+    // Helper to draw label
+    function label(txt, x, y) {
+      page.drawText(txt, { x, y, size: fontSize, font: bold });
+    }
+
+    // Form
+    const form = pdfDoc.getForm();
+
+    // Row positions
+    let y = height - margin - 60;
+    const rowGap = 24;
+    const fieldW = 360, fieldH = 18;
+    const labelX = margin, fieldX = margin + 140;
+
+    // Collect HTML values
+    const v = (id) => (document.getElementById(id)?.value || '');
+    const checked = (id) => (document.getElementById(id)?.checked ? 'Yes' : 'No');
+
+    // Contract
+    label('Contract', labelX, y); 
+    const fContract = form.createTextField('contract');
+    fContract.setText(v('fldContract'));
+    fContract.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // CBOL
+    label('CBOL Number', labelX, y);
+    const fCBOL = form.createTextField('cbol');
+    fCBOL.setText(v('fldCBOL'));
+    fCBOL.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Supervisor
+    label('Supervisor', labelX, y);
+    const fSup = form.createTextField('supervisor');
+    fSup.setText(v('fldSupervisor'));
+    fSup.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // CP in charge
+    label('CP in charge', labelX, y);
+    const fCP = form.createTextField('cp');
+    fCP.setText(v('fldCP'));
+    fCP.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Location (lat,lng)
+    label('Location (lat,lng)', labelX, y);
+    const fLoc = form.createTextField('location');
+    fLoc.setText(v('locField'));
+    fLoc.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // W3W
+    label('W3W', labelX, y);
+    const fW3W = form.createTextField('w3w');
+    fW3W.setText(v('w3wField'));
+    fW3W.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Work Type
+    label('Work Type', labelX, y);
+    const fWT = form.createTextField('worktype');
+    fWT.setText(v('fldWorkType'));
+    fWT.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Section A summary (checkboxes -> simple Yes/No summary)
+    label('Section A (summary)', labelX, y);
+    const aSummary = [
+      `Correct loc: ${checked('a1')}`, `Vehicles safe: ${checked('a2')}`, `Job Pack: ${checked('a3')}`,
+      `RA refs: ${checked('a4')}`, `Hazards insp: ${checked('a5')}`, `Precautions: ${checked('a6')}`,
+      `NOC: ${checked('a7')}`, `Permits: ${checked('a8')}`, `Demarcated: ${checked('a9')}`,
+      `PPE: ${checked('a10')}`, `Tools ok: ${checked('a11')}`, `Gas check: ${checked('a12')}`,
+      `Rescue: ${checked('a13')}`, `Competent: ${checked('a14')}`, `First Aid/COSHH: ${checked('a15')}`,
+      `Pre-start images: ${checked('a16')}`
+    ].join('  |  ');
+    const fA = form.createTextField('sectionA_summary');
+    fA.setText(aSummary);
+    fA.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Section B (multiline)
+    label('Section B – Other Info', labelX, y);
+    const fInfo = form.createTextField('sectionB');
+    fInfo.enableMultiline();
+    fInfo.setText(v('fldInfo'));
+    const hInfo = 70;
+    fInfo.addToPage(page, { x: fieldX, y: y-hInfo+fieldH, width: fieldW, height: hInfo });
+    y -= (hInfo + 8);
+
+    // Section C summary
+    label('Section C (summary)', labelX, y);
+    const cSummary = [
+      `Wayleaves: ${checked('c1')}`, `Lifting eq: ${checked('c2')}`, `Gas in use: ${checked('c3')}`,
+      `Harness insp: ${checked('c4')}`, `Hospital brief: ${checked('c5')}`, `COSHH: ${checked('c6')}`,
+      `Site images: ${checked('c7')}`, `Vehicles secure: ${checked('c8')}`, `Team briefed: ${checked('c9')}`
+    ].join('  |  ');
+    const fC = form.createTextField('sectionC_summary');
+    fC.setText(cSummary);
+    fC.addToPage(page, { x: fieldX, y: y-4, width: fieldW, height: fieldH });
+    y -= rowGap;
+
+    // Note about signatures
+    page.drawText('Signatures (capture separately; embedded images not editable in PDF form).', { x: margin, y: y, size: 9, font, color: rgb(0.25,0.25,0.25) });
+
+    // Finalize form appearances
+    form.updateFieldAppearances(font);
+
+    // Save & offer download
+    const pdfBytes = await pdfDoc.save({ updateFieldAppearances: true });
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const filename = `POWRA_Fillable_${new Date().toISOString().slice(0,10)}.pdf`;
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    addLog('[FILLABLE] OK → ' + filename);
+  } catch (err) {
+    addLog('[FILLABLE] ERROR ' + err);
+    alert('Could not generate fillable PDF. Please try again.');
   }
 }
 </script>
