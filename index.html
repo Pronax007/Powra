@@ -19,6 +19,7 @@
   button { padding: 6px 12px; margin-top: 5px; }
   a.link { display: inline-block; margin-left: 8px; color: blue; text-decoration: underline; }
   .actions { margin-top: 16px; }
+  .note { font-size: 0.9em; color:#555; }
 </style>
 </head>
 <body id="pdf-root">
@@ -53,7 +54,6 @@
     </td>
   </tr>
 
-  <!-- GPS-based Location (lat,lng) with Google Maps -->
   <tr>
     <th>Location</th>
     <td>
@@ -63,7 +63,6 @@
     </td>
   </tr>
 
-  <!-- what3words -->
   <tr>
     <th>W3W Location</th>
     <td>
@@ -129,6 +128,7 @@
 
 <div class="actions">
   <button id="downloadBtn" type="button" onclick="downloadPDF()">Download PDF</button>
+  <p class="note">If the download doesn’t start, it will try a backup method without logos.</p>
 </div>
 
 <!-- libs -->
@@ -136,10 +136,8 @@
 <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
 
 <script>
-// ---- Basics ----
 document.getElementById("datetime").textContent = new Date().toLocaleString();
 
-// Shared geolocation helper
 function getPosition(opts = { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }) {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) return reject(new Error("Geolocation not supported"));
@@ -147,7 +145,6 @@ function getPosition(opts = { enableHighAccuracy: true, timeout: 15000, maximumA
   });
 }
 
-// ---- GPS-based Location (lat,lng) + Google Maps link ----
 async function getCoords() {
   try {
     const pos = await getPosition();
@@ -163,7 +160,6 @@ async function getCoords() {
   }
 }
 
-// ---- what3words (separate button) + link ----
 const W3W_API_KEY = "0OHVUL46";
 async function getW3W() {
   try {
@@ -187,7 +183,6 @@ async function getW3W() {
   }
 }
 
-// ---- Signature pads ----
 let sigCount = 0;
 function addSignature() {
   sigCount++;
@@ -210,7 +205,7 @@ function clearSig(n) {
   if (window["pad" + n]) window["pad" + n].clear();
 }
 
-// ---- PDF Helpers ----
+// ---- PDF helpers ----
 function waitForImages(root=document) {
   const imgs = Array.from(root.images || []);
   const pending = imgs
@@ -222,40 +217,68 @@ function waitForImages(root=document) {
   return Promise.all(pending);
 }
 
+function cloneWithoutImages(node) {
+  const clone = node.cloneNode(true);
+  const images = clone.querySelectorAll('img');
+  images.forEach(img => {
+    const ph = document.createElement('div');
+    ph.style.width = (img.width || 120) + 'px';
+    ph.style.height = (img.height || 50) + 'px';
+    ph.style.border = '1px solid #ccc';
+    ph.style.display = 'inline-block';
+    ph.style.verticalAlign = 'middle';
+    ph.style.background = '#fafafa';
+    ph.textContent = img.alt ? `[${img.alt}]` : '[image]';
+    img.replaceWith(ph);
+  });
+  return clone;
+}
+
+async function runHtml2Pdf(element, filename) {
+  const opt = {
+    margin:       10,
+    filename:     filename,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  {
+      scale: 2,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: '#ffffff',
+      logging: false
+    },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  return html2pdf().set(opt).from(element).save();
+}
+
 async function downloadPDF() {
   try {
     if (typeof html2pdf === 'undefined') {
       alert('PDF engine not loaded. Check your connection and try again.');
       return;
     }
-    // Let any last UI updates flush
     await new Promise(r => setTimeout(r, 50));
-    // Ensure images are ready
     await waitForImages(document);
 
-    const element  = document.getElementById('pdf-root'); // whole page
+    const root = document.getElementById('pdf-root');
     const filename = `POWRA_Form_${new Date().toISOString().slice(0,10)}.pdf`;
 
-    const opt = {
-      margin:       10,
-      filename:     filename,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: '#ffffff',
-        logging: false
-      },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    await html2pdf().set(opt).from(element).save();
+    // Attempt with images
+    await runHtml2Pdf(root, filename);
 
   } catch (err) {
-    console.error(err);
-    try { window.print(); }
-    catch(e) { alert('Could not generate PDF. Please try again.'); }
+    console.error('Primary export failed:', err);
+    try {
+      // Retry without images (avoids CORS/taint issues)
+      const root = document.getElementById('pdf-root');
+      const clone = cloneWithoutImages(root);
+      await runHtml2Pdf(clone, `POWRA_NoLogos_${new Date().toISOString().slice(0,10)}.pdf`);
+      alert('Downloaded fallback PDF without logos (image export was blocked on this device).');
+    } catch (e2) {
+      console.error('Fallback export failed:', e2);
+      try { window.print(); }
+      catch(e3) { alert('Could not generate PDF. Please try again.'); }
+    }
   }
 }
 </script>
