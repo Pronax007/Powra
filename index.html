@@ -772,4 +772,33 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+
+<script>
+(function(){
+  const RAW_BASE = "https://github.com/Pronax007/Powra/raw/main/";
+  function normalizeMsAnchors() {
+    var container = document.getElementById("msLink");
+    if(!container) return;
+    var as = container.getElementsByTagName("a");
+    for (var i=0; i<as.length; i++) {
+      var a = as[i];
+      var m = a.href && a.href.match(/MS(\d{2})/i);
+      if (m) {
+        a.href = RAW_BASE + "F-JHG_MS" + m[1] + ".pdf";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+    }
+  }
+  document.addEventListener("DOMContentLoaded", function(){
+    normalizeMsAnchors();
+    // re-normalize after any change to dropdown (if our earlier script runs first)
+    var dd = document.getElementById("riskAssessmentDropdown");
+    if(dd) {
+      dd.addEventListener("change", function(){ setTimeout(normalizeMsAnchors, 0); });
+    }
+  });
+})();
+</script>
+
 </body></html>
