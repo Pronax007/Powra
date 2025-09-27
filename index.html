@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <!-- saved from url=(0048)file:///C:/Users/warre/Downloads/POWRA_v271.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<html lang="en"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Vodafone / National Grid POWRA</title>
 <style>
   body { font-family: Arial, sans-serif; margin: 20px; }
@@ -162,7 +163,6 @@ label:has(input[disabled]){ opacity:0.55; }
 .ra-row { margin:4px 0 !important; }
 .msRowResults { margin-top:4px !important; }
 </style>
-
 <style>
 /* --- Professional Style Enhancements v2 --- */
 
@@ -238,8 +238,6 @@ h3 + ul a:hover {
   table { border: 1px solid #000; }
 }
 </style>
-
-
 <style>
 /* --- Uniform Blue/White Buttons --- */
 
@@ -253,8 +251,6 @@ button:disabled {
   cursor: not-allowed;
 }
 </style>
-
-
 <style>
 /* --- Uniform Dark Grey Buttons (#2f3640) --- */
 button {
@@ -282,8 +278,6 @@ button:disabled {
   cursor: not-allowed;
 }
 </style>
-
-
 <style>
 .subtleRemove {
   background: transparent;
@@ -296,8 +290,6 @@ button:disabled {
   color: #c00;
 }
 </style>
-
-
 <style>
 .subtleRemove {
   background: transparent;
@@ -310,8 +302,6 @@ button:disabled {
   color: #c00;
 }
 </style>
-
-
 <style>
 .subtleRemove {
   background: transparent;
@@ -324,8 +314,6 @@ button:disabled {
   color: #c00;
 }
 </style>
-
-
 <style>
 #fillBtn {
   background: #2f3640;
@@ -347,121 +335,348 @@ button:disabled {
   transform: translateY(0);
 }
 </style>
-
-
 <style id="powra-validate-css">
   .powra-invalid { outline: 2px solid #d32f2f !important; outline-offset: 2px; }
 </style>
+<style>
+/* Force Team Member Name column wide enough for full dropdown text */
+th:first-child, td:first-child {
+  min-width: 220px;
+  width: 45%;
+}
+select[name="member_name[]"] {
+  width: 100% !important;
+  font-size: 16px;
+  padding: 10px;
+}
 
+/* Keep compact headers from v9 */
+th.compact-header {
+  padding: 4px !important;
+  font-size: 12px !important;
+  line-height: 1.2;
+  text-align: center;
+  vertical-align: middle;
+  white-space: normal;
+}
 
-<style id="pdf-friendly">
-/* --- PDF Friendly Styles v1 --- */
-@media print {
-  body {
-    background: #fff !important;
-    color: #000 !important;
-    margin: 0;
+/* Climbing Equipment Checked column small */
+th.equip-col, td.equip-col {
+  width: 60px;
+  max-width: 70px;
+  white-space: normal;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+td.equip-col input[type="checkbox"] {
+  transform: scale(1.2);
+  margin: 0;
+}
+</style>
+<style>
+#inspectionTable .select-wrapper {
+  display: inline-block;
+  width: 160px; /* fits Matthew Bodrozic */
+}
+#inspectionTable .select-wrapper select {
+  width: 100%;
+  font-size: 14px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+</style>
+<style>
+/* Lock first column to dropdown width */
+#inspectionTable th:first-child,
+#inspectionTable td:first-child {
+  width: 160px !important;
+  max-width: 160px !important;
+  white-space: nowrap;
+}
+</style>
+<style>
+/* Make first column hug dropdown tightly */
+#inspectionTable th:first-child,
+#inspectionTable td:first-child {
+  width: 150px !important;
+  max-width: 150px !important;
+  padding: 2px 4px !important;
+  white-space: nowrap;
+}
+#inspectionTable .select-wrapper {
+  width: 150px !important; /* shrink wrapper too */
+}
+</style>
+<style>
+/* Force wrapper and select to exact width */
+#inspectionTable th:first-child,
+#inspectionTable td:first-child {
+  width: 150px !important;
+  max-width: 150px !important;
+  padding: 2px 4px !important;
+  white-space: nowrap;
+}
+#inspectionTable .select-wrapper,
+#inspectionTable .select-wrapper select {
+  width: 150px !important;
+  max-width: 150px !important;
+  font-size: 14px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+</style>
+<style>
+#inspectionTable th:first-child,
+#inspectionTable td:first-child,
+#inspectionTable .select-wrapper,
+#inspectionTable .select-wrapper select {
+  width: 166px !important;
+  max-width: 166px !important;
+  box-sizing: border-box;
+}
+</style>
+<style>
+/* Team Member column locked at 166px */
+#inspectionTable th:first-child,
+#inspectionTable td:first-child,
+#inspectionTable .select-wrapper,
+#inspectionTable .select-wrapper select {
+  width: 166px !important;
+  max-width: 166px !important;
+  box-sizing: border-box;
+}
+
+/* Signature canvas expands inside cell */
+#inspectionTable td:nth-child(2) canvas.signature-pad {
+  width: 100% !important;
+  height: 80px !important;
+}
+
+/* Third column shrinks around checkbox */
+#inspectionTable th:nth-child(3),
+#inspectionTable td:nth-child(3) {
+  width: 70px !important;
+  max-width: 70px !important;
+  text-align: center;
+}
+</style>
+<style>
+#inspectionTable td:nth-child(3) { white-space: normal; }
+#inspectionTable .inspect-wrap { max-width: 100%; }
+#inspectionTable .removeInspectionRowBtn { white-space: nowrap; }
+</style>
+<style>
+/* Make third column hold content neatly */
+#inspectionTable th:nth-child(3),
+#inspectionTable td:nth-child(3) {
+  width: 80px;           /* small but enough */
+  max-width: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Stacked layout inside third cell */
+#inspectionTable .inspect-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+#inspectionTable .inspect-label {
+  display: flex;
+  flex-direction: column;    /* checkbox on top, text below */
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+}
+
+#inspectionTable .inspect-text {
+  font-size: inherit;
+  line-height: 1.2;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  display: block;
+  text-align: center;
+}
+
+/* Tidy remove button */
+#inspectionTable .removeInspectionRowBtn {
+  padding: 4px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+</style>
+<style>
+/* Ensure third column (inspect cell) fonts match base table font size */
+#inspectionTable .inspect-cell,
+#inspectionTable .inspect-cell * {
+  font-size: inherit;
+}
+</style>
+<style>
+/* Keep the third column wide enough to avoid wrapping "Inspected" */
+#inspectionTable th:nth-child(3),
+#inspectionTable td:nth-child(3) {
+  width: 90px !important;
+  max-width: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Normalize font to match table body (no unexpected bold) */
+#inspectionTable .inspect-cell,
+#inspectionTable .inspect-cell * {
+  font-size: inherit !important;
+  font-weight: normal !important;
+}
+
+/* Keep "Inspected" on a single line inside the cell */
+#inspectionTable .inspect-text {
+  white-space: nowrap !important;
+  line-height: 1.2;
+  display: inline-block;
+}
+</style>
+<style>
+#inspectionTable .removeInspectionRowBtn {
+  padding: 2px 6px !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+</style>
+<style>
+/* Completely hide the 3rd column (header + cells) when not Overhead */
+#inspectionTable.hide-equip th:nth-child(3),
+#inspectionTable.hide-equip td:nth-child(3) {
+  display: none !important;
+}
+</style>
+<style>
+/* Inline remove button that appears in Signature column when the equip column is hidden */
+#inspectionTable .inline-remove {
+  display: none;
+  margin-top: 6px;
+  padding: 2px 6px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 6px;
+}
+#inspectionTable.hide-equip .inline-remove {
+  display: inline-block;
+}
+</style>
+<style>
+/* Grey out class for disabling a single checklist row */
+.greyed-row {
+  opacity: 0.55;
+}
+</style><style>
+/* Lock interaction for the entire logon row when CP = Matthew */
+.greyed-row.locked-row input[type="checkbox"],
+.greyed-row.locked-row label,
+.greyed-row.locked-row .ynna-text {
+  pointer-events: none;
+}
+</style><style>
+/* Grey just the logon text when Matthew is CP */
+#logonTarget.greyed-text { opacity: 0.55; }
+</style>
+<style>
+/* --- Mobile sticky header for inspection table --- */
+@media (max-width: 768px) {
+  #inspectionTable thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
   }
+}
 
-  /* Hide buttons, interactive elements */
-  button,
-  #gpsButton,
-  #savePdfBtn,
-  #fillBtn {
+/* --- Inline field hints for duplicate/blocked messages --- */
+.field-hint {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+/* --- Print polish: hide interactive controls and footer --- */
+@media print {
+  .clear-signature-btn,
+  .removeInspectionRowBtn,
+  .inline-remove,
+  #footer {
     display: none !important;
   }
-
-  input, select, textarea {
-    border: 1px solid #000 !important;
-    background: #fff !important;
-    color: #000 !important;
+  /* Avoid table header repeating awkwardly */
+  #inspectionTable thead th {
+    position: static !important;
   }
+  /* Encourage clean page breaks */
+  .page-break { page-break-before: always !important; }
+}
 
-  /* Force tables clean */
+/* Utility to hide things in print or screen if we add later */
+.no-print { }
+@media print { .no-print { display: none !important; } }
+</style>
+<meta content="W.Barron" name="author"/>
+<style>
+@media print {
+  .section {
+    page-break-inside: avoid;
+    margin-bottom: 15px;
+  }
   table {
-    border-collapse: collapse !important;
-    width: 100% !important;
+    page-break-inside: auto;
   }
-  table th, table td {
-    border: 1px solid #000 !important;
-    padding: 6px !important;
-    color: #000 !important;
-    background: #fff !important;
+  tr, td, th {
+    page-break-inside: avoid;
+    page-break-after: auto;
   }
-
-  /* Page break before each major section */
-  h1, h2.section-title, .section-card {
+  .page-break {
     page-break-before: always;
-  }
-  h1:first-of-type, h2.section-title:first-of-type, .section-card:first-of-type {
-    page-break-before: auto;
-  }
-
-  /* Ensure signatures visible */
-  canvas.signature-pad {
-    border: 1px solid #000 !important;
-    background: #fff !important;
-  }
-
-  /* Make links show text only */
-  a:link, a:visited {
-    color: #000 !important;
-    text-decoration: none !important;
   }
 }
 </style>
-
 </head>
 <body>
 <div id="form-header" style="border-bottom:2px solid #000; padding:10px;">
-  <div style="display:flex; justify-content:flex-start; align-items:center;">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAEECAYAAAD0wkrNAAAACXBIWXMAAAsTAAALEwEAmpwYAABVzUlEQVR4nO3dWXBk2ZnY9/+59+aOHSgUal+69qWr95Xsjd0kp9lDDjnUUJQlWQopFGFLtsL2g0PPflVYXsIvtsMRnhhZI5Gj4b6TPb13V3Wzurv2fQFQ2Jfct3vv8cO5CaCqkJkXqKwGUPh+QXQVC5k3T2bezPPdc77zHaW1RgghhBBCtI610g0QQgghhHjQSIAlhBBCCNFiEmAJIYQQQrSYBFhCCCGEEC0mAZYQQgghRItJgCWEEEII0WISYAkhhBBCtJgEWEIIIYQQLSYBlhBCCCFEi0mAJYQQQgjRYhJgCSGEEEK0mARYQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiEmAJIYQQQrSYBFhCCCGEEC0mAZYQQgghRItJgCWEEEII0WISYAkhhBBCtJgEWEIIIYQQLSYBlhBCCCFEi0mAJYQQQgjRYhJgCSGEEEK0mARYQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiEmAJIYQQQrSYBFhCCCGEEC0mAZYQQgghRItJgCWEEEII0WISYAkhhBBCtJgEWEIIIYQQLSYBlhBCCCFEi0mAJYQQQgjRYhJgCSGEEEK0mARYQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiEmAJIYQQQrSYBFhCCCGEEC0mAZYQQgghRItJgCWEEEII0WISYAkhhBBCtJgEWEIIIYQQLSYBlhBCCCFEi0mAJYQQQgjRYhJgCSGEEEK0mARYQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiEmAJIYQQQrSYs9INuBf+Z49/Aiggu9JtEUIIIUTLKGAL8HPr2Cf/7Uo3ZjnWdIAFPBb8ObOirRBCCCFEq3UDD610I5ZrrQdYNd0r3QAhhBBCtNya7d8lB0sIIYQQq5Ve6QYslwRYQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiEmAJIYQQQrSYBFhCCCGEEC0mAZYQQgghRItJgCWEEEII0WISYAkhhBBCtNiDUsldrBp6wU8j9hfQlvvJa/A7teBHtJYG/Dq/q10vtuJ1b/Q4tceS91cIUZ8EWKLFgo6pUXylardbqx2UBt3oCWpQ0gG3nk/jc8sDpbj34Ce4QGj4HnvBeyyTAEKIxUmAJVpIB52fYv7q/85OKugAtb9GgxANOujItc/iz0+Zzln5SAfcKrXXuXZuLfa6B39qHfzf5ZxbtXNYz///eu8xBG2R91gIcTcJsESLBCMLThckD6ESD4FX5vZpFgVWAvw8evYPUB0FK87aCbJ8E1RFB1CdXwaVAL/MbR2wssBKoTPvQ+Ez83zXzPNbrTzABrsD1fYExLeBm+f2wEeBFYPKIDr3ifm9Cu63FH4ZnB5I7EPFd5rz06/e/lgqOI9zJ9DZE2C3I++xEOJOEmCJ1tBBIBXZhOr9C1Tniw1uW0UXzkD5mukU10rn5HugXYjtQm3+H0FFGt0YnXsvCLDW8nToKuC7YEVQ0Y2o/n8CySN1b6pzH0H5OngF835ZSw2wSuD0orq/jur+0+ACoM5jjf7vMPM7sNuQ91cIcScZ2xatUZsusxzz05AN2mJtbpKuARtUk45bW+Cvxee3SinM6KBqcm45nfeYfuWbESoVb/5YVtIE3EIIsQgJsESLBL2aLoOuNrmtj5n2abRKa7Xyg061Wds91mYAuUppzEhWs4DGy4K/WI5WWMrk2PklGq8UBfxCkFQvhBB3kwBLrAAJPMRaIOepEGL5JMASQgghhGgxCbCEEEIIIVpMAiwhhBBCiBaTMg3iAdK0fPwqUa+dK93G1dqu9WAtnLuLtXGl2raa2iLE4iTAEg8If8HqsYVVvwGrVjF+lQzYar2gCnytRpYKajatZCcRbHPkL2wXQbtWyWv3QNKmZted564FplDqaggcgvPVv2P1rKVYmTbq21eLWrXPt5ynYvWQAEusUV6wbL9o/lQRU5fIjnLbl73vmiX3fsF8F1txUNGgVtcX9GWsNegK6FJQNDMOTor5PfN883t3JiizFQ8KsC51Q2zPFNjE4/YOL/i7coLjOsx15n7VlNbwS6Bipl1zr6Fv2uvlgCoQNbf5Il+7B1Ltda+YyvFKgdNuzkuC+nC+BtygYGrJvHcqBlakeX2uerwyUOHu7X9q50csKKxa+51n2ucXTLusVHAbm7kAxy+CnzXnuBUHe6nnrW8eY660y53tUsHnNWiXXzTnK45pjxU1r6VfDdrhmX9ruOm8BiILzuUl8t2gDVUWDyx10OblfIbFg0QCLLG2aM90TARf6CoFTgfYPRDpBiuFwgF8NMp8EXoZqE6bAIYSeKVgixvbdFj34+q7tqG1Xw2+9B2IbADVDrFNplo4tmkDVbSXg+oUuFPgZ0wbCQJHFSaY8UHb5jF08P9va48VvHZVoDrfgSsL7F6wU+D0Q6QPZUUxXw0uWpfAnYbKBLizQTBWDYp+NqpkLxalK8Felg5YnRBNQbQPnB6U1QZEAM+cu35x/pzwcibY0hVTC8xygtuGKSURnAt2CqyOO/ZaBBPEWObc8MtBbF0xv7ISwWerD6L9YLWjVATz+fJM3bHKuDlH/Lxpc23boqZBuAatwO4whXv1IoGfUub5+uUgqIlAdDNEB8y5bsXNa+IVoDoO7kTw2bGDz81i9eqCf/eLLH2XBd/c3O6E4HvmLipiRqh1Kfj9ahiBFCtBAiyxhgRFPrVvgqnEQWh/BtX2GMrZGHQ689MVqjblpV209qB4HjLvofOfmW16vJL5Yr9vm057pjO1HUgcRHW8gGp/CqLbmB9FMiNFCtf8Pf8ZeuaXwX56M4CL6UgbtU+bDig6gOr5ptkP0svP/9qKgF9BV8Yg+zGUL5sOUFsQ243q/DKq4yWIbg1ei/mRNYVvXqPiefTsm+jcSShfNaMqtnOfXrcHlPbAq4CdMNstpY6iOl+GxKFgY/DaVKwOXlXfvG/eDOT/aM7dwoUgCK8EU98hgm8/CKTbHzP7hNpR829g7q80mgjkTkD6LfM50lVw+lCpx6D7a5A6hlKx2z4riqDN7iS68Dk6/S5kPzTtU05QhLXe+aGBYLSp4xmI70NhMV/c1Qr27damXZm3zTRq55OoDX8flThqtijSCwoWe2l08Sw690eUnQKnO9hHsvZ4ptXYKSjfRGfegupMEPCGGGnyPfOaR/pQHV+G+K5gdLfGPFdtp6B0FdLvgp8OiuPKSNZ6JAGWWBv8vAkiIhug4wVU55cg0o9KHAS7u+ndFUBsK8R3Q+Ur6NzH5ku7cAbzZZ4KOqwWcbPmyjq+DdX5EqrjBUjsAWdj4/t19qKiW6HzZfTU30LueDBi0Wi6QZsO1+lE9XzbPE93ar5PsWLmar1wCl04ZQK35GFU+4vQ+QIquQ+i2xu3q70PFd0OnS+g07+H2bfAHQXiC6ZkxOJ8E5DqKiT3QMfLqLZnUNEtppNu0rkrtkFsOySOQvEyuvCJCYQqwxDppenXuHZBOajUMVTPG2Zzar82VRiMEqkY2kvD1I/MiFLXS9D9dVR0F6SONZ6WjPShYrsgfgidOgqZtyD7CVAONsKuM03n+2A7qOTjqJ6vmmm1uYCoNqrmQvkW2s1C7xuoDf+l+SwtFrhF+lGxHSawcjZAZCC4cNG3NyHSjc6fgvIIuCdNEKQSjV9DMOkIdj90PAe930HFD4A3O/97tSAfbeqnaP1bE5TJNci6JQGWWP28jMmXaDsEycdQG76Hiu9dxoFsiO9Fxfeiko+g47vQs2+aIMabAlK07CNhRSFxGPq+Bz1/Bk5PuPupKCSPoJJHILIBPaYgeyLYI69RR+wGU4SbANtM9y1kd4J9zVz1Jw5C73eh97uo6KaQT0hBbIfpwOJ7wEqhp39spoioYEbZVovl9GiKuwOBVvSM2uQwWQlIHEN1/Qmq50/Dnw81dhe0PY5qexxKj6Cdbpj5FZTHwHIXbCq+GDPCo+wuiGwNprgWu13CjHZ2vgib/iUq+Wj49lkxVOoIKnUEHd+DVjbkPpt/7nXbpYOAKLjwuLNd2kVHN0LbY6iN/wLV9kzjdmiAqDkvnT5zQbaYxAHo+ooZja3catDGhc3NgbUHut+A5MPB8+6/+3beDLhj5iKHmEylr2MSYInVTVfNVWz7M6iBf4lKHg6uiu+R04nq+Q6q8zX0rX+Hnv6BeSwVctqlmSBAsjb8o2V/war250FF0N6/g9JFMwrVsCMIpkQX/VUVdAmVOgZdX0P1/T2zofFy2hXdCn1/H/wCOv0Hk4Njr5JOROvguQbnjV7KexksRsClZXtl1vZObHsMteGfo9oeCxK2l0/F96M2/3fo+F70rf8VqmOYyKTRe6BB6WAqss5r4iSh7Tmsrf/GBNHLbV/ni+C0o4f/ZzOaZcVpOFWoGox+umlU8ijEd4YM+MpQ+BxduoJqf9Zc3CzWRisJ3V9DT/8E9Gc0z8XS5r10OrBSTdpROAvFsya/TNaCrGsSYInVy6+AnzdTAhv/Oaq9ydXrctjtMPBfoawIeuwvzWiAasEqufbnUNq956tXlXoUBv4peujfmhyyplfadTorpcz0RvefmABpmcHVnNgO6P4mFC+ZURQadNxfqAp46SDpuhJMXy6BO22S+f2SWQhwL6kz2jWjHm1PoXq/j+p47h4OdgcVR3W/boLcsf8XShcg0k/DIEEHOYGLLJpQ2kO1P49O7IfYrntsnIVKPQGJA+j0OybobbQptq6/qbayIpA6GqwYjDV/aC+Lzn0GuQ/M4hf+rMGx2yC204wG+tXG54rvmVHg6OZgtWcDxQvowvlgxafkXq1nEmCJ1cmvmC/m2Gbo+y50fPm+PZSKbED3fd+slMu8ZTpou/PejrnIFJB2syZnQ5vcFBVpko9lGgcdr0D8b6B0BTO6spyPrQ2xnYsvTfdLaHcyGCFrR0X7QjyGMqN08YNQvBzcN0QHeJ+pyEboesNM+fq1YHkJvBzEd0Bi7/KW8Nf4FRNURAag55vQ9VrTu2g/WLGpS6CiKKe/cadvJaHv+2bBxsStBcHTcgJdBYl9KPbd3a7qhDlvVcSc13ZHuEMmD0FyP1RHMefTMoINu50lTdWWbpgE89JNqIw1v31iN0S3QOVm0MbFXjsfqJrpxuiOEG24bqYdI911jifWCwmwxCqkTUJpZBP0fAfang7xFeuaAKYyCt40SvtoFYPoRtPpNpmWUbGdsOlfoSu35hPLl1tv6E5+EV28aBLMS9dMjkZkM7Q/aXKtnN7GbVMOOrYHIp+b4G9ZHb8yK6tubxiUr6Nzn6OLn5vO3dkMbUdRbU+YROFGR7Ti6NRByH9sRteIsOIdSmwvauu/Wdk2QBBE96G6XzcrNBvf2JQYyH+Czv3R5A/Zbei2J1Cpp1CR+ueHUhHoeh1dvgXpvwsC6GW8B4uVAvGm0eWr6MxHJoi2k5DYg2p71uQwNdP2BKr9WfTkD0ywaS1nNGexT74XTP/WkvQdM1Lk5dDF0+COAy66MgSZN1Ftz9cPVJPHIP4hlC6ZgLUevwjxR1Bth+rfRmt06Ry6fDUohyLB1XonAZZYfWqFQ5MHUH3fR0UWSSRdyJ1BT/0Qnf/cXDkqU9VdY5kl2fEt0P06tD2PahA0qfhudPc3wE2bL1yng3tKdNZVE1RN/wLynyyoZVQGK4bOvmWm2nr/HqrjxYaHUokd6MiGIHH23unqTZj8GWTfQbszZiFBMKWmM38wK8f6votKPdm4XdEt6EgvFNyGt1tXfBewIL4d1f2GmVaqQ/tpmPkdTP8MXR0x74P2AAdm30SnDkPXV005B6tt8YO0PYkqXkDP/iaYkmpBPlz6t+iJH6LdKahOmFW8ykFn3kPPvo3q/iqq99uNp5pjOyG+F5PP1ppgQ5euQfr3UB40hUWtJER3Qs9rUJ2EwsWgnEIbVMfQ6T+YHC6rb9HjqdQj0P4kevaXwUISFmlrUOA0eQw6Xq7fOD+Lnv0tlIdNsWBZPrjuSYAlVh9dMqUGUo+iogONb1u9ZYKr6Z8Eo0MFUNGgkpCptKwL7VAaRPUVoOdPGh5O9XzHXIGWzrL0IoR3PA13HD3xV2ZkoTxikohVBLBNR1oeRGeOm6mgJgGWKQbaFiRN32O+U3kIPfkfYebnULxoRj1qFbi9tGlX8QLK7oYmARZ2l8mP0RJgzauY4qGph5uP9GTeRY/9n5A/F6zuSxIUgDLTcuUb6Oo42G2oOp27AnTsoQUjMPdyfvjo9Jsmryv9VjCyFZlfxFAdgdJltM6j4rvM+dEoz8jpCqYu7z3o0+4sevbnMPEfzSifXzAjU5HNUL1mch4L58wIntNpculyH5uacM7iARZg6tI5ffOjYrd95H3zNWB3BIn/DZ6rX4TsBybQU3eOFov1SAIsscrUimbuNImyzW498QP0+P9pvgSt5IL8kAXL7rULmXdM0BXpQLU/Tb1TXzkpSB0xozJ+UAxxuYmq2U9g9k3QBYj1M1/AEyA2V/CQyiC4k407Aau23PteV7a56NxHMPMT0xFE+oLnt7BdbSYIK52D8g1TmqEeO3nvCfMPGq8EyU2o1MON89L8ojk/ch+bTv7Owpx2wowqZk9C7Lfo6HZU/KHFjxXthtQjZrWpV1j+SkU3jR77f+aTxK07tp6y4kHgN4zOfIiK7Q6S6++mAF1rh77X89YzU41Tf2s+L3bHfGmK6i1Td0op5j5jVsyMGFfG0KULjc/hyAaTT1g8BV7x9ppYvmteg9huVGRD48ut6ngwslYCp85oo1hXZJJYrCK+uYK0opDcC6nDDW5bxU//xlRjdmcwW2PUcoAWbu5smRwNKw6FT9Hj/z7Yr6+ByGaI72dum47lKJyC9G/ntw6ZS6CtdaK1tpkCj37pIvP7sS3Cipvnd6/1PEvXTIdemQyu1u9sl5prF5UpdOFk8Bzqtcuh/pYk65EGTBV0YnupOwKqPXT+BLpyg/pVz2vniYbC50GeWx2RjdD5kgmO/dLyW1+8AKVBEyRatc/THecGphK8rlw3Wzw1omo7FtwjNweZ35sA0kqac07ZwfFtM0rme/N5WbXcLO2ZKdjihfrHjm+DjmfN89KV238X5FKp1BFUpMFoujuGTv/OjKq1qtSLWPPkLBCrhw727YoOoBJ7UFaDYXavCNM/NyvrrPYmewpapuNxs5D/HF0ZbtgMFd2Iiu0xdWwaLCFv+FRKV9HFc8FS7cVGMYJOR8XMiF11tPFjzS35vrdARlfHTKdu1TqnOq+ZnTAjAIULJmdMhOdXIdIF8QbV8f0yevYdKF4DLDON5eXu/tElwEOXLqOL5+uGKsruNgsTVNv8PoJL5eXMCji8xjsHKNvUrqrO3h2Q3GmpZTLq0JWrUBkJ8qsSzG+JpeYvoKzY7aPNynwn6NwH6AbBqbJ7UR1fMtOK2ue2z5hfMcfvfAkSdUYPwSxiybyHqeu1SmrCiRUnU4Ri9dC+yZ+IbjUVpxvxSyah1cuaL8amrCAIq0LxNMR3Und7DLsrqHcDyw5ovKzZ5wy7cRqXZZsRosok8/uwLSbamlWN1QxUpgGHhgUesYGSmbpcZpC5Ivwy2p0I8n6WkUOnvaBEQmeQVL6MHDztmry0htuvaNBZU4YgvrdBIKKDTr8aNKUM1Jl2jG4PVpjWgp7FqtM34BfBmwju2mhaPBix1OVgxKiRFoxg+WkzIqx1uIrrNbUNpEs3TXDW6KbRXejYNigPzU8L4pnPZ2QDpB6jYf5VZdjUItPOvZX3EA8UORPEKuIBUZSzAdWsWruXNj86WLEVipky0NmTkHwUVa9atd1ukpTvZerLL5gikypIWq5LmWkIN9skT6VFe/3pslkRVnvsus2yQHuoRtODq5Cu3ERP/hC86fnVqEvh5YMpoy8HI0LLqe2lUVaicWhmRVBtT5oaTE0L2wZ5iYlDKF/XvamKdKGVEyLoqfcwlWDrI92kPQSju7WK9/eXrs6gCxcxQeZSuixlTnG/hC4PAmVUveBUWZDYby7aqqOYadCqqYcXf6jh95Gmii5eMhcukX5kY2dRIwGWWF20NgmiduMkXV2dMeUYljLCoCKAhtJlk+BdL8BSERNkqThzOTBLHcnwS2YaM9Kgtg7MH195tCyIakRXMCMcSxndWEMbOXuzkDthEqGbVedeTHUGUkcg/tCCZfthaXP+2sn6JRVqVBTV+ZUgSGkyyqkBXBPsNXw+tjln56aSl9jR+0WTz6i8JvdVzI9gLT/fKzQvB9WhYHRxGcGLFYPyBVOyoePrLFpV3rJRycPo7IemcKudMp8VZysqeaB+YKc1ZN4xqxfncumEMCTAEoaudfBBonlt5EZr8+9WFLNFRKs620USQWtbaqiIGWpv2N6Cuf9iBRLrCr78vEyIjsFZ8IW5zKkm7S3hfrUE4vvNm0/cD9W0xZKvVzHtmXPDK5gOstHCgcX4ORMY+94yn7YKAqwQI19213IeoMkx48xv5bLEz6p2zchrqLsFe/N9Efl5fhmq08HnaakBljIrDotXIP0mdLzG4t1exGyCHhlgLlD2chAbMAnwdbfH0aY0Q+nqfIkNIQISYK17OuiU3OC7wQ6SWINVOrVASFcJVzAwTIesMFu+1JsSCxFoaJflBXsahY9aS6MyraT9JQZ+a4yyTIBuRcBXSx/BUtEFCwqWGvAGgbhuwV6Wy6WSwXNe3mdj/n6r6PzQrgmylvuZtSJQnTLTf+6sKU2ymNhOs0WS0435blIQ3Q2Jh+sfW/no0hWTqyi1r8QdJMBa13SQbhEDuxuImyRSO2FW5dgpk3tgtaEzH0LpfLA3WJ1jAcqKoJqOKmkzguTfsZ1E7Tvdr2ICsAZUo1WDDe/I7XWfGrRxNXY290q74JWDEZYH6HnNWVhOYCmjb7WRyoXnxr0E4Sv02tbKFiy71uhqPCc0898Hy3lSwX3caXTuBKrr1UVz8xSgEofQsYfQpYsQ7UfFdzeevS3dCLbnKkH03vYvFQ8eCbDWM99FWTGzLUrPN8DqAHxzFa+iYMXM/nVWJ1RH0PnjptxB3do+BKNfIYbxtc/dHVjQyfmFIMhqQLUxN5Qfmhkx03Y3NExC1kEyeKVJ4vlaVAsc19jU333XihHN4PzVheZTZ9pFz/4O/IzJ97lXdspMbVZHghIcD9J76wW5g/fwHtkpsyfozE8hvgtVr8J+bLtZYVz4HBXfhYptqXtIXZ1Bp980KQe2lGYQd5MAa13z0FYUlTiA6v6zxjd1ehoXnJwTa5CvMP+4i39ZWqaPmqv/00CkC7TFklYxaRdQEN8HzsYGtysHeVq1aYkHqbMS94+aP3/nVmrW4RXQU38NxUvBlFSzkZnggkQT5CneeXvb/L46warYdLuVtG8uuO7axmYJrKDeXPpt6P1u/S2MYtvMAgelzJRhg30kqdyEmV+YBS2q2WIWsR5JgLXe+S7aLzf/3lJxszKqloh+lyAx3gqxdYqbC0aG7uwEzHG1NwVevnFxA6cTHeky22QQMvlVV0DZqPYnUbFt9W/nZYKO6otKPBcPFK3BbbJbgAp2GKhOmZ+GSfG1xScwvwildpwFVdaVhcmhfNDOWT1/cbRstjmGOw2Vm/Uvm6wkJA9CfAckD0NkU/1DVkdNhX0r0bKCquLB8qB9EsWS2GakyJtCe+nGN432mxU1eCw6aqR98wVmdzddHaW9DIuODCnb/HNlBF0dbjwhoGKoxBGTsOo36cwA0zH5oJKoxMGG05i6MmVyK7Re3rJwsb4pG+1n0Y1GYa2IqbMV3WxGhuemzP0FP0GR0drFiB3kSOKachTutPnTy5j6XX45KF0iX+uLs0DF0dnjUPis7q1UYj+q59vz1d0XocGUc/BLQcArr7m4m4xgrWeWZZazV8fBnTJF9eppfxbyJ2HyR2Y5sp1iroaTXzHTaXbK7CEYazCsDvPVwe+sLaOU+bKqTphlz37BXFEu2vYk9P05VIZg9ncQid69Me0c34wSRLqh8/m6m9POqY5C8SIoDVoCLLFEVsSsVisPNai1FoXOVyDzHuQ/gUgv83lxCy4+dBUoQuwQtD2OivabDZndGRNU6XJQgT1r8rmqGaCKFLtchGUDSch9BOn9kDy2+O0ifdD9jcbTg9kPIHs82CNUulGxODkz1jXbXPVWpqByy+Qc1LsSSxxCdX8LnTluagX5xfl8EO2aDiL1iPlpdDXnp82WEotWZbZMUOOXzR6DxfPBFhWLUDaq7Sno/hq6dNVcyftBbay5FWRgRtt8MxLV8WVU3/fNNiaNVIagdMkEcbLthVgSBUTNRUTpEsR3s/jnIcgFTBwB5+/mz9251bG18inBtHbHs7Dxn6KcBRcHXjoYyZqFwnl07gPIngA3v7QtZdYNy1yElQbNe1OPiqNiuxofKvMeOnsiSImQHE2xOBnXXO+UBboI5avBNhl1bgao9qdRW/57E/RoKyjkCDgbUV2vYQ38C1Rib8OH0+URdOYds+Jp0W1IlBkBqNxEFz9v3vze76I2/TcmOVX7QaHEatC2UpAsr1Hdb2Bt+Ceo5OGGX4i6dNl8cfqF4HbyERFLZMegOorOnzbb9dShAGvDt1F93zNJ3H4+OHddE1z5BfNZSB6BzpdvC64UoOxOVHQHKnkM2p4JRqDtB3DlayuZUXJdnUI32Z+wHg3oyjWzYrPpNkdiPZPL8/VOxc2IUe5zaHuh8TSh3YHq+w5ENkPHBaBspjqcLtMJJA41f7zKKGROAD7YdRJDVQpKtyDzEXR8DaINEk2tJKrnm2C3oQtnzUicLpqOSkXA6UFFt6A6XzFtbMgz+9jljktVZnEPYmbz7vxJKJ2F5CMNbroP+v852L1QvgnVYZNbpWKm5lziEKrjy6jE4cYPqUtQOB1cGMjXekN2CrxZdPZt6H4dZTXZ9/Q2PrpwCirjwess3xGiPvkkrncqYurD5E+CO4JiZ5M7RFGdL0DnC0t/LF0y+SbelKmtVa+cgxUBbwbyp9EzP0b1/QXYPfWPa7eZIKvzVTO9506aUQArBrGtqEj9WjbzbfPQmb+D7NsmJ61OcqsQTVmOyW0sXUPP/BwV2QANzkGVOABb/geT95c/ia6OmCm+6FZU8mFU/KHmj5n7CHKfmXPearKKd72zk2Yv0tnfQfszEF1CgOVOwdSPoTrW+GJUCCTAElbEJKmXByHzLjq+H+U0CGbugZ78G/T0z4EETZNwVRLcGfTkf4DYVuh6o/kGPHYSEvuAvSz1ylIX/oge+T+gNMz8Js9CLJOKgy6gZ36HThxE9XyncdkRFTUjrPF9KO2aBSjUtuxpTGfeRs/8CnPOS3J7U1YMqmnIfgylGxDdEf6+Xh6y74A7USfFQYh50osITN6GQk//Ej37y/uwS5+Pzp9Az/4CylfASQYrehqwYiYHqjyEHv8r9OxvltCuJQZX+Y9h9P+C4imzzN2WL05xj6woaGWmrKd/DJm3wt/PDmrJhQmuyjfR0z82I8N2iM+VwNQKw1TcL18NqsSHo6u3oDxqLkotqd4uGpMRLGG+lK2kqesy/TOzPDn5qMmtagGd+QA9+e+hcCG46gsZ16soWMqsjEKZ5N3Uw42XTy+Fn0WXbqJH/29IvxkEdV900mqtblGTx7RUyNVKrboNhNvPzzJt+0KE2N7Hqm3SvNw21UokhDlGs1HYYLPp3Em0+g+Ag2p7pPkq1pB07o/o2Z9B9kPwqhBJNW6zcpoEbQufc5jLmRaNmIXKGWvlOaaD9AQbMh9A4ii0Pd78bn7erGxWYDb0FqIxOUtEwDJ5H4Uz6OH/BXreQDWrBdOMl0dn3kRP/xCyJ4NCpEvsXJRj2pU/ha7+W+h4EdX9OqSOhtiSp4HydfTML9GZN4OaV3awRL5ZcLWgYnZDVsiAKKglBo2PqWvtajjRRNP2K2sJfVUQbDSqDK4sM1LzRST7KppXKZ8rIbXccVi14I9mAdSC2y8qqNbulyF7Al1NQ98bqM6vQmTDMtsHeEV05i3zucp9ajr+SEeTtqjmqwvnztew76cKcbNmgapqvp/o/ahMb0XMasLMu9D2KCpEgKWL59HZjxZ8VwjRmARYYp4VN5WJi5fQE/8eXb6J6ngBEtshuhNUrOn3qaYK5RtQOGeCtexHULyCqXsVYW7PtNCCsg1+GUqDaO/n6PJlVOpRSB6C2B6TyN4k2NIQFH+8BuWr6PQ7kP3EJK3WnnvT4MoyuTG6BOVhU7DUm72juRGzt5yfY76DDtHx+XmzgkxtM/WN5n4dNUv4q+PglRuMQNiAG9Qz2zb/vOY4EOkxVb9DdVjmNtoroSq3IN5mVrfNtcsxpQSqo0ENp/s5NRVsoeR7UBlHxQ+CO35Xe7XTborU+lVCBZuLsSzmKqWXh00g5OfubkukG+1lMfv+NTygeQ91EYqn0WNT6Px5VPszJrcw/pBZpNHkKBoPKoNQuASF0+jsB2Y0xa8EnyuH+p8rE+RoL40q3zKrE+/cPNnpRVcngurzfpPAKQiatAvVKbQuodwctc3U50T6zYITVW/7Hss0wZ0x57eKBIVVa5R5/au1c7mVyQtBzb3KGLp4CfwcymprfJf855B+P7jok65TNCdniVhAmdEi7ZpifN6v0KVrZt++xAGI70TbHaAiKBUB5aD9CuCZwMxLm06peBFKV9Cl6+BNmy9XKwFzVaqXKri/5ZtOPvMhunQdlT8Jse0Q242O7TCreqwEKBuFAny0rpjgrDpqqsMXr6IrN0whUzcHdkf4L0tLmamByi30xF+CSnD3ptQWWEl04XRQ6qEJFQSP+bNo//8LOr+Fx7QBD7wZVHUIvWggqMz0pjuLnvirYM/IOzfmNq+hzn8cBGlNuvRaAFUZRE/+J7C67jhmMPKmc6jyDbSdXKRdLWLZJjfOnYbZn6ELn5lk4zvZcbMBr5cxoyLLmbpUMXCzkPkAXQ5W892Vo6PATqDyn6GdNpq/lrY5ru8G5900lC+ZcieJfRDfjXZ6ginqCEpZaB0UGvXL5nNVHTYXKqWrprBudSKYoauVE2nwubKCkdnsCVMBnghwR30uKwmVYVMeRevGIzRWMOrk5WDmN1C8iPYW2RbI7jCbWasYdwfgaj6Yzb6Hrg4Ho7R3BGl2OxQvYAoGh50mXwLtme+BagZiTaZYS1dN7avYNmQxgQhD6WbDs6uY/9nja7fxq15tDzTfXFU6PWa60OkGFUfZKbActFsKtuvIQ3XGjCx4aYIKpAuuXFvV+dbaVNuvDfNF7gxApMsEWSqOUjboCtrLmRGWyji4Y6YCvXIwia7LGeUI9ofDXbB/3ELB9MpcvkuIDmHudQ6qzt92zNqUVZAbpupNuSyhXXPTl83HTeofs9Yum/kNhu/nNGGY59eK9uhgysoL3g9d57FUEDgttRbSws+Va87d6EbzubLawE6irIgZrfMrJojx0lAZCUZLfcznqvb+hTx/td/8OSmL+c9s2HOjdkzqHNPm9u+BO4+huf09rXeOOSHP2SXQvhkV7P+nqO3/E6pBeQudP4Ue+d9g9hcQ2djadohm3reOffL8SjdiOWQES9RR27ZGmxwbd9Z82SvzRadrHfXcZrSe6TC0O39/C8LncyyhXbXcDz/oqNy0GdGo1IIaCz13VR90ANqdr6o9l8uznHYFj+3VOqo7BZ3EXLJ8iGsARfA6LnbM2v/3giv+em0O3i+vFqTdebta52UtYXpj4XO985h6/k+rlqR/P693au95MLJT9/mpINF9ueecCs57n8UDuQWPpZbzvIMcOO0F02OZIOgfDAI225y72g8O65kLHF3bZN0OPldLPH+VFXw+6z0n33zO5z6zTQ84/xlc9P0Ijjk3UlXvGGrBe3qnhedsq0dHg89afBsqebBhcIX20Nl3zIpDSwoQi/AkwBIN2PPLvmtf8H4F82UcfEnPDdkHowZWsDrnvlLAwjwIz7THrwKlBW2r/ccyz8OuTVPeKzvc9F/ojjfI06lX2T6UoCMK1a6laPVzvRcLzsf7yjLTdaEsc8pbxYJ0xOAiwa8CZXO82iFV7bZWMM13jwVE7/kcu1OL3g8rBtyv0igLNs6e45uLRd+HDX8POl5sfAg3bTblLt8E1erPl3iQSYAlwpmbelnphizGbv1AmRBfhNoomGxv02KKuQtCv8jciGMtt81JQuoQqudbTSvl6/JlKA+Z6vzRji+k9eLBIJ9qIYQQD5gqEAWnzSzAqa1OVEHuWNuzqI3/CNX2ZMOj6OoYOvOeub+duP/NFg8UCbCEEEI8WLw8xLegel6H+B4TZLnjYLWbfUZje1CJEFtqFS/AzE/NClqZHhRLJAGWEEKIB4uumhIbycOojpfNP+mSWWG8lOPkPze1x5yuIL9UiPBkL0IhhBAPGNuUjindMH8CaonBlc68jc4dN4GV7PEolkECLCGEEA+WWlkKP7OgdEx4ujKMnv7J/CbasoJGLINMEQohhHjABKsIdVD6Ygl08QJ66gfBJtolk7MlAZZYBgmwhBBCPGBs8Kvo6izqzm2BFuNlQVfMdjgzP4Ppn5nE+DBbIQlRhwRYQgghHiy1PT5LN9G5kybRfZFaY9qdgeIZKHyGLlwyeydWR0xwRW0TbSGWR84eIYQQDxYr2Ky8dA099pfo2d+j7ITZUNqKABq8MtrPQnXcBFWVSbPRt7LBSSEpyuJeSYAlhBDiAVPbSzUD+Y8gU0ZrP9h2yAn2P6wGqwMds1JQORDpQAIr0SprOsCy7C9i/zMhhBBrT7A/p04EezDeuS9hbc/S2nZFtf22pF8RrbGmAywkwBJCCFFXLWhaOCp1227ad5A+RbTOmg6wrg2nVroJQgghhLiPdh1c6RYsz5oOsH7y0caVboIQQggh7qN//epKt2B51nSA9eGlzpVughBCCCHuo3+90g1YpjUdYOVKa7r5QgghhHhArekIJRH1VroJQgghhBB3kYIfQgghhBAtJgGWEEIIIUSLSYAlhBBCCNFiazoHS4iVoAHf89Ba4/k+WmvQGu3XyhT6d9zDXMdYFtSKG1oWWJaNUgrbtr+wtgshhPhiSIAlREhaa/MD+L5vgivfR2vwfY35jb67GLQyAZfvK5SlUEqBrwAf27bxffN7y5IBZSGEeFBIgCVEE77v47ouxWKJqusSj8fp6epk85bNbNrYTzIeJxqNEovFiEQidwVKnvbxXBe34lKpViiVy8zMzjI+Mcn4xATT02k83yMWjRCLx4lEIqBlyw4hhFjLJMASYhFaa6pVExApoC2ZZGDjRrq6Ounu7KB/wwb27NnN7p3b6WzvJBGLYUeaf5wq5Qq5fJ6R8XFuDg5xc3CYkdFRZmdnyRYKTE9Nk55NE4/HiEQcbNsxU5BCCCHWFAmwhLiD7/v4vo9lKSK2TUd7G/v37eWF55/jyJGDtCdT+Bpi0QioxTaMrS8ai9ITi9LT082BvQ/h+1Aql5kYH+fUuQu8894HXLp8Gdu28TwfrV3J0RJCiDVIAiwhFlAo8sUijmWxc/s2jh45zKED+9k0sJFdO7djqdblSdm2g21DJOLQ3raLvv4NHNi7h4tXrnDm3Hk+Ofk509MzdHd3Sn6WEEKsMRJgCRHwPI90JkNPby+PHTvKscOHefqJx+jp6f5CHr+jrY2OfXvYv28Pex/aSVdXFx98dJzx8QnitdwsIYQQa4IEWEIA1WoV39e0p1K89PyzfOdbbzDQ379i7Tmwbz/bt25jQ28PP/7pL8jmclSrVQmyhBBijZAAS6x7rudRqVTo7urmW298nVdfepHu7q6VbhbJZJKvvfoKbakU//knP+P64BAdjmPKPAghhFjVJMAS65rWmkq5zLat23jlxS/x+muvkmpLLft4xWIR13Pna1thEYlGicdjyzpeWyrFKy9+ifHxSYrFv2NyZppUIilBlhBCrHISYIl1y/M8yuUKmzYN8I2vv8Y3vvYalrW0wKVaqVAoFZmeSjMyPsbMbJpKpYLrulgW2JZDLBajp6ebjf19dHV10dXRsaTHiESifOXlF0mnZ/ntW2/PFTyVxHchhFi9JMAS65bneYDm5Re+zFdefnHJwdW16zc5fe4ct0ZGGBkdZ2x8gnyhYHbDCUpXKTRaKdpSKQb6+xnYuJGjhw5w+OABOjraQz/W5k0beeKJx7ly8yZDQ7eCAE4CLCGEWK0kwBLrUrFUIh6Ps//APp5+4jGSS5jCuzU6wqmz5zn5+SmuXb1BrpCnWChSKJXRvodlWdRCNbNvoc+EZTM6Nk7q8hUuXrrExStXePzRRziwbw+OHe5juHf3Lh59+Aijo+MUi+UvPOG9VvD0i5yevLPIqkyNrpyVeP+FWMskwBLrjtaaQrHIQH8/r7/2FbZu2Rz6vpevXOX3b7/D56fPMjQ0TKXqEo9FsW2b9lT93CitNb7vk83lmJye5tboKMO3RqhWXuXRh49CiD6rt7eHRx9+mE8+PUWxXMLzvFBFSD3PC0br6rMsa+6nxnXduelOjZqrAeb7PsrSOLaD7Tg4tm2CymV2vFprPM/H87ygyKsX/F3PbYhd4/suWmtsO4JtWziOjW1bd92uFWoFZ2v5dHVZFs4dr11YYd4bANu2l1RwtvZ63r0xZvPjau3jeRrXdal6Lp7noRa8/1p7aG3OGdu2g/dgae0TYj2QAEusO57nkYwn2PPQLp596kmiIUeCzp6/yE9/8Ws+/PgEJiKySMRj2LYFNO5clVJzHXA8FiOXK3D8k5PkiyVQmCArhF07trN3105mpmaYyaRJNOnUtNYopXCcxlvuKKVQyprL7/J8H7QmkUiglEU8ESMW7JFYqlSoVFx87eMHQZHWGscJ/3Uyt3F2EHgCOI6NZQWrJJWFYzvE41Esy0L7PihFuVyhUq2iAC8IfrTWVF0XhQkYWjF1WnvdwgSOtd/X7rOUxzBtXTCnvPgDLOn45nbm9Wz+nqu542rfx9caT2sUilg0QsKKgaWIRSLEYlE0CrdapVxx8XwPgk3Pfa3xq9W5IF1GuYSQAEusM77vUyiWOHb0MC99+fnQwdWNm0P86Ge/4IPjJ6hWXeKxGNHo0komKKXmrvSVcqlUq3z88R/ZtKGfwwcPEY00HwGoVlx6enqIJ2Lo2SYjK0ClUqGvt5dNAxvxfe/uKbcgePF8n4mJSaZn0liWwvU8Bvo38vDhgxw4sI9NGzfiOArtg+t6jE1McOXqNQaHhrk5NEQmk8W37CXlsbmuS7XqYtkWvT3dbNq0iQ29PWweGGDL5gG6u7tQtwUfCq00mUyOkZFRxsbGuTU6ytjEJOMTk3N1whzHuacgy/N9bMuis72drq5O4vEYruvedTvz2pnRt7HxcTLZbOhpWzNq57FpYCMb+nopl8uL3s4ELIqpqVlmZmepNsm9833Q+KRSCbYMbMJ2bDz37hEyy7aolKvMzKaZTafnAt1qtYrlOPRv6GXv7l1s37aVrVu2mIUZysR6vg/5QpGpqUluDA5x5eoNRsZGSWcyoCGRiId6DYR40EmAJdadYrHIoQP7efqJx0PdfnZ2lnfef4/PTp+mkM/T29tDqDm9BhzHwbZt8vk8p86d4+333uelLz2H49jkC0Uq5TL5fJ50JkM6myGbK1AqlZiZTXNzaIhypRJqxKhQKLL90S382Tf+hEq5EnTA80GW2fPQI5fL8ds33+L6jZt0tLfzzBNP8NwzT7Fz+zZ27dx+13GPAAcP7GdicoJz5y/y2akzXLsxSKVSPzdMKYXrupQrFXzPo7OzkwMHtrNr+za2bN5Ef18vXd3dbNq4gfa2xgsACsUSE5OTjE9MMDE1xdj4JFeuXePa9evMzqSxbJtoJLKsaSvPdXHicXbt3sFjx44x0N9PqVS663a2beP5Pvl8gV/85reMjo3T2dk8wNJa42MCzEePPcwLzz/DzPTsomNYEdvGsm0+OPExJz45STmTAWgQZPl4rkdf9wbe+PrXaW9LUSgWb7uFpRROxGFyaorjn3zK8U9Oksvn6GhvZ/++PRw+cIAd27eyafMmtm7aTHudsiWe7zMyOsrg0DAjI2NcunKVs+cvMjk1iRMEurYsxBDrmARYYt0w00mQSCYY2Lgx9P0uXb3Gex+ewHU92ts7uNfgqkYpRWdHB1NTU/zmd78nGYvS0dnO4PAw2WyeickpBoeGuDU2TjadxfXcYHTGRilTvqERrTXFYpGB/o0cO9p4CjKdzfL+iY/xgaMPH+EffO877Nqxo37bgS2bBtiyaYBtW7aQLxS4OTSM63l1A6xyuYzv+6RSKfp7+zh8aD+PP3KMR48dwXGWlrCfTMTZsW0rO7Ztnfu3M+fO884HH3Hx4iVGxifIZfPYtkc02vh1upPrecSVYsumTTz9+GNNi84WCkU+OHGCUqlMZ2fIB/F93KrH/j172LdnT9ObT0xP89mp08Em5PWDltr0bldXJ88/+1TDY07PzHL9xhCVcpmujnYeO3aMF59/nueeeypUYGRbFls3b2brZpPDODg4zNvvvccHJz5mdGySSqUCEUdys8S6JQGWWDdczycasdm/5yH6N/SGus/07CynzpxjcOgWjmMvubNuJhqN4nke127c5C//4w+wLYtyuYzr+VSqFSqlMuVKBc/z0EqhXRfHUTi2RZjZSV/74fJ2PB/Hsjl84AD/7B//Q3Zt3xb6OUxMTnP9xhC+59XtmD3Po1gu09vdzdNPPMbLL7zAwX17sBy7ZaMchw8eYMfWrQwO3+LNd9/j/Y+OMz01g2VZS8oPQ4PSGktZ+A1ymGps26wa9Wk+ZXvbw2iNHyLB3fDncuSaH9j8x/d8LLv+a+v5Phpoa0/x+tde4xtffY3+3l7UMt+Pbdu28Bff/Q4H9u/nxz//JWfPXaRcKROPS06WWJ8kwBLrhlutkIy38/ijj7Bty5ZQ97l5Y5BLV6/h+R4RdX8+Lsq2qVarXLt+E+37WI6FpSxsy+RrRaPRZY8CKNSi+UMLaa0p5PM8/vgxnn/26SUFV1rDZ6dOc+b8eRzbviuQUUpRrVaZnpnl6KGDfPXVlzly8AA7d2y/L51uW3sbBw/so7u7i4ENG3j3w4+4cPEypUqF9lQqXICiwAeqbhXfa/zaAZTLFTzfx1rGyGaI1gDgedoklYc8qu/7t00FL6ZQyLNl80b+i7/4Ll969ik29G0Iefz6Io7DY48eI5GI87c//yXHP/4E13VbtvhAiLVEAiyxblRdD8u2OXRgP329PaHuMzI6wsTYGLFoDOs+TXVYQDQSCZ1wfz/EEnGef+YZ2pLJJd3v8tWrXLp8hWwmQ1dX122dqFKKYrBKcvfOnfzpN77OV195qcUtX9zAxn7eeP1r9PR08WOtuXTlGvlCkaQkYM9JxOM8+vDDbNm8qaXHVcChA/tNzl25zPE/fkpE65aP/gqx2kmAJdYN7Zt6Pv194YIrjebW2DhTs2lTa2kZIy6hRkyWoZWjP0operq7l3XMy1euMjwyRiR6d+Di+z6VSoWNA/3843/wPb703NOtaG5o0UiE555+mpgT44c/+SmfnTlDIh6T6apAX28fKvQY2tId3L+Pb77+dW4ODTM9Mzu3ylOI9UICLLFuaK2wbJtUMtxmzpl0lsnpafL5PJ0dHUuucRS2iORymHIPTqg8rDAaPTdfa1y3iuNEbgsyC4UiZ85fYHR8jERQr2qhXKHAhr5eXnz+WZ5+6nGcJYwAlitlzl24xODgEJlsDsuyiURsNg1s5MC+vfT2hAuSo9EIzz77JNOz08ym00zPzMwVyFzvTEmNu9/3dCbDqdPnuHjlCpVKBc/3cGyH3p4eHj5ykD27doUezT24fz/f+/Nv89c//BE3B4fo6elq7ZMQYhWTAEusC77vY9s2iUQsVMKz9n2y2SzZbJ5qdWlBkhm1UsRjMeLxGCYnpjUjBbXikKVShWq1gkbdlxGZXC7P8MgIY+MTpDMZyuUysViU9vZ2Bvr7SSTiDA2PcOPmIMVCifb224NWrTWVSoVDhw7wja+9RiIWbiuiqekZhoZvcf7CRS5dvcrg0BDpbA7btok4ETb293PpyjX27X2IbVs2s3lgIFSw9KXnnmV8apq/+dFPUJbVtEDrelQqlzhz7gKXLl/lk5Ofcvn6dapBfpnt2PT2dHPl2jUef+QRjh4+yMb+5jlb8UScV158gfdPfMzQreGmqyCFeJBIgCXWBa01kYhNMh4PVQzTB4qVEp7rAkuv0O3YNtu3beXggf0ooNqCkSwFcyNIFy5e5ur166FWuS3HJ59+xo9/9guu37iJj0mWV0qjgG1btzIwsBHXrTI7m76r4Krn+YCmp7ubo4cOsrG/P9Rjjo6P8+vfv8mHx08wPDSC5dhmfGXu2EXSs7OcO3+BtlSKY8cO863X/4QD+/Y2PXZnZwfPPPk4b779Lul0OvQ2Q+vJ+x+e4K9/8DdMzaZxg6rs0WgUjUnGz6RzvPv+h3x+6izPP/sU3/rGn4TK33Icm2OHDzE0NMzY2DixWEyCLLEuSIAl1g2lLGw7gg6z2iuobL2c7U88zyMej7F/3x6++60/xbLtRQtVLpWlFCrYhuSHP/oJ124O4lcrKGt5+WH1jIyO8c4HH/DZqdPYTsRsfWKZEt6+73P95iBjE5NYSlGpVu9KXvY8F1AcO3qUPbt3h3rM4eFRfv6b3/D+8ROMjU/g+z6xYIuf2lPTGjwNrucyk57lvQ+Og1JoNAf37Wv6GAMb+3nhS8/x7vsfMj4xSVtqaQn9D7I333mXH/38F9wcGsGyIBIUab19H0jzeRifmOT4H08ST8T55utfpy/EdO0zTz7O1WvXuX5zkFjI0Uwh1joJsMS6odTSksN9Xzdd6r6Y2h5zqVSKVNCJJ+Kt7VS6OjvmB3a0plXJWNlMlt/8/k3OXbiMsm26Ojvuuo3neRSD6uCLbUvjeR6xaJTnn36CA/uaF9F0XZd3P/qAP7z9NtlcgWg0SiwaNc/rDo5jmz3xtCaTzfL+h8eJWDab+vvp6upq+DjdXV289sqLnDlzjuvXb0iAFcjmzcjUmTPnaWtLEY1GF/2c2LZNMpnEcSrMzszy7nsfsGf3Ll547tmmj7FpwBSkrZar+DTbuVOIB4Oc52LdWLixcFNK4QQjQ8tZCeh7XjC9eH+UyuX7Mj04OTPDux9+SCadprN98e1qarW5otG7E9s9z8OyHbp7etizt3lwpX2fz0+d4eSnnzM1OU0yHp/bVLoRpRQd7e3kMnk+O3WGcxcuhXq9d2zdSmdXB76+fys815JypcKp0+cYGRsHpYjFmq+yrI1Yjk5McubsecYmxkM9VmdHB5GYgwo2+RbiQScBllgflML1fLOpbogvd8uySCaSwXY0q7BDuE/NGRkdY3JyhmpQHHKpXNcllYizY+sW4iHqHnm+z5nzF7g1OoYdjSx58+xI1KFcrvDZ6TNMTE+Hut+G3l46O9vv2wrPtSSbzXHys1NkMhli0fAlFJRSKK25OTjM8PBoqPskUgm6g1ppoS90hFjDJMAS64IVbDRcLJdCrehTQFtbG+1tKaKR9ZEzUqlWmJqeBjSWWl4CuOt5xGIxBgY2hiqc6mufm4NDZLM5EtGlv84mn0dz/fpN0plsqPts6Oujp6vbbBWzzjv6XC7PmbNnKRQKS8qNsiyLSCTC9MwMUzMzoe4Tj8Xp7OxCLXNUWIi1RgIssS4opfB9n2qlQqlSDnWfjo4Ouru7SKXicwm+oR/Ptu9b5ff7pVAskcvlgi16lpfT5Xs+kYhDZ1cndpj9/7RiamaWfKG4rBEz27LwtGY6PUsmGy7A6u/rpburw+zvuORHfLAUyyVGxicoV6pLev1r5UIKhSLZbD7UfaJRh7ZkHKWgRVVLhFjVJMAS64ZlKTzfZ3o63BW3UtC/YQOdHR1LDLDU3CrEsJaTTN9qlVKZQqEY1J5cZoDl+zi2Q0eqLVRh0arrUigUqFYry1q6r5RC+z6FQoFcLlyA1d7RTiqVWgWjV6vgPS9XqFQqaF8v+fVXyqLqVimWi6Fub9sOjhOs4tUr/doLcf/JKkKxbti2jdY+Q8O32LNrJ9FY8xyh/r4+ent6mJyeCdUBKaVMIOd6XLl2g9+/9Q5Aww2Xa1uIPLRjF9u2bSYWol33g+u6VMpVUMqUZVgGjemoY7FoqHpjxULBvDb63lZBup5HtRIup8q2LCxLsZJdvFLKVOJf5uvcKlp7KJb+8iulQJkCup4b7pVUtXpyKx9XCvGFkABLrBtOJILr+nx66hR7HtrF7p07mt5n25bNbN+2mbPnL+HbfqhpFMuycD2PK1euMTU1hdagG1yxF4tFkskUr73yIhv6e1cswKp6HhW3gtKhKoUtSqHwtdmDMMwqR9tpzXY/phBquNvqoHLmSoU2tZFQJ2KveMFN23ZMvLPMoMcHsMLdWSO5V2J9kQBLrBtRx8H3XT499TnPPf1kqABry5bNHNizjw8++oRSuRyqArhlWWityeaypDPpYNFivY5FUSjkaWtvI5NNr+jqKt/38Tz/ngYYlGXhui6ZbBbPbT6ilEomiESj95SsoICIHQkdmJYrFSrVKmqFQqxanTR7kRpiX7RYPEYsFqNcqixpGxttrhpwLAvHDrf6UPsevucFgbBsuC0efJKDJdYN27bxfc2tW+NMTk2Fvt/+A/s5evQw8XicSqUS6j4LV0rVCpwu/hP8DrMZ9Ur2O57nz09lLnNYybIUruuRyxdwQ5ZB6GhLEY/Ggi12lsbzfZRl09HVTkdHZ6j7TE9Pk85ksO3WfP1ZSoFe2pSj1ppYNNKyNixXLBJl86YBYrHokstW+FqTiEdpT4Yr2FqtuhRKxSDAlABLPPgkwBLriskdgRuDw8xmMqHus2Wgn5e//DypZJJcLo8bMufEtm0cx2n4E4lEgmroNj7+io5glctl8oWiycFa5jHs2ghWJhvquSil2NDXR1tbEjfEiNedtO9j2RYbevvqFka909jEJFPTs1jW7XsoLlc0GsHESSGnyoLtl2KR2Irvh5hKJTmwdw9tbSmq1fCFcWsjWKlUG21tbaHuU65UyOXyaO3flw3KhVhtJMAS6057KsXZc+d56533Qt3eiUQ4duQIL3zpWbZsHiCXy1Iqle65UKXWmlK5TK5QpFwqEY/ETBXzFVKtVimViqh72HrHtm1K5TKjY2OUQ4z2WZbNQ7t20dXRSaGYX9L0ZK1MgO977Nuzm+7uu7f1Wczk9AzpTBrHsep29AqT14Vq/hUZjcWwLCf0CJwOjh9PJog4K/d+A7S3tXHs4SPEYlFyhXDlFsBMJ5fLFXp6uujr6w51n1KpyOysmTJf6alRIb4IcpaLdcWscItx+dp1jn98kmIp3JRfMpng7//5t/nG179OV6ep8eS6Lq7rLmnLmtpm0NWqS7VaNVu+pNrYPDDA9q3bQo8G3Df3OLJg2zblcplbI2NUys3rjdm2xSNHj7Bzx3Z8X5vXM+QoXrVaxfU9ujo7eeTIYbo6u5rep1AsMjM9TblcxmoQPGlAKx2q6j+A7VjokKU8qtUqGs2WTRtpb1/Z9zsWi3Fw/176enrwfb/hatea2pZTlgXbt21ly+YtoR4rk82TyeXwl7iBuhBrlQRYYt2xLDNycXNoiF/++tdkQ9ZPikaj/OnrX+Wf/ZN/yKED+9HAbCZDtVIJ1TGZJHKPYqlMrpCnUqmwbfMW/uLPv8W/+q//BYcP7b/HZ3ZvlAryiWDZq8ps28bzzUbM5y5cwA9R72jnzu08++zT7N3zEJVymUq12jTQ87VmJpNh29YtvPrSC+zetbPp45SKJT746GOmZmdNYn2dh1DBT7Xi4oYM9pLxOBEn0vRl01pTLJWwLJtnnnqK7VvDBSf3U19PL88+/SQP7dpJLldoei6Xy2Us22L7ju0cO3KInq7muW+e5zMxOYUV5B4KsR7IKkKxLrWn2ijkC/zyN79jz549PHz4YKj7taVSfPXlF+nu6GTntq1cuHSZsfFJZtNpstkcmiBIqfUh2gQDCk00GiWeSLBr5w62DGykq6uTA/v28sjRI/T0hJtmWQsc28LXPh99/Ck7tm3n0MHmgeOTjxyjVCjyh7fe5sLlK0xOTRGLRrFtGzuYTvJ8H19rKuUKtmOzbfMWvvHVV3ntlZeJxZtv8zI1O8vv3nyTmekZ2holZisLrc1oV7UaboRz27atDAz0MzOTJhaPEovF5tqtNcGoZYVsLkdXZydPP/E4jx47SmQFp4QXevH55ygU8vz0l79hcmoa3/eJJxJEbHtuwUa16pnyG77Hnod28dWXX+LA3r2hjn/i5EkuXb1GIpGQ9YNi3ZAAS6xLkYhDuVLh1ugYHx4/wZbNm+jt7gp1X2VZPPXkYzz15GOcPX+ed98/wbXrN5iYnKLqVUGzYAWhKcgYiUTobG+nt7eXJx99lMcffyTUlX89trN6t+FxHAetNWfOneXysSOhAqz29ja+8tKXae9o5w9vvs35ixdRlkL7Gtfz0FqTcGxAodoVfb3dvPrSS7zywpdo7wiX3H7l6lXOXriI7/kkEom6tzMr3Hwy6QylYinUsR85eoTBoVu8+/6HVNwqbrVK2fPmVovatk0qmSQej/H8M0/x7T99I/T59kXo7OzglRdfpFLxeO/D40xOTmDZNq7rBqVJLBKJKLF4lP7ePr78/LO8+tILtIdcWHD8xCdcuHCJRDwu+Vdi3ZAAS6xbjm2jfZ/f/P4tLNvm+9/9M1LJ1JKOcejAATYNbKRULpPPFykWipTKRUqVCr6viEUdEokEyUSCZCKOE4nS1dlJLNrKkYvVNSZQqwM2NTPLqbPnePKxR9m0aaDp/WKxGM8+9Ti7d+zg6rXrDA4Pk05nmZqZwvU8erq66OzoYOuWzezcvo0tWzYRj8VDtenTU6f5xW9+j+81LxZrW2YEa2xyktlsuJWmO7Zv4zvfeoNtWzfz+akznD57nsnpaWzbIhqJsHnzAIcPHODwoQM8fPgQfb29oY77Rerf0Mc33/g6hw4d4NLlK1y5dpWRkVHSmRxtqTZ2bNvCli2bePjQQfbu3UMqZHmGK9eucfXadbL5HL3dD85IrRDNSIAl1i3bNpW0p6an+bu33yUWsXn15VfYNNC/pON0d31xnYYGTp0+w4WLl6lWqiteR6kepRTxWJQz5y7w41/8in/8/e+RTNYfNapxbIctmwfYsnkjMzNpcvk86awp+ZBqS9GeTNHV1Ul0CVNrQ8O3+O3v/47Tp88STzQPyGoB4uj4OINDt3jqscdCPc7mgY189Ssvsfeh3Rw7eoTZdBrLUsSiUfr7+9mxfRs7tm1d1TlIXR0dPPHIw+zdvYvhoSGmZmYpFIvE43E2bOhjoL+Pnu6e0McbHZ/gRz/9BeMTk8Tj8VX93IVoNQmwxLqmlKKnu4vp2Vl+9qvfUyq7vPrSC+zauX2lm3Ybz/dJZzKcPnuW3/7hHS5dvoznudh2dNV2WqlkkumZWd798Djbt23lS888TUfI6TxQdHd30d3dxbZ7aMPNoWF+8rNf8tmp0+gFBV8bsSwL39fkMnnOX7jM5WvX2RMiiR4gEU9w6MB+Dh0It2ChWC7juS5tqaWNnLaSr/X84oZAZ0c7nYfC5SXWpTXHT3zCux98hO9rkvFwo41CPCgkwBLrnmVZxCIRSqUiv/z1b7l16xavvPQChw8dvKc8qVaZnJrm7LkLnPjjSc5fvMhsOoPrukQikVUbXEEwihWPkctm+esf/Gdu3Rrh6199la2bN30hj3/63Dl+9uvfcerz06QzWeKxWOjXy7IU0ViEi1cuc/zjP4YOsJZicmqaM+cuEI06PPvUky0/fhj5fIFr12+we/dOkg3y0pbK1/CTn/+Sn/z8l7iuRyQSkdwrse5IgCUEEIlE8DyPbC7HyVOnyeYLXLx8hYePHObQ/r2kvuARhkKhyMT0NJevXOb8hctcu36DG4NDZPMFYtEIkVWwj10Y0UgE3/cZG5/gD2+9Tb5Y5IXnn+PQgf0tzkObl85kOXv+PL9/6x0+/ewUlUplrnL+UjYbjsdiTE/OcOLjk2zdvIlnn3yCSIvafOnqNf7w5tvMpjM89cQjLTnmcoxPTvKf/vbHvPD8s7z0pedwWrCqcWpqhg9OHOe3b77F8MgobanUilesF2IlSIAlRMC2bbo6OymXy1y6fJlboyMmsLl5hL179jDQ309vTzfOfVrBVyyVKBVLjI2NceHKVW7cvMmV69cZujVKpVzBUor2ZAK1hMBKB+UhwnCCrX1Mzvy9bPl8O8uyaG9vY2Y2zbsffMjMzCw3Bwc5cvAgGzf0kWpva0mafqFY5PrNQU6fPs/Jzz/l8pWrlMsVYrHYXF7VUtutLBi6NcxPf/VryuUyzz75JG3tyw+2c4UiZ86d4933P+S994/z0EM76exsPkpq2xa2ZVZRtlIun+f4x38kPTuLUorHH3uUrtDTuLerVqpcGxzkoxMf8/6HxxkdGyeeSEhwJdYtCbCEuEMkGHUpFUucOnuO6zdusmXLZvbs3sWePbvZsXUr/Rt6SSWTqBBbqdSjMQHQ1NQMQ0PDjE9NMTg0FAR1QxSLJbT20dqMBClloZa4Sa5lOVSr1bsed6HaEcuua0oioKDFo2OWZZFMJnGrLqfOnOXa9Rt8euoURw4eZOeuHezetp3uZZYtyOULXLtxk8tXrvD5mXNcunqNYr6A7/tzwdVyRaNRXNfl0qUrlAolRkbHeOSRh9mze9eScopy+Rw3bgxy+vwFPjrxCVeuXqVQKGFZ6rYtl+q9N67rBRXQl/1UFhUJgp/Pz56n4vkMDt7i0UeOsn/vQ8RDPj/f8xkdH+Xc+Yu899EJzl24RKlcRilFZA2Msgpxv0iAJcQdLMvCsizT8WnNbCZDoVji1sgYn35+ir6+XjYPbGJgoJ/e7m7a2pIkE0lSKVPnyLFtbCeCbVtoX1OturjVKhXXpVwqkcsXyGazZHI5ZtMZhm4Nc2t4hEKpRL5QIJ8rUK6YbWaito2zzFwrpRTJVILB4WH+8NY7JtDSetGxqWQ8zsWrV0mn0wDY9yG3y3EcPM+jUq0yPTND4UyBweERuto72bF9Czu2b6M7KMXQ2dlOPJ4gFosSdRywFK7r4bkuhUKRTC5LLldgemaGwaEhrl6/wfj4JOlMhlK5jG1ZOMEq0XtRu3+1WmVweJhMLsO5ixc5sHcvu3Zsp6e3m/ZUG+3tKROQKIXv+pTKJTLZHLlsjompKa7fuMnV6zcYnZhgamoa1/WIxWJkszlOfvY5M9MzqNo5t4Bt29i2zfkLFymXi1iW3dq8O8syNdUqMHxrhDcL73L20gUO7d/Pvj0P0dnZRldnF22pFFEnArZFpVIhn8uTyxdIp9MMDQ9x+ep1bgwNMzI6SrlcJhqJYVlqTUxjC3G/SIAlRB21zg3A9Txm07OMT05w4+YgF9qv0NXZSVdnO4l4nEQiQTwRJxaJYNsm36c2LVXbs9B1XcrlMsVymUI+Tz5fIJvNMZNOky8UsJSayxVqVcJxKpFgeHiEn/ziV/i+v2hwpTBTUPliiVw2Z0ZN7kPHqLXGsizisRi+71OtuoyOjHJr+BY3B29w9nwv7R0dtLe10ZZMEI/HiUQiOI6DUmqu6GW5XDaBaKHE7OwMUzMzZDIZfE8TjUaIRaMt7dhr+1d6VZfJqRkmp2YYvjXChg0b6OnuIpmIk0qmiEbNik7f8yiXK+QLBQrFAtPTM4xPTpHJZNDajJCmUil83yedzvDJyc85c+4CwF37WlpKoSyLbCZHuVTBtutvUL0cKniMZCJOxLGZnp5mcnKS0dExzl+8SEd7O+3tbSQScaJOFIL3oVAoBIFunvHxCSanJqlUKmakMp5cbaXZhFgREmAJEYITbNkSC/KZqpUK4+PjjI2NoWujQnN/mv9oFvQzSgV/V2aaRylU8HelFO3BJs+tvuJ3HId8oUA2l1vQtrspNb9HI3DXsv1WsyyLaDRqcr4Az9eMjU8wOjZuXs87XsuFDVVzfyqUpbCUmis4GqYMw3LZEYdUxMH3fXK5AtnsNa7c1tZaO1Xwv/n3VwVBWq2NtdegXKlQmpoKnvPij7vwvblfz01jLiji8Thaa3K5AhcuXp5/L257H+bP4dregmbFaFDnSoIrIQAJsIQIbWEHV5vK0cE+bVrruQ7Wn/uPDvKZAK2xqO1hrEBrlGWOtzCwuR9tntu2Z+4/izO3U8FWMV8My7JMIKo1nueZvLRapKH1gtcSsMDSCwLXuSDmi52KMiOTPlorNCb4mBsb9AFLgwZrQftMPHJ3gKSUhdZe8Pf6j1kb/btvdK09wWWAMs9rYbA7v2+3xrLMe+BjKt/fz3NYiLVKAiwhlmEtrYyq5ZStVrURqdpo1lpg21ZLqugrtfrOpdreiautXUKsNav3W1cIIYQQYo2SAEsIIYQQosUkwBJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghHjimTljzWwkh7hcJsIQQ4oFiYdnhSnMoywoKcEmoJUSrrZ3CM0IIIZpSSpudBiYn6enpIpvNc1eZeKXo7upkdjZtCqdadcrICyGWTQIsIYR4QKigYOvo+Dg/+M8/IRaPUqlUFr1tKpXg1sg4lrKwIjKCJUSrSYAlhBAPiNqWNdlMlg8/PmE2n/b9urf1PC+oSC8BlhCtJgGWEEI8QJRSeL5POZdvusG32RbHabgPohBieSTAEkKIB4xawt6OElwJcX9IgCWEEA8gJZGTECtKyjQIIYQQYrVas1cKD8oIVmmlGyCEEEKIllFADCisdEOWa60HWH8V/Jlf0VYIIYQQopUUsBF4Z6UbslxK31mATgghhBBC3BPJwRJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghhBCixSTAEkIIIYRoMQmwhBBCCCFaTAIsIYQQQogWkwBLCCGEEKLFJMASQgghhGgxCbCEEEIIIVpMAiwhhBBCiBaTAEsIIYQQosUkwBJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghhBCixSTAEkIIIYRoMQmwhBBCCCFaTAIsIYQQQogWkwBLCCGEEKLFJMASQgghhGgxCbCEEEIIIVpMAiwhhBBCiBaTAEsIIYQQosUkwBJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghhBCixSTAEkIIIYRoMQmwhBBCCCFaTAIsIYQQQogWkwBLCCGEEKLFJMASQgghhGgxCbCEEEIIIVpMAiwhhBBCiBaTAEsIIYQQosUkwBJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghhBCixSTAEkIIIYRoMQmwhBBCCCFaTAIsIYQQQogWkwBLCCGEEKLFJMASQgghhGgxCbCEEEIIIVpMAiwhhBBCiBaTAEsIIYQQosUkwBJCCCGEaDEJsIQQQgghWkwCLCGEEEKIFpMASwghhBCixSTAEkIIIYRosf8f4HrrxwgnxkYAAAAASUVORK5CYIIJIYQQQrSYBFhCCCGEEC32/wMx7wSKO8Pc4QAAAABJRU5ErkJggg==" alt="John Henry Group Logo" style="height:60px; margin-right:20px;">
-    <div style="text-align:center; flex:1;">
-      <h1 style="margin:0; font-size:20px;">John Henry Group</h1>
-      <p style="margin:0; font-weight:bold;">Vodafone/National Grid Daily Point of Work Risk Assessment</p>
-    </div>
-  </div>
-  <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:13px;">
-    <tbody><tr>
-      <td style="border:1px solid #000; padding:4px;">Reference Number: F-JHG-RA</td>
-      <td style="border:1px solid #000; padding:4px;">Version Number: 1</td>
-    </tr>
-    <tr>
-      <td style="border:1px solid #000; padding:4px;">Published Date: 24/04/2024</td>
-      <td style="border:1px solid #000; padding:4px;">Next Review Date: 25/05/2026</td>
-    </tr>
-    <tr>
-      <td style="border:1px solid #000; padding:4px;">Document Owner: Mick Ellis</td>
-      <td style="border:1px solid #000; padding:4px;">Approved By: Alex Hitch</td>
-    </tr>
-  </tbody></table>
+<div style="display:flex; justify-content:flex-start; align-items:center;">
+<img alt="John Henry Group Logo" src="data:image/png;base64,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" style="height:60px; margin-right:20px;"/>
+<div style="text-align:center; flex:1;">
+<h1 style="margin:0; font-size:20px;">John Henry Group</h1>
+<p style="margin:0; font-weight:bold;">Vodafone/National Grid Daily Point of Work Risk Assessment</p>
 </div>
-
+</div>
+<table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:13px;">
+<tbody><tr>
+<td style="border:1px solid #000; padding:4px;">Reference Number: F-JHG-RA</td>
+<td style="border:1px solid #000; padding:4px;">Version Number: 1</td>
+</tr>
+<tr>
+<td style="border:1px solid #000; padding:4px;">Published Date: 24/04/2024</td>
+<td style="border:1px solid #000; padding:4px;">Next Review Date: 25/05/2026</td>
+</tr>
+<tr>
+<td style="border:1px solid #000; padding:4px;">Document Owner: Mick Ellis</td>
+<td style="border:1px solid #000; padding:4px;">Approved By: Alex Hitch</td>
+</tr>
+</tbody></table>
+</div>
 <div style="text-align:center; margin-bottom:15px;">
-
-
-
-
-  </div>
-  
-
-
-    
-  
-  
-
-
-  <div style="flex:2; text-align:center;">
-    
-    
-    
-  </div>
-  <div style="flex:1; text-align:right;">
-    
-  </div>
-
-
-
+</div>
+<div style="flex:2; text-align:center;">
+</div>
+<div style="flex:1; text-align:right;">
+</div>
 <div class="container">
 <div style="text-align:center; margin-bottom:20px;"></div>
 <div id="sheet">
@@ -469,21 +684,19 @@ button:disabled {
 <h1>Vodafone/National Grid Daily Point of Work Risk Assessment</h1>
 </div>
 <div class="divider"></div>
-
 <p><strong>Date/Time:</strong> <span id="datetime">27/09/2025 00:52:35</span><div class="section" id="gps-block" style="margin:10px 0; padding:10px; border:1px solid #ccc; border-radius:6px; background:#f9f9f9;">
 <label for="gpsLocation"><strong>GPS Location:</strong> <span id="gpsAddress" style="font-style:italic; opacity:0.9;" title="Mansfield Road, Selston CP, New Selston, Ashfield, Nottinghamshire, East Midlands, England, NG16 6BD, United Kingdom"> — Mansfield Road, Selston CP, New Selston, Ashfield, Nottinghamshire, East Midlands, England, NG16 6BD, United Kingdom</span></label>
-<input id="gpsLocation" placeholder="Latitude, Longitude" readonly="" style="width:220px; margin-left:5px;" type="text">
+<input id="gpsLocation" placeholder="Latitude, Longitude" readonly="" style="width:220px; margin-left:5px;" type="text"/>
 <button id="gpsButton" style="margin-left:5px">
   Get Current Location
 </button>
 <span id="gpsHint" style="color: grey; font-size: 0.8em; margin-left:8px;">(Requires location permission)</span>
-<a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf" "="" id="gpsLink" style="display:none; font-size:0.9em; margin-left:10px;" target="_blank">View on Google Maps</a>
+<a "="" href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf" id="gpsLink" style="display:none; font-size:0.9em; margin-left:10px;" target="_blank">View on Google Maps</a>
 </div></p>
 <h2>Job Details</h2>
 <label>Contract</label>
-
 <select id="contract" name="contract" style="margin-left:10px; padding:6px; border:1px solid #333; border-radius:6px;"><option selected="selected" value="VF/NG">VF/NG</option></select>
-<label>CBOL/Depotnet Number(if available)</label><input type="text">
+<label>CBOL/Depotnet Number(if available)</label><input type="text"/>
 <label>Supervisor Name &amp; Contact:*</label>
 <select data-required="true" id="supervisorContact" name="supervisorContact" style="width:100%; padding:6px; border:1px solid #333; border-radius:6px;">
 <option value="">-- Select Supervisor --</option>
@@ -502,10 +715,9 @@ button:disabled {
 <option>Bobby Rehman</option>
 <option>Mick Waine</option>
 </select>
-
 </div>
 <label for="workType" style="font-weight:bold;">Work Type:*</label>
-<select data-required="true" id="workType" name="workType" style="margin-left:10px; padding:6px; border:1px solid #333; border-radius:6px;" disabled="">
+<select data-required="true" disabled="" id="workType" name="workType" style="margin-left:10px; padding:6px; border:1px solid #333; border-radius:6px;">
 <option value="">-- Select Work Type --</option>
 <option value="Overhead">Overhead</option>
 <option value="Cabling/Subducting">Cabling/Subducting</option>
@@ -515,144 +727,142 @@ button:disabled {
 <div id="workTypePrompt" style="color: red; font-style: italic; margin-top: 4px; display: block;">
   Please complete all required fields above before selecting a work type.
 </div>
-
 <h3>Reference Documents</h3>
 <ul>
 <li><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf" target="_blank">📄 JHG Method Statements (PDF)</a></li>
 <li><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Risk%20Assessments.pdf" target="_blank">📄 JHG Risk Assessments (PDF)</a></li>
 </ul>
 <div id="belowWorkType" style="display: none;">
-
-<br><br>
+<br/><br/>
 <div id="sectionAContainer" style="display: none;"><h2>Section A - Start Safe</h2>
 <div class="section-card" style="margin-top:10px; padding:12px; border:1px solid #ccc; border-radius:8px;">
 <div class="checklist">
 <div class="ynna-row">
 <span class="ynna-text">The correct location is confirmed (W3W &amp; Wayleaves checked)</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA1" name="secA1" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">All vehicles and plant are parked safely</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA2" name="secA2" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">JHG Job Pack is available and has been discussed with the working party</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA3" name="secA3" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">I have inspected the entire work area(s) for site specific hazards</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA4" name="secA4" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">I am aware of precautions to watercourse, trees, dust, noise, birds nest, etc</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA5" name="secA5" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">NOC have been notified of the works to be carried out &amp; location</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA6" name="secA6" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide splicing-hide">Vodafone/NG Permit Boards are available</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA7" name="secA7" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Work area has been demarcated by an SAP and/or an LAC has been issued</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA8" name="secA8" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">All workers have clean and serviceable PPE for the task(s)</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA9" name="secA9" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Tools have been inspected and are in good working condition</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA10" name="secA10" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide splicing-hide">Gas Detector Unit has been checked, is working and is within calibration</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA11" name="secA11" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text splicing-hide">Tower rescue kit is available on site and is in-date</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA12" name="secA12" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Working party members have relevant skills and training records</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA13" name="secA13" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide">First Aid Kit and COSHH sheets are readily available</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA14" name="secA14" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Pre-start images have been taken of the work area(s)</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA15" name="secA15" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">All risk assessments for this work are available for reference at site</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secA16" name="secA16" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="color:red; font-style:italic; font-weight:bold;">
@@ -669,7 +879,6 @@ button:disabled {
 <div id="msInfo" style="text-align: center; font-size: 13px; font-style: italic; color: #555; margin-top: 4px;">
   Note: Not every Risk Assessment has a mapped Method Statement. The ones shown here are linked based on known connections.
 </div>
-
 <div id="msResults" style="text-align: center; margin-top: 10px; background: rgb(247, 247, 247); padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 8px; display: block;"></div>
 </div>
 <div id="riskAssessmentRows" style="margin-top:10px;"></div>
@@ -687,105 +896,105 @@ button:disabled {
 <div class="ynna-row">
 <span class="ynna-text splicing-hide">Wayleaves have been checked, and grantors are aware of worker presence</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC1" name="secC1" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text splicing-hide">Working party is aware and will apply red pennents to the tower as per SAP instructions (NSI 4 11.1) </span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC2" name="secC2" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide">T-Card has been deposited in correct location with all working members on</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC4" name="secC4" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">All members of the working party have signed the working party register</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC5" name="secC5" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Vehicle and plant warning beacons are operating where required</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC6" name="secC6" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">The working party members are aware of the welfare facility location(s)</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC7" name="secC7" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text" id="logonTarget" style="">Location has been logged onto using the “Log on” System and acknowledged</span>
 <span class="ynna-boxes">
-<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="Y"> Y</label>
-<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="N"> N</label>
-<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="NA"> NA</label>
+<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="Y"/> Y</label>
+<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="N"/> N</label>
+<label style=""><input class="ynna" data-group="secC8" name="secC8" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide splicing-hide">Where required, the correct lifting equipment is available</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC9" name="secC9" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text overhead-hide splicing-hide">A Gas Detector Unit is constantly in use at all open chambers</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC10" name="secC10" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="">
 <span class="ynna-text splicing-hide">Climbing Harness has been inspected and is suitable for use</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC11" name="secC11" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Team members have been briefed on nearest hospital location</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC12" name="secC12" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Unattended plant and vehicles are locked and secured</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC15" name="secC15" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row">
 <span class="ynna-text">Team members have been briefed in site-specific risks &amp; controls</span>
 <span class="ynna-boxes">
-<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="Y"> Y</label>
-<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="N"> N</label>
-<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="NA"> NA</label>
+<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="Y"/> Y</label>
+<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="N"/> N</label>
+<label><input class="ynna" data-group="secC16" name="secC16" type="checkbox" value="NA"/> NA</label>
 </span>
 </div>
 <div class="ynna-row" style="color:red; font-style:italic; font-weight:bold; flex-wrap: wrap;">
@@ -795,28 +1004,229 @@ button:disabled {
 
 </div>
 <div style="margin-top:8px;">
-  <button type="button" id="fillBtn">Fill</button>
-  <input id="cpInitials" type="text" style="width:120px; margin-left:6px; padding:4px; border:1px solid #ccc; border-radius:4px;">
+<button id="fillBtn" type="button">Fill</button>
+<input id="cpInitials" style="width:120px; margin-left:6px; padding:4px; border:1px solid #ccc; border-radius:4px;" type="text"/>
 </div>
-
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  window.RA_LIST = [
+    ["F-JHG-RA 01","Abrasive Wheels"],["F-JHG-RA 02","Access & Egress on Site"],["F-JHG-RA 03","Asbestos"],
+    ["F-JHG-RA 04","Auger Boring"],["F-JHG-RA 05","Avoidance of Underground Services"],["F-JHG-RA 06","Bitumen - Reinstatement"],
+    ["F-JHG-RA 07","Box Demolition/Brick & Block work"],["F-JHG-RA 08","Cabling and Jointing"],["F-JHG-RA 09","Confined Spaces"],
+    ["F-JHG-RA 10","Contaminated Land"],["F-JHG-RA 11","Deep Trench Excavations"],["F-JHG-RA 12","Driving"],["F-JHG-RA 13","Duct Laying"],
+    ["F-JHG-RA 14","Excavating Near Sub Stations"],["F-JHG-RA 15","Excavating Near Fuel Stations"],["F-JHG-RA 16","Excavations"],
+    ["F-JHG-RA 17","Fibre Cable Blowing"],["F-JHG-RA 18","Fibre Optics"],["F-JHG-RA 19","Fire"],["F-JHG-RA 20","Hand Tools"],
+    ["F-JHG-RA 21","Hazardous Substances – Refer to product specific MSDS & COSHH assessment"],
+    ["F-JHG-RA 22","Highly Flammable Liquids - Refer to product specific MSDS & COSHH assessment"],["F-JHG-RA 23","House Keeping"],
+    ["F-JHG-RA 24","Ladders & Stepladders"],["F-JHG-RA 25","Lifting Operations"],["F-JHG-RA 26","Lone Working"],["F-JHG-RA 27","Manual Handling"],
+    ["F-JHG-RA 28","Noise"],["F-JHG-RA 29","Operating Cable Winch"],["F-JHG-RA 30","Overhead Power Cables"],["F-JHG-RA 31","Pole Erection"],
+    ["F-JHG-RA 32","Portable Power Cables"],["F-JHG-RA 33","Provision of Temporary Service"],["F-JHG-RA 34","Sewage"],
+    ["F-JHG-RA 35","Vibrating Equipment"],["F-JHG-RA 36","Waste Disposal"],["F-JHG-RA 37","Weil’s Disease (Leptospirosis)"],
+    ["F-JHG-RA 38","Working in the hours of Darkness"],["F-JHG-RA 39","Working Near Railways"],["F-JHG-RA 40","Delivery of Materials to Site"],
+    ["F-JHG-RA 41","Drilling Through Walls (Core drilling)"],["F-JHG-RA 42","MEWP’S"],["F-JHG-RA 43","Risk to Members of the Public"],
+    ["F-JHG-RA 44","Weather Conditions"],["F-JHG-RA 45","Safe Use of Harness"],["F-JHG-RA 46","Falling Objects"],["F-JHG-RA 47","Banksman for MEWP"],
+    ["F-JHG-RA 48","Working Near Water"],["F-JHG-RA 49","Handling Creosote - Refer to product specific MSDS & COSHH assessment"],
+    ["F-JHG-RA 50","Handling Resin - Refer to product specific MSDS & COSHH assessment"],["F-JHG-RA 51","Traffic Management"],
+    ["F-JHG-RA 52","Storage & Transportation of Gas Cylinders"],["F-JHG-RA 53","Wildlife Awareness"],["F-JHG-RA 54","Working Near Trees"],
+    ["F-JHG-RA 55","Pollution control"]
+  ];
+  window.MS_TITLES = {
+    1:"Project Commencement /Arrival on Site",2:"Removal of Manhole/Joint Box Covers",3:"Excavation and Duct Laying",
+    4:"Box Building",5:"Testing and Clearing of Ducts, Brush and Mandrels Systems",6:"Directional Drilling",7:"Reinstatement Works",
+    8:"Cabinet Erection",9:"Drilling through Walls for Cable Opes",10:"Blown Fibre Tubing",11:"Blown Fibre Installation",12:"Fibre Splicing",
+    13:"Fibre Testing and Commissioning",14:"Fibre Preparation",15:"Use of MEWP [Mobile Elevated Work Platforms]",
+    16:"Safe Use of Ladders & Step ladders",17:"Traffic Management Setup",18:"Working in Close Proximity to Underground Services",
+    19:"Pole Installation",20:"Pole Removal",21:"Lifting Operations",22:"Testing a pole",23:"Confined Spaces",24:"Use of Machinery",
+    25:"Impact Moling",26:"Pulling in a Cable",27:"Safe Use of Winches",28:"Services Embedded in Concrete",
+    29:"Working Near Overhead Electric Services",30:"Identification of 110kv lines:",31:"Testing for the absence of Voltage",32:"Earthing Procedures",
+    33:"Climbing Techniques Wood poles/Pylons",34:"Material Handling",35:"wrapping fibre on conductors through tension sets &angle towers",
+    36:"wrapping fibre on conductors through pole sets",37:"Wrapping Fibre on conductor’s through-high (20+) pole sets",
+    38:"wrapping fibre on conductors using arm mounted brackets (winches hat)",39:"Wrapping fibre on an earth wire through 220kv Duel Circuit Tower",
+    40:"Wrapping fibre on a phase wire through 110kv Duel Circuit Tower",41:"Recovering Fibre",42:"Recovery of stranded Tug",
+    43:"Telemess –Procedures Proof of Readiness Site Completion",44:"Installation of Phase to Ground",45:"Stringing Mass Fibre",
+    46:"Use of ATV’s",47:"Use of GDU’s",48:"Core drilling of chambers"
+  };
+  window.RA_TO_MS = {
+    1:[24,9,48], 2:[1], 3:[], 4:[6], 5:[18], 6:[7], 7:[4], 8:[26,12,14], 9:[23],
+    10:[], 11:[3,25], 12:[], 13:[3], 14:[18,29], 15:[18], 16:[3,25], 17:[10,11],
+    18:[14,12,13], 19:[], 20:[24], 21:[], 22:[], 23:[1], 24:[16], 25:[21], 26:[1],
+    27:[34], 28:[24], 29:[27], 30:[29,30,31,32], 31:[19,22], 32:[24], 33:[26,12],
+    34:[23], 35:[24], 36:[7], 37:[], 38:[1], 39:[], 40:[40], 41:[9,48], 42:[15],
+    43:[17], 44:[], 45:[33], 46:[19], 47:[15], 48:[], 49:[], 50:[], 51:[17], 52:[],
+    53:[], 54:[7], 55:[]
+  };
 
-<hr>
-<hr>
+  function fileNameForMS(num, title){
+    const safe = (title || "").replace(/[^\\w\\s-]/g,"").trim().replace(/\\s+/g,"_");
+    return `MS${String(num).padStart(2,"0")}_${safe}.pdf`;
+  }
+  function renderLinks(msNums){
+    if (!msNums || !msNums.length) return "<em>No linked Method Statement found.</em>";
+    return msNums.map(n => {
+      const t = window.MS_TITLES[n];
+      if (t) {
+        const f = fileNameForMS(n, t);
+        return `<div><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf"" target="_blank" rel="noopener">MS${String(n).padStart(2,"0")} ${t}</a></div>`;
+      }
+      return `<div>MS${String(n).padStart(2,"0")}</div>`;
+    }).join("");
+  }
+
+  const selStd = document.getElementById("raSelectStd");
+  if (selStd && selStd.options.length <= 1) {
+    window.RA_LIST.forEach(([code, title]) => {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = code + " — " + title;
+      selStd.appendChild(opt);
+    });
+  }
+
+  const results = document.getElementById("msResults");
+  const label = document.getElementById("msLabel");
+  if (selStd && results) {
+    selStd.addEventListener("change", () => {
+      const idx = window.RA_LIST.findIndex(([c]) => c === selStd.value) + 1;
+      const msNums = window.RA_TO_MS[idx] || [];
+      results.innerHTML = `<div style="display:inline-block; text-align:left;">${renderLinks(msNums)}</div>`;
+      results.style.display = "block";
+      if (label) label.style.display = msNums.length ? "block" : "none";
+    });
+  }
+
+  const addTop = document.getElementById("addRowBtnLinkedTop");
+  const addBottom = document.getElementById("addRowBtnLinked");
+  const container = document.getElementById("riskAssessmentRows");
+
+  function addRow(){
+    if (!container) return;
+    const row = document.createElement("div");
+    row.className = "ra-row";
+    row.style.margin = "8px 0";
+    row.innerHTML = '*F-JHG-RA ';
+
+    const sel = document.createElement("select");
+    sel.className = "raSelectRow";
+    sel.style.cssText = "width:70%; padding:8px; border:1px solid #333; border-radius:6px;";
+    const def = document.createElement("option");
+    def.value = "";
+    def.textContent = "-- Select a Risk Assessment --";
+    sel.appendChild(def);
+    window.RA_LIST.forEach(([code, title]) => {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = code + " — " + title;
+      sel.appendChild(opt);
+    });
+
+    const res = document.createElement("div");
+    res.className = "msRowResults";
+    res.style.cssText = "text-align:center; margin-top:6px; background:#f7f7f7; padding:8px; border:1px solid #ddd; border-radius:8px; display:none;";
+
+    sel.addEventListener("change", () => {
+      const idx = window.RA_LIST.findIndex(([c]) => c === sel.value) + 1;
+      const msNums = window.RA_TO_MS[idx] || [];
+      res.innerHTML = renderLinks(msNums);
+      res.style.display = "block";
+    });
+
+    row.appendChild(sel);
+    row.appendChild(res);
+    container.appendChild(row);
+    row.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  if (addTop) addTop.addEventListener("click", addRow);
+  if (addBottom) addBottom.addEventListener("click", addRow);
+});
+</script>
+</div>
+<script id="ynna-exclusive-js">
+document.addEventListener('DOMContentLoaded', function(){
+  // Any checkbox with class 'ynna' participates; grouped by their data-group or name
+  const boxes = Array.from(document.querySelectorAll('input.ynna[type="checkbox"]'));
+  function groupKey(input){
+    return input.getAttribute('data-group') || input.getAttribute('name') || '';
+  }
+  // Attach listeners
+  boxes.forEach(box => {
+    box.addEventListener('change', () => {
+      const key = groupKey(box);
+      if (!key) return;
+      const sameGroup = boxes.filter(b => groupKey(b) === key);
+      if (box.checked){
+        // Disable the other two and uncheck them
+        sameGroup.forEach(b => {
+          if (b !== box){
+            b.checked = false;
+            b.disabled = true;
+            // Grey their labels
+            const lbl = b.closest('label');
+            if (lbl) lbl.style.opacity = '0.55';
+          }
+        });
+      } else {
+        // Re-enable others
+        sameGroup.forEach(b => {
+          if (b !== box){
+            b.disabled = false;
+            const lbl = b.closest('label');
+            if (lbl) lbl.style.opacity = '';
+          }
+        });
+      }
+    });
+  });
+});
+</script>
+<script>
+(function(){
+  function fillGPS(){
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(function(pos){
+      var coords = pos.coords.latitude.toFixed(6) + ", " + pos.coords.longitude.toFixed(6);
+      var f = document.getElementById("gpsLocation");
+      if (f) f.value = coords;
+    }, function(err){ console.log("GPS error:", err && err.message); });
+  }
+  var btn = document.getElementById("gpsButton");
+  if (btn) btn.addEventListener("click", fillGPS);
+  window.addEventListener("load", fillGPS);
+
+  function fillDateTime(){
+    var now = new Date();
+    function pad(n){ return (n<10?'0':'') + n; }
+    var formatted = pad(now.getDate()) + "/" + pad(now.getMonth()+1) + "/" + now.getFullYear() +
+                    " " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+    var span = document.getElementById("datetime");
+    if (span) span.textContent = formatted;
+  }
+  window.addEventListener("load", fillDateTime);
+})();
+</script>
+<hr/>
+<hr/>
 <h3>Signatures &amp; Declaration</h3>
 <p style="font-weight:bold; font-size:14px; line-height:1.4;">
   I CONFIRM THAT I HAVE PREVIOUSLY COMPLETED THE JHG INDUCTION AND I HAVE TODAY BEEN INSTRUCTED IN AND FULLY UNDERSTAND 
   THE DETAILS OF THE WORK AT THIS LOCATION. I WILL STOP WORK IMMEDIATELY IF I HAVE CONCERNS ABOUT THE SAFETY OF THE 
   WORKING PARTY OR THE GENERAL PUBLIC.
 </p>
-<table id="signatureTable" style="width:100%; border-collapse:collapse; margin-bottom:10px;">
-<tbody><tr>
-<th style="border:1px solid #333; padding:6px;">Team Member Name</th>
-<th style="border:1px solid #333; padding:6px;">Signature (Draw Below)</th>
-<th class="equip-col" style="display: table-cell; border: 1px solid rgb(51, 51, 51); padding: 6px; text-align: center;">Climbing Equipment Checked</th></tr>
+<!-- New Signature/Inspection Table -->
+<div class="page-break"></div><table id="inspectionTable" style="width:100%; border-collapse:collapse; margin-top:15px;">
+<thead>
 <tr>
+<th style="border:1px solid #333; padding:6px;">Team Member</th>
+<th style="border:1px solid #333; padding:6px;">Signature (Draw Below)</th>
+<th class="equip-header" style="border:1px solid #333; padding:6px;">Climbing Equipment Inspected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<!-- Dropdown -->
 <td style="border:1px solid #333; padding:6px;">
-<select name="member_name[]" style="width:95%; padding:6px;">
+<div class="select-wrapper"><select name="inspection_member[]">
 <option value="">-- Select --</option>
 <option>Warren Barron</option>
 <option>Carl Carlisle</option>
@@ -824,26 +1234,767 @@ button:disabled {
 <option>Matthew Bodrozic</option>
 <option>Bobby Rehman</option>
 <option>Mick Waine</option>
-<option value="__OTHER__">Other / Contractor…</option></select>
-<input type="text" name="member_custom[]" class="member-custom" placeholder="Enter contractor name" style="margin-left: 8px; width: 160px; padding: 4px; border: 1px solid rgb(51, 51, 51); border-radius: 6px; display: none;"></td>
-<td style="border:1px solid #333; padding:6px;">
-<div style="text-align:center;">
-<canvas class="signature-pad" height="80" style="width:230px; height:80px; border:1px solid #aaa; background:#fff;" width="230" data-initialized="true"></canvas><br>
-<button onclick="clearPad(this)" style="margin-top:4px; padding:4px 8px;" type="button">Clear</button>
-</div>
+<option value="__OTHER__">Other / Contractor…</option>
+</select></div>
 </td>
-<td class="equip-col" style="display: table-cell; border: 1px solid rgb(51, 51, 51); padding: 6px; text-align: center;"><input name="equipment_checked[]" required="true" type="checkbox"></td><td><button type="button" class="removeRowBtn subtleRemove" onclick="removeSignatureRow(this)" style="display: none;">✖</button></td></tr>
-</tbody></table>
-<button onclick="addSignatureRow()" style="margin-left:5px; font-size:150%; padding:9px 18px;" type="button">
-  Add Row
-</button>
+<!-- Signature Canvas -->
+<td style="border:1px solid #333; padding:6px; text-align:center;">
+<canvas class="signature-pad" height="80" style="width:230px; height:80px; border:1px solid #aaa; background:#fff; touch-action:none;" width="230"></canvas><br/>
+<button class="clear-signature-btn" style="margin-top:5px; padding:4px 8px; font-size:13px;" type="button">Clear</button>
+<button aria-label="Remove row" class="inline-remove" title="Remove row" type="button">✖</button>
+</td>
+<!-- Checkbox -->
+<td style="border:1px solid #333; padding:6px; text-align:center;">
+<input name="inspection_equipment[]" type="checkbox" value="yes"/> Inspected
+      </td>
+</tr>
+</tbody>
+</table>
+<div id="inspectionActions" style="margin-top:10px; text-align:left;">
+<button id="addInspectionRowBtn" style="padding:8px 12px; font-size:14px;" type="button">
+    + Add Inspection Row
+  </button>
+</div>
 <p id="overheadDeclaration" style="display:none; font-size:13px; font-style:italic; margin-top:10px;">
       Declaration: All team members confirm they have inspected their climbing equipment and verified it is in-date.
     </p>
+<script>
+const msLinks = {
+  "RA02": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS01.pdf",
+  "RA05": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA06": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS07.pdf",
+  "RA07": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
+  "RA09": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS23.pdf",
+  "RA13": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS03.pdf",
+  "RA14": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA15": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA17": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
+  "RA18": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS10.pdf",
+  "RA21": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA22": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA24": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS16.pdf",
+  "RA25": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS21.pdf",
+  "RA26": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA27": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS34.pdf",
+  "RA29": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
+  "RA30": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA31": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS08.pdf",
+  "RA33": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
+  "RA37": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS37.pdf",
+  "RA38": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA39": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA40": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS01.pdf",
+  "RA41": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
+  "RA42": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS15.pdf",
+  "RA43": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
+  "RA45": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS16.pdf",
+  "RA47": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
+  "RA48": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+  "RA49": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA50": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
+  "RA51": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS17.pdf",
+  "RA52": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
+  "RA54": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
+};
 
+document.addEventListener("DOMContentLoaded", function() {
+  const dropdown = document.getElementById("riskAssessmentDropdown");
+  const linkDiv = document.getElementById("msLink");
+  if (dropdown && linkDiv) {
+    dropdown.addEventListener("change", function() {
+      const selected = this.value;
+      if (msLinks[selected]) {
+        linkDiv.innerHTML = `<a href="${msLinks[selected]}" target="_blank">📄 Open Related Method Statement</a>`;
+      } else {
+        linkDiv.innerHTML = "";
+      }
+    });
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Names that should disable the row
+  const NAMES = new Set([
+    "warren barron",
+    "bobby rehman",
+    "matt bodrovic",
+    "mick waine"
+  ]);
 
+  function norm(s){
+    return (s||"")
+      .toString()
+      .replace(/[“”]/g, '"')
+      .replace(/[‘’]/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
 
+  // Find CP dropdown by scanning for our names in options
+  function findCpSelect(){
+    const selects = Array.from(document.querySelectorAll("select"));
+    for (const sel of selects){
+      const opts = Array.from(sel.options || []);
+      const hasName = opts.some(o => NAMES.has(norm(o.text || o.value)));
+      if (hasName) return sel;
+    }
+    return null;
+  }
 
+  // Find the row by locating the exact span text and then its nearest row-like container
+  function findTargetRowAndCheckbox(){
+    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
+    const spans = Array.from(document.querySelectorAll('span.ynna-text'));
+    let targetSpan = spans.find(sp => norm(sp.textContent) === TARGET_TEXT)
+                   || spans.find(sp => norm(sp.textContent).includes(TARGET_TEXT));
+    if (!targetSpan) return null;
+
+    // Find a "row" container
+    const row = targetSpan.closest('tr, .form-row, .row, .grid, li, .form-group, .section, .flex, div');
+    if (!row) return null;
+
+    // Primary checkbox (as before) if needed for specific styling
+    let primaryCb = null;
+    // Check siblings first
+    const sibs = [targetSpan.previousElementSibling, targetSpan.nextElementSibling].filter(Boolean);
+    for (const s of sibs){
+      const cb = s.matches && s.matches('input[type="checkbox"]') ? s : s.querySelector && s.querySelector('input[type="checkbox"]');
+      if (cb){ primaryCb = cb; break; }
+    }
+    if (!primaryCb){
+      // search within row
+      primaryCb = row.querySelector('input[type="checkbox"]');
+    }
+
+    return { row, targetSpan, primaryCb };
+  }
+
+  // Enable/disable all checkboxes in row, and give a visual cue
+  function setRowDisabled(rowInfo, disabled){
+    if (!rowInfo) return;
+    const { row, targetSpan } = rowInfo;
+    const checkboxes = Array.from(row.querySelectorAll('input[type="checkbox"]'));
+    for (const cb of checkboxes){
+      cb.disabled = disabled;
+      if (disabled) cb.checked = false;
+    }
+    // Visual: dim the entire row and prevent pointer events on labels
+    row.style.opacity = disabled ? "0.55" : "";
+    const labels = Array.from(row.querySelectorAll('label, span.ynna-text'));
+    for (const el of labels){
+      el.style.pointerEvents = disabled ? "none" : "";
+    }
+    // Also dim the specific span for clarity
+    if (targetSpan){
+      targetSpan.style.opacity = disabled ? "0.55" : "";
+      targetSpan.style.pointerEvents = disabled ? "none" : "";
+    }
+  }
+
+  function applyRule(cpSel, rowInfo){
+    if (!cpSel || !rowInfo) return;
+    const sel = cpSel.options[cpSel.selectedIndex];
+    const val = norm((sel && sel.text) || cpSel.value || "");
+    const shouldDisable = NAMES.has(val);
+    setRowDisabled(rowInfo, shouldDisable);
+  }
+
+  // Init + observers
+  function init(){
+    const cpSel = findCpSelect();
+    const rowInfo = findTargetRowAndCheckbox();
+    if (!cpSel || !rowInfo) return;
+
+    // Bind change
+    cpSel.addEventListener("change", function(){ applyRule(cpSel, rowInfo); });
+
+    // Apply after render
+    setTimeout(() => applyRule(cpSel, rowInfo), 0);
+    setTimeout(() => applyRule(cpSel, rowInfo), 300);
+  }
+
+  const obs = new MutationObserver(() => init());
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+  init();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const EXPLICIT = [
+    ["warren","barron"],
+    ["bobby","rehman"],
+    ["mick","waine"]
+  ];
+  function norm(s){
+    return (s||"").toString().toLowerCase()
+      .replace(/[“”]/g, '"')
+      .replace(/[‘’]/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function optionMatchesBlocked(valueText){
+    const t = norm(valueText);
+    if (EXPLICIT.some(([a,b]) => t.includes(a) && t.includes(b))) return true;
+    if ((t.includes("matt") || t.includes("matthew")) && t.includes("bodr")) return true;
+    return false;
+  }
+  function findCpSelect(){
+    return Array.from(document.querySelectorAll("select")).find(sel =>
+      Array.from(sel.options||[]).some(o => optionMatchesBlocked(o.text||o.value))
+    );
+  }
+  function findTargetRow(){
+    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
+    const spans = Array.from(document.querySelectorAll('span.ynna-text'));
+    let targetSpan = spans.find(sp => norm(sp.textContent).includes(TARGET_TEXT));
+    if (!targetSpan) return null;
+    const row = targetSpan.closest('tr, .form-row, .row, .grid, li, .form-group, .section, .flex, div') || targetSpan.parentElement;
+    return {row, targetSpan};
+  }
+  function setRowDisabled(rowInfo, disabled){
+    if (!rowInfo) return;
+    const { row, targetSpan } = rowInfo;
+    const cbs = Array.from(row.querySelectorAll('input[type="checkbox"]'));
+    for (const cb of cbs){ cb.disabled = disabled; if (disabled) cb.checked = false; }
+    row.style.opacity = disabled ? "0.55" : "";
+    const labels = Array.from(row.querySelectorAll('label, span.ynna-text'));
+    for (const el of labels){ el.style.pointerEvents = disabled ? "none" : ""; }
+    if (targetSpan){ targetSpan.style.opacity = disabled ? "0.55" : ""; targetSpan.style.pointerEvents = disabled ? "none" : ""; }
+  }
+  function applyRule(cpSel, rowInfo){
+    if (!cpSel || !rowInfo) return;
+    const sel = cpSel.options[cpSel.selectedIndex];
+    const val = norm((sel && sel.text) || cpSel.value || "");
+    setRowDisabled(rowInfo, optionMatchesBlocked(val));
+  }
+  function init(){
+    const cpSel = findCpSelect();
+    const rowInfo = findTargetRow();
+    if (!cpSel || !rowInfo) return;
+    applyRule(cpSel, rowInfo);
+    cpSel.addEventListener("change", () => applyRule(cpSel, rowInfo));
+  }
+  const obs = new MutationObserver(() => init());
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+  init();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const cpSel = document.getElementById("cpInCharge");
+  if (!cpSel) return;
+
+  const EXPLICIT = [
+    ["warren","barron"],
+    ["bobby","rehman"],
+    ["mick","waine"]
+  ];
+
+  function norm(s){
+    return (s||"").toString().toLowerCase()
+      .replace(/[“”]/g, '"')
+      .replace(/[‘’]/g, "'")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function optionMatchesBlocked(valueText){
+    const t = norm(valueText);
+    if (EXPLICIT.some(([a,b]) => t.includes(a) && t.includes(b))) return true;
+    if (t.includes("matt") && t.includes("bod")) return true;
+    return false;
+  }
+
+  function findTargetSpan(){
+    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
+    return Array.from(document.querySelectorAll('span.ynna-text')).find(sp => norm(sp.textContent).includes(TARGET_TEXT));
+  }
+
+  function setDisabled(span, disabled){
+    if (!span) return;
+    let container = span.closest('tr, div, li, section') || span.parentElement;
+    if (!container) return;
+    const cbs = Array.from(container.querySelectorAll('input[type="checkbox"]'));
+    for (const cb of cbs){ cb.disabled = disabled; if (disabled) cb.checked = false; }
+    container.style.opacity = disabled ? "0.55" : "";
+    const labels = Array.from(container.querySelectorAll('label, span.ynna-text'));
+    for (const el of labels){ el.style.pointerEvents = disabled ? "none" : ""; }
+  }
+
+  function applyRule(span){
+    const sel = cpSel.options[cpSel.selectedIndex];
+    const raw = (sel && sel.text) || cpSel.value || "";
+    const val = norm(raw);
+    const shouldDisable = optionMatchesBlocked(val);
+    setDisabled(span, shouldDisable);
+  }
+
+  function init(){
+    const span = findTargetSpan();
+    if (!span) return;
+    applyRule(span);
+    cpSel.addEventListener("change", () => applyRule(span));
+  }
+
+  init();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const cpSel = document.getElementById("cpInCharge");
+  const BLOCKED = ["warren barron","bobby rehman","mick waine","matthew bodrozic"];
+
+  function norm(s){
+    return (s||"").toLowerCase().replace(/\s+/g," ").trim();
+  }
+
+  function setDisabled(disabled){
+    const span = document.getElementById("logonTarget");
+    if (!span) return;
+    // Assume checkboxes are in the next sibling cell
+    let checkboxCell = span.closest("td")?.nextElementSibling;
+    if (!checkboxCell) return;
+    const cbs = checkboxCell.querySelectorAll('input[type="checkbox"]');
+    cbs.forEach(cb => { cb.disabled = disabled; if (disabled) cb.checked = false; });
+    checkboxCell.style.opacity = disabled ? "0.55" : "";
+    span.style.opacity = disabled ? "0.55" : "";
+    checkboxCell.querySelectorAll('label, span.ynna-text').forEach(el => {
+      el.style.pointerEvents = disabled ? "none" : "";
+    });
+  }
+
+  function applyRule(){
+    const sel = cpSel?.options[cpSel.selectedIndex];
+    const raw = (sel && (sel.text || sel.value)) || "";
+    const shouldDisable = BLOCKED.some(n => norm(raw).includes(n));
+    setDisabled(shouldDisable);
+  }
+
+  if (cpSel) cpSel.addEventListener("change", applyRule);
+  applyRule();
+});
+</script>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const workType = document.getElementById("workType");
+  const section = document.getElementById("sectionAContainer");
+  if (!workType || !section) return;
+  function toggleSection(){
+    if (workType.value) {
+      section.style.display = "block";
+    } else {
+      section.style.display = "none";
+    }
+  }
+  workType.addEventListener("change", toggleSection);
+  toggleSection();
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const workType = document.getElementById("workType");
+
+  function toggleOverhead() {
+    const overheadItems = document.querySelectorAll(".overhead-hide");
+    overheadItems.forEach(span => {
+      const row = span.closest("tr") || span.parentElement;
+      if (!row) return;
+      if (workType.value === "Overhead") {
+        row.style.display = "none";
+      } else {
+        row.style.display = "";
+      }
+    });
+  }
+
+  if (workType) {
+    workType.addEventListener("change", toggleOverhead);
+    toggleOverhead(); // run once on load
+  }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    let missing = [];
+    document.querySelectorAll("[data-required='true']").forEach(el => {
+      if ((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && !el.value.trim()) {
+        missing.push(el);
+      } else if (el.tagName === "SELECT" && !el.value.trim()) {
+        missing.push(el);
+      }
+    });
+
+    if (missing.length > 0) {
+      e.preventDefault();
+      alert("Please complete all required fields marked with *");
+      missing[0].focus();
+    }
+  });
+});
+</script><script>
+function initSignaturePads() {
+  document.querySelectorAll(".signature-pad").forEach(canvas => {
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+
+    canvas.addEventListener("mousedown", () => drawing = true);
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mouseout", () => drawing = false);
+    canvas.addEventListener("mousemove", e => {
+      if (!drawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.fillStyle = "#000";
+      ctx.beginPath();
+      ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 1.5, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+  });
+}
+function clearPad(btn) {
+  const canvas = btn.parentElement.querySelector("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+document.addEventListener("DOMContentLoaded", initSignaturePads);
+</script><script>
+function updateNameOptions() {
+  const selects = document.querySelectorAll('select[name="member_name[]"]');
+  const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
+
+  selects.forEach(select => {
+    Array.from(select.options).forEach(option => {
+      if (option.value && selectedValues.includes(option.value) && option.value !== select.value) {
+        option.disabled = true;
+      } else {
+        option.disabled = false;
+      }
+    });
+  });
+}
+
+document.addEventListener("change", function(e) {
+  if (e.target && e.target.name === "member_name[]") {
+    updateNameOptions();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", updateNameOptions);
+</script><script>
+function addSignatureRow() {
+  const table = document.getElementById("signatureTable");
+  const row = table.insertRow(-1);
+
+  const cell1 = row.insertCell(0);
+  const cell2 = row.insertCell(1);
+  const cell3 = row.insertCell(2);
+
+  cell1.style.border = "1px solid #333";
+  cell1.style.padding = "6px";
+  cell2.style.border = "1px solid #333";
+  cell2.style.padding = "6px";
+  cell3.style.border = "1px solid #333";
+  cell3.style.padding = "6px";
+  cell3.style.textAlign = "center";
+  cell3.classList.add("equip-col");
+  cell3.style.display = "none"; // hidden by default, toggled by workType
+
+  cell1.innerHTML = '<select name="member_name[]" style="width:95%; padding:6px;">' +
+                    '<option value="">-- Select --</option>' +
+                    '<option>Warren Barron</option>' +
+                    '<option>Carl Carlisle</option>' +
+                    '<option>Joe Smith</option>' +
+                    '<option>Matthew Bodrozic</option>' +
+                    '<option>Bobby Rehman</option>' +
+                    '<option>Mick Waine</option>' +
+                    '</select>';
+  cell2.innerHTML = '<div style="text-align:center;">' +
+                    '<canvas class="signature-pad" width="230" height="80" style="width:230px; height:80px; border:1px solid #aaa; background:#fff;"></canvas><br>' +
+                    '<button type="button" onclick="clearPad(this)" style="margin-top:4px; padding:4px 8px;">Clear</button>' +
+                    '</div>';
+  cell3.innerHTML = '<input type="checkbox" class="equip-check" name="equipment_checked[]">';
+
+  initSignaturePads();
+  updateNameOptions();
+
+  // Ensure new checkbox respects current Work Type state
+  toggleEquipColumn(document.getElementById("workType").value);
+  updateRemoveButtons();
+}
+
+function initSignaturePads() {
+  document.querySelectorAll(".signature-pad").forEach(canvas => {
+    if (canvas.getAttribute("data-initialized")) return; // prevent re-binding
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+
+    canvas.addEventListener("mousedown", () => drawing = true);
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mouseout", () => drawing = false);
+    canvas.addEventListener("mousemove", e => {
+      if (!drawing) return;
+      const rect = canvas.getBoundingClientRect();
+      ctx.fillStyle = "#000";
+      ctx.beginPath();
+      ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 1.2, 0, 2 * Math.PI);
+      ctx.fill();
+    });
+    canvas.setAttribute("data-initialized", "true");
+  });
+}
+
+function clearPad(btn) {
+  const canvas = btn.parentElement.querySelector("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function updateNameOptions() {
+  const selects = document.querySelectorAll('select[name="member_name[]"]');
+  const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
+
+  selects.forEach(select => {
+    Array.from(select.options).forEach(option => {
+      if (option.value && selectedValues.includes(option.value) && option.value !== select.value) {
+        option.disabled = true;
+      } else {
+        option.disabled = false;
+      }
+    });
+  });
+}
+
+function toggleEquipColumn(workTypeValue) {
+  const show = workTypeValue === "Overhead";
+  document.querySelectorAll(".equip-col").forEach(el => {
+    el.style.display = show ? "table-cell" : "none";
+  });
+  document.querySelectorAll(".equip-check").forEach(cb => {
+    cb.required = show; // mandatory only when Overhead
+    if (!show) cb.checked = false; // clear if hidden
+  });
+}
+
+// Validation before form submission
+function validateForm(e) {
+  const workTypeValue = document.getElementById("workType").value;
+  if (workTypeValue === "Overhead") {
+    const checks = document.querySelectorAll(".equip-check");
+    for (let cb of checks) {
+      if (!cb.checked) {
+        alert("Please confirm climbing equipment checked for all team members.");
+        e.preventDefault();
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const workTypeSelect = document.getElementById("workType");
+  if (workTypeSelect) {
+    workTypeSelect.addEventListener("change", function() {
+      toggleEquipColumn(this.value);
+    });
+  }
+
+  // Attach validation to form submit
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", validateForm);
+  }
+
+  initSignaturePads();
+  updateNameOptions();
+});
+</script>
+<script>
+(function(){
+  const ALLOWED = ["Warren Barron","Carl Carlisle","Joe Smith"];
+  const OTHER_VALUE = "__OTHER__";
+
+  function nearestRow(el){ while(el && el.tagName && el.tagName.toLowerCase() !== "tr") el = el.parentElement; return el || null; }
+
+  function ensureOtherOption(select){
+    if (!select) return;
+    if (![...select.options].some(o => o.value === OTHER_VALUE)) {
+      const opt = document.createElement("option");
+      opt.value = OTHER_VALUE;
+      opt.textContent = "Other / Contractor…";
+      select.appendChild(opt);
+    }
+  }
+
+  function ensureCustomInput(select){
+    let input = select.parentElement.querySelector('input.member-custom');
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "text";
+      input.name = "member_custom[]";
+      input.className = "member-custom";
+      input.placeholder = "Enter contractor name";
+      input.style.cssText = "margin-left:8px; width:160px; padding:4px; border:1px solid #333; border-radius:6px; display:none;";
+      select.parentElement.appendChild(input);
+      input.addEventListener("input", function(){ enforceRow(nearestRow(select)); });
+    }
+    input.style.display = (select.value === OTHER_VALUE) ? "" : "none";
+  }
+
+  function effectiveName(row){
+    const select = row && row.querySelector && row.querySelector('select[name="member_name[]"]');
+    if (!select) return "";
+    if (select.value === OTHER_VALUE) {
+      const custom = row.querySelector('input.member-custom');
+      return custom ? (custom.value || "").trim() : "";
+    }
+    return select.value || "";
+  }
+
+  function enforceRow(row){
+    if (!row) return;
+    const box = row.querySelector('input.equip-check[type="checkbox"]');
+    const select = row.querySelector('select[name="member_name[]"]');
+    if (!box || !select) return;
+
+    ensureOtherOption(select);
+    ensureCustomInput(select);
+
+    const name = effectiveName(row);
+    const allowed = ALLOWED.includes(name);
+
+    if (!allowed) {
+      box.checked = false;
+      box.disabled = true;
+      box.title = 'Only allowed for: ' + ALLOWED.join(', ');
+    } else {
+      box.disabled = false;
+      box.title = '';
+    }
+  }
+
+  function enforceAll(){ document.querySelectorAll('#signatureTable tr').forEach(enforceRow); }
+
+  function setupSelect(select){
+    ensureOtherOption(select);
+    ensureCustomInput(select);
+    select.addEventListener("change", function(){
+      ensureCustomInput(select);
+      enforceRow(nearestRow(select));
+    });
+  }
+
+  function setupAllSelects(){ document.querySelectorAll('select[name="member_name[]"]').forEach(setupSelect); }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    setupAllSelects();
+    enforceAll();
+    // keep __OTHER__ enabled even if duplicate-disabling logic exists elsewhere
+    document.addEventListener("change", function(){
+      document.querySelectorAll('select[name="member_name[]"] option[value="__OTHER__"]').forEach(function(opt){ opt.disabled = false; });
+    });
+    const table = document.getElementById('signatureTable');
+    if (table && window.MutationObserver) {
+      new MutationObserver(function(){ setupAllSelects(); enforceAll(); }).observe(table, {childList:true, subtree:true});
+    }
+  });
+})();
+</script>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var wt = document.getElementById("workType");
+  var wrap = document.getElementById("belowWorkType");
+  function apply(){
+    if (!wrap) return;
+    var show = wt && wt.value && wt.value.trim() !== "";
+    wrap.style.display = show ? "" : "none";
+  }
+  if (wt) wt.addEventListener("change", apply);
+  apply();
+});
+</script>
+<script>
+(function(){
+  async function reverseGeocode(lat, lon) {
+    try {
+      const controller = new AbortController();
+      const t = setTimeout(()=>controller.abort(), 8000);
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&format=json&zoom=18&addressdetails=1`;
+      const res = await fetch(url, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'POWRA/1.0 (+contact: field-app)' // polite header
+        },
+        signal: controller.signal
+      });
+      clearTimeout(t);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      return data && (data.display_name || (data.address && Object.values(data.address).join(', '))) || '';
+    } catch (e) {
+      return ''; // fail silently to avoid blocking coords
+    }
+  }
+
+  function setAddressText(txt){
+    var el = document.getElementById('gpsAddress');
+    if (!el) return;
+    el.textContent = txt ? (' — ' + txt) : '';
+    el.title = txt || '';
+  }
+
+  // Hook into the existing geolocation success logic if present
+  // We'll monkey-patch navigator.geolocation.getCurrentPosition usage by wrapping the success handler if we can find the field.
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('gpsButton');
+    var latField = document.querySelector('input[name=\"gps_lat\"], #gpsLat, input#gpsLat');
+    var lonField = document.querySelector('input[name=\"gps_lon\"], #gpsLon, input#gpsLon');
+    var coordsField = document.querySelector('#gpsLocation, input[name=\"gps_location\"], input#gpsLocation');
+
+    async function afterCoords(lat, lon){
+      const addr = await reverseGeocode(lat, lon);
+      setAddressText(addr);
+    }
+
+    // If there is a handler already attached, we don't override it; we just listen for changes on fields
+    if (latField || lonField || coordsField) {
+      ['change','input'].forEach(evt => {
+        if (latField) latField.addEventListener(evt, ()=>{ if(latField.value && lonField && lonField.value){ afterCoords(latField.value, lonField.value); } });
+        if (lonField) lonField.addEventListener(evt, ()=>{ if(lonField.value && latField && latField.value){ afterCoords(latField.value, lonField.value); } });
+        if (coordsField) coordsField.addEventListener(evt, ()=>{
+          var m = (coordsField.value||'').match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
+          if (m) afterCoords(m[1], m[2]);
+        });
+      });
+    }
+
+    // Additionally, augment the click on the GPS button to fetch address after coordinates are set
+    if (btn && navigator.geolocation) {
+      var originalOnClick = btn.onclick;
+      btn.onclick = function(ev){
+        if (originalOnClick) try { originalOnClick.call(this, ev); } catch(e){}
+        // Give the page a tick to fill fields, then read and reverse geocode
+        setTimeout(function(){
+          var lat='', lon='';
+          if (latField && lonField) { lat = latField.value; lon = lonField.value; }
+          else if (coordsField) {
+            var m = (coordsField.value||'').match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
+            if (m) { lat = m[1]; lon = m[2]; }
+          }
+          if (lat && lon) afterCoords(lat, lon);
+        }, 300);
+      };
+    }
+  });
+})();
+</script>
 <script>
 
   updateRemoveButtons();
@@ -860,8 +2011,6 @@ document.addEventListener("DOMContentLoaded", function(){
   updateRemoveButtons();
 });
 </script>
-
-
 <script>
 
   updateRemoveButtons();
@@ -870,8 +2019,6 @@ document.addEventListener("DOMContentLoaded", function(){
 }
 document.addEventListener("DOMContentLoaded", updateRemoveButtons);
 </script>
-
-
 <script>
 
   updateRemoveButtons();
@@ -880,8 +2027,6 @@ document.addEventListener("DOMContentLoaded", updateRemoveButtons);
 }
 document.addEventListener("DOMContentLoaded", updateRemoveButtons);
 </script>
-
-
 <script>
 
   updateRemoveButtons();
@@ -890,8 +2035,6 @@ document.addEventListener("DOMContentLoaded", updateRemoveButtons);
 }
 document.addEventListener("DOMContentLoaded", updateRemoveButtons);
 </script>
-
-
 <script>
 function addRemoveCell(row) {
   if (!row.querySelector(".removeRowBtn")) {
@@ -927,20 +2070,6 @@ document.addEventListener("DOMContentLoaded", function(){
   updateRemoveButtons();
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   var fillBtn = document.getElementById("fillBtn");
@@ -967,8 +2096,6 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   var workType = document.getElementById("workType");
@@ -994,8 +2121,6 @@ document.addEventListener("DOMContentLoaded", function(){
   checkRequired();
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   var workType = document.getElementById("workType");
@@ -1029,8 +2154,6 @@ document.addEventListener("DOMContentLoaded", function(){
   checkRequired();
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   var raSelect = document.getElementById("raSelectStd");
@@ -1040,14 +2163,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 </script>
-
-
 <div id="email-send-block" style="margin:20px 0; padding:12px; border-top:1px solid #ddd; text-align:center;">
-  
-  <span id="emailStatus" style="margin-left:10px; font-style:italic; color:#666;"></span>
+<span id="emailStatus" style="margin-left:10px; font-style:italic; color:#666;"></span>
 </div>
-
-
 <script>
 // === Simple email send helper ===
 // Configure these to use EmailJS (optional). If not set, we'll fall back to mailto://
@@ -1155,43 +2273,7 @@ function buildEmailBody(){
   });
 })();
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1269,11 +2351,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1351,14 +2429,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1388,14 +2459,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1439,11 +2503,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1487,11 +2547,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1533,11 +2589,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1584,11 +2636,7 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
-
-
-
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function(){
       var btn = document.getElementById('powraSaveBtn');
       var err = document.getElementById('saveError');
@@ -1634,117 +2682,830 @@ function buildEmailBody(){
       });
     });
   </script>
-</div>
+<!-- Sticky Footer with Save button -->
+<div id="footer" style="
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#2f3640;
+  color:#fff;
+  
+  text-align:center;
+  border-top:2px solid #000;
+  z-index:999;
+ padding:4px; font-size:12px; text-align:center;">
+<button id="saveBtn" style="
+    background:#2f3640;
+    border:1px solid #2f3640;
+    color:#fff;
+    padding:14px 22px;
+    font-size:17px;
+    font-weight:600;
+    border-radius:12px;
+    cursor:pointer;
+  ">💾 Save as PDF</button>
+<div id="versionNote" style="margin-top:3px; font-size:11px; opacity:0.7;">POWRA v1.7-long (MASTER) • Author: W.Barron</div></div>
+<!-- Add jsPDF, html2canvas, and Signature Pad libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<style>
+/* Page break helper */
+.page-break { page-break-before: always; }
+@media print {
+  .page-break { display: block; }
+  #footer { display: none !important; }
+}
 
+/* Bigger tap targets */
+input[type="checkbox"], input[type="radio"] {
+  width: 22px;
+  height: 22px;
+}
+select, textarea, input[type="text"], input[type="tel"] {
+  font-size: 18px;
+  padding: 10px;
+}
+</style>
+<style>
+/* Make first column resizable for debugging */
+#inspectionTable th:first-child,
+#inspectionTable td:first-child {
+  
+  overflow: auto;
+  min-width: 100px;
+  max-width: 300px;
+}
 
-<div id="save-pdf-block" style="position:fixed; bottom:0; left:0; width:100%; background:#f9f9f9; border-top:2px solid #ccc; padding:10px; text-align:center; z-index:1000;">
-  <button id="powraSaveBtn" type="button" style="padding:12px 20px; border:1px solid #333; border-radius:6px; background:#2f3640; color:#fff; font-size:16px; cursor:pointer;">
-    Save as PDF
-  </button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      var btn = document.getElementById('powraSaveBtn');
-      if (!btn) return;
-      btn.addEventListener('click', function(){
-        window.print();
+/* Debug box */
+#debugBox {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: #222;
+  color: #fff;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  z-index: 9999;
+  font-family: monospace;
+}
+</style>
+<script>
+function resizeCanvas(canvas) {
+  const ratio = Math.min(Math.max(window.devicePixelRatio || 1, 1), 1.5);
+  const width = canvas.offsetWidth;
+  const height = canvas.offsetHeight;
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+  canvas.getContext("2d").scale(ratio, ratio);
+}
+
+// Override initSignaturePads to include scaling
+function initSignaturePads() {
+  const pads = document.querySelectorAll("canvas.signature-pad");
+  pads.forEach((canvas) => {
+    resizeCanvas(canvas);
+    if (!canvas.signaturePad) {
+      const pad = new SignaturePad(canvas, { minWidth: 0.2, maxWidth: 0.5, penColor: "black", throttle: 0, velocityFilterWeight: 0.5 });
+      canvas.signaturePad = pad;
+
+      // Clear button support
+      let clearBtn = canvas.parentNode.querySelector(".clear-signature-btn");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => pad.clear());
+      }
+    }
+  });
+}
+
+// Re-initialise pads on window resize/orientation change
+window.addEventListener("resize", () => {
+  document.querySelectorAll("canvas.signature-pad").forEach(resizeCanvas);
+});
+document.addEventListener("DOMContentLoaded", initSignaturePads);
+</script>
+<script>
+(function(){
+  function createInspectionRow() {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="border:1px solid #333; padding:6px;">
+        <div class="select-wrapper">
+          <select name="inspection_member[]">
+            <option value="">-- Select --</option>
+            <option>Warren Barron</option>
+            <option>Carl Carlisle</option>
+            <option>Joe Smith</option>
+            <option>Matthew Bodrozic</option>
+            <option>Bobby Rehman</option>
+            <option>Mick Waine</option>
+            <option value="__OTHER__">Other / Contractor…</option>
+          </select>
+        </div>
+      </td>
+      <td style="border:1px solid #333; padding:6px; text-align:center;">
+        <canvas class="signature-pad" style="width:100%; height:80px; border:1px solid #aaa; background:#fff;"></canvas><br>
+        <button type="button" class="clear-signature-btn" style="margin-top:5px; padding:4px 8px; font-size:13px;">Clear</button>
+      
+<button type="button" class="inline-remove" title="Remove row" aria-label="Remove row">✖</button>
+</td>
+      <td class="inspect-cell" style="border:1px solid #333; padding:6px; text-align:center;"><div class="inspect-wrap"><label class="inspect-label" class="inspect-label"><input type="checkbox" name="inspection_equipment[]" value="yes"><span class="inspect-text">Inspected</span></label><button type="button" class="removeInspectionRowBtn" title="Remove row" aria-label="Remove row">✖</button></div></td>
+    `;
+    return tr;
+  }
+
+  function addInspectionRow() {
+    const table = document.getElementById('inspectionTable');
+    if (!table) return;
+    const tbody = table.querySelector('tbody') || table;
+    const newRow = createInspectionRow();
+    tbody.appendChild(newRow);
+
+    // Init signature pad for the new canvas using v57 settings
+    const newCanvas = newRow.querySelector('canvas.signature-pad');
+    if (newCanvas && typeof resizeCanvas === 'function' && window.SignaturePad) {
+      resizeCanvas(newCanvas);
+      const pad = new SignaturePad(newCanvas, { minWidth: 0.2, maxWidth: 0.5, penColor: "black", throttle: 0, velocityFilterWeight: 0.5 });
+      newCanvas.signaturePad = pad;
+      const clearBtn = newRow.querySelector('.clear-signature-btn');
+      if (clearBtn) clearBtn.addEventListener('click', () => pad.clear());
+    }
+
+    // Wire up remove button
+    const removeBtn = newRow.querySelector('.removeInspectionRowBtn');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
+        newRow.remove();
+      });
+    }
+
+    // Scroll to new row
+    newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Wire add button on load
+  document.addEventListener('DOMContentLoaded', function(){
+    const btn = document.getElementById('addInspectionRowBtn');
+    if (btn) btn.addEventListener('click', addInspectionRow);
+
+    // Also wire any existing remove buttons (if present in initial markup)
+    document.querySelectorAll('.removeInspectionRowBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        if (row) row.remove();
       });
     });
-  </script>
-</div>
-
-
-<!-- Sticky Save Footer -->
-<div id="saveFooter">
-  <button id="savePdfBtn">Save as PDF</button>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-  // Make footer sticky
-  const footerStyle = document.createElement("style");
-  footerStyle.innerHTML = `
-    #saveFooter {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #2f3640;
-      padding: 12px;
-      text-align: center;
-      z-index: 9999;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    }
-    #saveFooter button {
-      background: #c0392b;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    #saveFooter button:hover {
-      background: #a32d22;
-    }
-  `;
-  document.head.appendChild(footerStyle);
-
-  // Save as PDF function
-  document.getElementById("savePdfBtn").addEventListener("click", () => {
-    const element = document.body;
-    const opt = {
-      margin: 0.5,
-      filename: "POWRA_Form.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
-    };
-    html2pdf().set(opt).from(element).save();
   });
+
+  // Expose for manual calls if needed
+  window.addInspectionRow = addInspectionRow;
+})();
 </script>
-
-
+<style>
+/* Visual hint when checkbox is blocked */
+#inspectionTable .inspect-label.blocked { opacity: 0.55; }
+</style>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const gpsButton = document.getElementById("gpsButton");
-  const gpsHint = document.getElementById("gpsHint");
-  const gpsInput = document.getElementById("gpsLocation");
-  const gpsAddress = document.getElementById("gpsAddress");
+(function(){
+  const BLOCKED = new Set(["matthew bodrozic","bobby rehman","mick waine"]);
 
-  if (gpsButton) {
-    gpsButton.addEventListener("click", function () {
-      gpsButton.disabled = true;
-      gpsButton.innerHTML = "Loading... <span class='spinner'></span>";
-      if (gpsHint) gpsHint.textContent = "Fetching GPS... please wait";
+  function normalize(str){ return (str || "").toLowerCase().trim(); }
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function (position) {
-            if (gpsInput) {
-              gpsInput.value = position.coords.latitude + ", " + position.coords.longitude;
-            }
+  function updateInspectionRowState(row){
+    if (!row) return;
+    const sel = row.querySelector('select[name="inspection_member[]"]');
+    const cb  = row.querySelector('input[name="inspection_equipment[]"]');
+    const label = row.querySelector('.inspect-label');
+    if (!sel || !cb) return;
 
-            // Reset button & hint
-            gpsButton.disabled = false;
-            gpsButton.textContent = "Get Current Location";
-            if (gpsHint) gpsHint.textContent = "(Requires location permission)";
-          },
-          function () {
-            gpsButton.disabled = false;
-            gpsButton.textContent = "Get Current Location";
-            if (gpsHint) gpsHint.textContent = "⚠️ Unable to retrieve location, please try again.";
-          },
-          { timeout: 20000 }
-        );
-      } else {
-        gpsButton.disabled = false;
-        gpsButton.textContent = "Get Current Location";
-        if (gpsHint) gpsHint.textContent = "⚠️ Geolocation not supported in this browser.";
+    const isBlocked = BLOCKED.has(normalize(sel.value));
+    if (isBlocked) {
+      cb.checked = false;
+      cb.disabled = true;
+      cb.title = "Restricted for this team member";
+      if (label) label.classList.add('blocked');
+    } else {
+      cb.disabled = false;
+      cb.title = "";
+      if (label) label.classList.remove('blocked');
+    }
+  }
+
+  // Delegate changes from any select in the inspection table
+  document.addEventListener('DOMContentLoaded', function(){
+    const table = document.getElementById('inspectionTable');
+    if (!table) return;
+
+    // Initial pass for any existing rows
+    table.querySelectorAll('tbody tr').forEach(updateInspectionRowState);
+
+    table.addEventListener('change', function(e){
+      if (e.target && e.target.matches('select[name="inspection_member[]"]')) {
+        const row = e.target.closest('tr');
+        updateInspectionRowState(row);
       }
     });
+  });
+
+  // If addInspectionRow exists, patch it to run the state update on new rows
+  (function patchAddFn(){
+    const orig = window.addInspectionRow;
+    window.addInspectionRow = function(){
+      if (typeof orig === 'function') orig();
+      // find last row added and enforce logic
+      const table = document.getElementById('inspectionTable');
+      if (!table) return;
+      const rows = table.querySelectorAll('tbody tr');
+      if (rows.length) updateInspectionRowState(rows[rows.length - 1]);
+    };
+  })();
+})();
+</script>
+<script>
+// Enforce unique Team Member selection across all inspection rows
+(function(){
+  function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+  function getAllMemberSelects(){
+    return Array.from(document.querySelectorAll('#inspectionTable select[name="inspection_member[]"]'));
+  }
+
+  function refreshDisabledOptions(){
+    const selects = getAllMemberSelects();
+    // Collect currently selected names (ignore empty and "__OTHER__")
+    const chosen = new Set(
+      selects.map(s => s.value).map(normalize).filter(v => v && v !== "__other__")
+    );
+    // Disable already-chosen names in every other select
+    selects.forEach(sel => {
+      const myVal = normalize(sel.value);
+      Array.from(sel.options).forEach(opt => {
+        const name = normalize(opt.value || opt.textContent);
+        if (!name || name === "__other__") {
+          opt.disabled = false;
+          return;
+        }
+        // disable if chosen elsewhere (i.e., in chosen but not this select's current value)
+        opt.disabled = chosen.has(name) && name !== myVal;
+      });
+    });
+  }
+
+  function attachPrevTracking(sel){
+    sel.addEventListener('focusin', () => {
+      sel.dataset.prev = sel.value;
+    });
+  }
+
+  function onMemberChange(e){
+    const sel = e.target;
+    if (!sel || sel.name !== "inspection_member[]") return;
+
+    const val = normalize(sel.value);
+    if (!val || val === "__other__") {
+      refreshDisabledOptions();
+      return;
+    }
+    // If this value already exists in some other select, revert
+    const duplicates = getAllMemberSelects().filter(s => s !== sel && normalize(s.value) === val);
+    if (duplicates.length > 0) {
+      // revert to previous value (or empty) and notify
+      sel.value = sel.dataset.prev || "";
+      // Optional: brief visual cue
+      sel.style.outline = "2px solid #d32f2f";
+      setTimeout(() => sel.style.outline = "", 800);
+      showInlineHint(sel, "That team member is already selected in another row.");
+    }
+    refreshDisabledOptions();
+  }
+
+  function initUniqueSelection(){
+    const selects = getAllMemberSelects();
+    selects.forEach(sel => {
+      attachPrevTracking(sel);
+      // ensure change handler only attached once
+      if (!sel.dataset.uniqueBound) {
+        sel.addEventListener('change', onMemberChange);
+        sel.dataset.uniqueBound = "1";
+      }
+    });
+    refreshDisabledOptions();
+  }
+
+  document.addEventListener('DOMContentLoaded', initUniqueSelection);
+
+  // Re-run after adding/removing rows
+  // Patch addInspectionRow if present
+  (function patchAddFn(){
+    const orig = window.addInspectionRow;
+    window.addInspectionRow = function(){
+      if (typeof orig === 'function') orig();
+      initUniqueSelection();
+    };
+  })();
+
+  // Re-run after a remove button is clicked
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.classList && e.target.classList.contains('removeInspectionRowBtn')) {
+      // allow DOM to remove first
+      setTimeout(initUniqueSelection, 0);
+    }
+  });
+})();
+</script>
+<script>
+// Strong unique-selection enforcement for inspection_member[]
+// - Disables duplicates immediately when a new row is added (via MutationObserver and patched addInspectionRow)
+// - Re-checks just before user opens a dropdown (pointer/touch/focus) to ensure options are disabled in time
+(function(){
+  function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+  function getAllMemberSelects(){
+    return Array.from(document.querySelectorAll('#inspectionTable select[name="inspection_member[]"]'));
+  }
+
+  function refreshDisabledOptions(){
+    const selects = getAllMemberSelects();
+    const chosen = new Set(
+      selects.map(s => s.value).map(normalize).filter(v => v && v !== "__other__")
+    );
+    selects.forEach(sel => {
+      const myVal = normalize(sel.value);
+      Array.from(sel.options).forEach(opt => {
+        const name = normalize(opt.value || opt.textContent);
+        if (!name || name === "__other__") { opt.disabled = false; return; }
+        opt.disabled = chosen.has(name) && name !== myVal;
+      });
+    });
+  }
+
+  function attachPrevTracking(sel){
+    sel.addEventListener('focusin', () => { sel.dataset.prev = sel.value; });
+    // Before opening, ensure options are disabled appropriately
+    ['pointerdown','mousedown','touchstart','focus'].forEach(evt => {
+      sel.addEventListener(evt, refreshDisabledOptions, { passive: true });
+    });
+  }
+
+  function onMemberChange(e){
+    const sel = e.target;
+    if (!sel || sel.name !== "inspection_member[]") return;
+    const val = normalize(sel.value);
+    if (!val || val === "__other__") { refreshDisabledOptions(); return; }
+    const duplicates = getAllMemberSelects().filter(s => s !== sel && normalize(s.value) === val);
+    if (duplicates.length > 0) {
+      sel.value = sel.dataset.prev || "";
+      sel.style.outline = "2px solid #d32f2f";
+      setTimeout(() => sel.style.outline = "", 800);
+      showInlineHint(sel, "That team member is already selected in another row.");
+    }
+    refreshDisabledOptions();
+  }
+
+  function initUniqueSelection(){
+    const selects = getAllMemberSelects();
+    selects.forEach(sel => {
+      attachPrevTracking(sel);
+      if (!sel.dataset.uniqueBound) {
+        sel.addEventListener('change', onMemberChange);
+        sel.dataset.uniqueBound = "1";
+      }
+    });
+    refreshDisabledOptions();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initUniqueSelection();
+
+    // MutationObserver: watch tbody for added/removed rows and refresh
+    const table = document.getElementById('inspectionTable');
+    const tbody = table ? table.querySelector('tbody') : null;
+    if (tbody) {
+      const mo = new MutationObserver(() => { initUniqueSelection(); });
+      mo.observe(tbody, { childList: true, subtree: false });
+    }
+  });
+
+  // Patch addInspectionRow (if defined) to enforce immediately after row creation
+  (function patchAddFn(){
+    const orig = window.addInspectionRow;
+    window.addInspectionRow = function(){
+      if (typeof orig === 'function') orig();
+      initUniqueSelection();
+    };
+  })();
+
+  // Re-run after a remove button is clicked
+  document.addEventListener('click', function(e){
+    if (e.target && e.target.classList && e.target.classList.contains('removeInspectionRowBtn')) {
+      setTimeout(initUniqueSelection, 0);
+    }
+  });
+})();
+</script>
+<style>
+/* When not Overhead, hide the header text and the checkbox/label UI */
+#inspectionTable.hide-equip .equip-header { display: none; }
+#inspectionTable.hide-equip .inspect-label { display: none; }
+
+/* Keep the remove button visible and column compact */
+#inspectionTable td:nth-child(3), 
+#inspectionTable th:nth-child(3) {
+  text-align: center;
+  vertical-align: middle;
+}
+</style>
+<script>
+(function(){
+  function normalize(v){ return (v || "").toLowerCase().trim(); }
+
+  function setEquipVisibility(isOverhead){
+    const table = document.getElementById('inspectionTable');
+    if (!table) return;
+    if (isOverhead) {
+      table.classList.remove('hide-equip');
+      // enable checkboxes
+      table.querySelectorAll('input[name="inspection_equipment[]"]').forEach(cb => {
+        cb.disabled = false;
+      });
+    } else {
+      table.classList.add('hide-equip');
+      // disable + uncheck all equipment checkboxes when not overhead
+      table.querySelectorAll('input[name="inspection_equipment[]"]').forEach(cb => {
+        cb.checked = false;
+        cb.disabled = true;
+      });
+    }
+  }
+
+  function initEquipToggle(){
+    const workType = document.getElementById('workType');
+    if (!workType) return;
+    const isOverhead = normalize(workType.value) === 'overhead';
+    setEquipVisibility(isOverhead);
+    if (!workType.dataset.toggleBound){
+      workType.addEventListener('change', function(){
+        const oh = normalize(workType.value) === 'overhead';
+        setEquipVisibility(oh);
+      });
+      workType.dataset.toggleBound = "1";
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initEquipToggle();
+  });
+
+  // Also re-apply on newly added inspection rows (so their checkbox starts disabled when not Overhead)
+  (function patchAddFn(){
+    const orig = window.addInspectionRow;
+    window.addInspectionRow = function(){
+      if (typeof orig === 'function') orig();
+      initEquipToggle();
+    };
+  })();
+})();
+</script>
+<script>
+(function(){
+  function wireInlineRemove(btn){
+    if (!btn || btn.dataset.bound) return;
+    btn.addEventListener('click', function(){
+      const row = btn.closest('tr');
+      if (row) row.remove();
+    });
+    btn.dataset.bound = "1";
+  }
+
+  function ensureInlineRemoveButtons(){
+    document.querySelectorAll('#inspectionTable .inline-remove').forEach(wireInlineRemove);
+  }
+
+  // After DOM loads, wire existing inline remove buttons
+  document.addEventListener('DOMContentLoaded', ensureInlineRemoveButtons);
+
+  // Patch addInspectionRow so new rows also get wired
+  (function patchAddFn(){
+    const orig = window.addInspectionRow;
+    window.addInspectionRow = function(){
+      if (typeof orig === 'function') orig();
+      ensureInlineRemoveButtons();
+    };
+  })();
+
+  // Also ensure buttons are wired whenever Work Type toggles the column visibility
+  document.addEventListener('DOMContentLoaded', function(){
+    const workType = document.getElementById('workType');
+    if (workType && !workType.dataset.inlineBound){
+      workType.addEventListener('change', ensureInlineRemoveButtons);
+      workType.dataset.inlineBound = "1";
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  function normalize(s){ return (s||'').toLowerCase().trim(); }
+
+  function findAssociatedCheckboxForLogon() {
+    const span = document.getElementById('logonTarget');
+    if (!span) return null;
+    // Try within the same row/container first
+    let container = span.closest('.ynna-row') || span.closest('label') || span.parentElement;
+    if (!container) container = span.parentElement;
+    if (!container) return null;
+    // Look for a checkbox inside this container
+    let cb = container.querySelector('input[type="checkbox"]');
+    if (cb) return {container, cb};
+    // Fallbacks: look at siblings/parent
+    cb = span.previousElementSibling && span.previousElementSibling.matches && span.previousElementSibling.matches('input[type="checkbox"]')
+      ? span.previousElementSibling : null;
+    if (cb) return {container, cb};
+    // Wider search within parent node
+    const parent = container.parentElement || span.parentElement;
+    if (parent) {
+      cb = parent.querySelector('input[type="checkbox"]');
+      if (cb) return {container: parent, cb};
+    }
+    return {container, cb: null};
+  }
+
+  function applyCpRules(){
+    const sel = document.getElementById('cpInCharge');
+    if (!sel) return;
+    const value = normalize(sel.value || sel.options[sel.selectedIndex]?.text || '');
+    const pair = findAssociatedCheckboxForLogon();
+    if (!pair) return;
+    const {container, cb} = pair;
+    if (value === 'matthew bodrozic') {
+      // Grey out row
+      if (container) container.classList.add('greyed-row');
+      // Disable & uncheck checkbox if found
+      if (cb) { cb.checked = false; cb.disabled = true; }
+      // Also set title for clarity
+      if (cb) cb.title = 'Disabled while CP in charge is Matthew Bodrozic';
+    } else {
+      if (container) container.classList.remove('greyed-row');
+      if (cb) { cb.disabled = false; cb.title = ''; }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    // Initial run
+    applyCpRules();
+    // Bind change
+    const sel = document.getElementById('cpInCharge');
+    if (sel && !sel.dataset.boundCpRule) {
+      sel.addEventListener('change', applyCpRules);
+      sel.dataset.boundCpRule = '1';
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  function normalize(s){ return (s||'').toLowerCase().trim(); }
+
+  function getLogonContainer(){
+    const span = document.getElementById('logonTarget');
+    if (!span) return null;
+    return span.closest('.ynna-row') || span.closest('label') || span.parentElement || null;
+  }
+
+  function lockRowInteractions(container, lock){
+    if (!container) return;
+    // Toggle class that also blocks pointer events via CSS
+    container.classList.toggle('locked-row', !!lock);
+
+    // Disable all checkboxes inside this row
+    const boxes = container.querySelectorAll('input[type="checkbox"]');
+    boxes.forEach(cb => {
+      if (lock) { cb.checked = false; cb.disabled = true; cb.title = 'Disabled while CP in charge is Matthew Bodrozic'; }
+      else      { cb.disabled = false; cb.title = ''; }
+    });
+
+    // Add/remove an event handler to kill click/keyboard toggling as a backstop
+    function stopper(e){ e.stopPropagation(); e.preventDefault(); return false; }
+    if (lock) {
+      if (!container.dataset.lockBound) {
+        container.addEventListener('click', stopper, true);
+        container.addEventListener('keydown', stopper, true);
+        container.dataset.lockBound = '1';
+      }
+    } else {
+      if (container.dataset.lockBound) {
+        container.removeEventListener('click', stopper, true);
+        container.removeEventListener('keydown', stopper, true);
+        delete container.dataset.lockBound;
+      }
+    }
+  }
+
+  function applyCpRules_Strict(){
+    const sel = document.getElementById('cpInCharge');
+    if (!sel) return;
+    const val = normalize(sel.value || sel.options[sel.selectedIndex]?.text || '');
+    const container = getLogonContainer();
+    if (!container) return;
+    if (val === 'matthew bodrozic') {
+      container.classList.add('greyed-row');
+      lockRowInteractions(container, true);
+    } else {
+      container.classList.remove('greyed-row');
+      lockRowInteractions(container, false);
+    }
+  }
+
+  // Bind on load and change
+  document.addEventListener('DOMContentLoaded', function(){
+    applyCpRules_Strict();
+    const sel = document.getElementById('cpInCharge');
+    if (sel && !sel.dataset.boundCpStrict) {
+      sel.addEventListener('change', applyCpRules_Strict);
+      sel.dataset.boundCpStrict = '1';
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  function normalize(s){ return (s||'').toLowerCase().trim(); }
+
+  // Find only the checkbox that corresponds to the #logonTarget line
+  function findLogonCheckbox(){
+    const span = document.getElementById('logonTarget');
+    if (!span) return null;
+    // Search nearby (same row/container first)
+    const container = span.closest('.ynna-row') || span.closest('label') || span.parentElement || null;
+    if (container) {
+      const cb = container.querySelector('input[type="checkbox"]');
+      if (cb) return cb;
+    }
+    // Try previous sibling input
+    if (span.previousElementSibling && span.previousElementSibling.matches && span.previousElementSibling.matches('input[type="checkbox"]')) {
+      return span.previousElementSibling;
+    }
+    // Fallback wider search within parent
+    const parent = (span.closest('.ynna-row') || span.parentElement);
+    if (parent) {
+      const cb = parent.querySelector('input[type="checkbox"]');
+      if (cb) return cb;
+    }
+    return null;
+  }
+
+  function applyCpRules_LogonOnly(){
+    const sel = document.getElementById('cpInCharge');
+    const logonText = document.getElementById('logonTarget');
+    if (!sel || !logonText) return;
+    const value = normalize(sel.value || sel.options[sel.selectedIndex]?.text || '');
+    const cb = findLogonCheckbox();
+
+    if (value === 'matthew bodrozic') {
+      // Grey only the text
+      logonText.classList.add('greyed-text');
+      // Disable the single checkbox (make untickable)
+      if (cb) {
+        cb.checked = false;
+        cb.disabled = true;
+        cb.title = 'Disabled while CP in charge is Matthew Bodrozic';
+        // As extra safety, prevent accidental toggles via events (if some browser ignores disabled)
+        const stopper = function(e){ e.stopPropagation(); e.preventDefault(); return false; };
+        if (!cb.dataset.locked) {
+          cb.addEventListener('click', stopper, true);
+          cb.addEventListener('keydown', stopper, true);
+          cb.dataset.locked = '1';
+        }
+      }
+      // Remove any broader row locks if previously set
+      const row = logonText.closest('.greyed-row');
+      if (row) row.classList.remove('locked-row');
+    } else {
+      logonText.classList.remove('greyed-text');
+      // Re-enable the single checkbox
+      const cb2 = findLogonCheckbox();
+      if (cb2) {
+        cb2.disabled = false;
+        cb2.title = '';
+        if (cb2.dataset.locked) {
+          const stopper = function(e){ e.stopPropagation(); e.preventDefault(); return false; };
+          cb2.removeEventListener('click', stopper, true);
+          cb2.removeEventListener('keydown', stopper, true);
+          delete cb2.dataset.locked;
+        }
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    applyCpRules_LogonOnly();
+    const sel = document.getElementById('cpInCharge');
+    if (sel && !sel.dataset.boundLogonOnly) {
+      sel.addEventListener('change', applyCpRules_LogonOnly);
+      sel.dataset.boundLogonOnly = '1';
+    }
+  });
+})();
+</script>
+<script>
+// Helper: show a temporary inline hint under a select element
+function showInlineHint(sel, msg) {
+  if (!sel) return;
+  let hint = sel.parentElement.querySelector('.field-hint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.className = 'field-hint';
+    sel.parentElement.appendChild(hint);
+  }
+  hint.textContent = msg;
+  clearTimeout(hint._t);
+  hint.style.opacity = '1';
+  hint._t = setTimeout(() => { hint.style.opacity = '0'; hint.textContent=''; }, 2500);
+}
+</script>
+<script>
+(function(){
+  if (typeof resizeCanvas !== 'function') return;
+  var mq = window.matchMedia && window.matchMedia('(orientation: portrait)');
+  if (mq && !mq._powraBound) {
+    mq.addEventListener('change', function(){
+      // Debounce slight delay so layout settles
+      setTimeout(function(){
+        document.querySelectorAll('canvas.signature-pad').forEach(resizeCanvas);
+      }, 200);
+    });
+    mq._powraBound = true;
+  }
+})();
+</script>
+<script>
+(function(){
+  // Patch addInspectionRow to focus the select in the new row after adding
+  var orig = window.addInspectionRow;
+  window.addInspectionRow = function() {
+    if (typeof orig === 'function') orig();
+    var table = document.getElementById('inspectionTable');
+    if (!table) return;
+    var rows = table.querySelectorAll('tbody tr');
+    if (!rows.length) return;
+    var last = rows[rows.length - 1];
+    var sel = last.querySelector('select[name="inspection_member[]"]');
+    if (sel) {
+      sel.focus({preventScroll:false});
+      last.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+  };
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var workType = document.getElementById('workType');
+  if (workType && !workType.dataset.canvasFixBound) {
+    workType.addEventListener('change', function(){
+      document.querySelectorAll('canvas.signature-pad').forEach(resizeCanvas);
+    });
+    workType.dataset.canvasFixBound = "1";
   }
 });
 </script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const saveBtn = document.getElementById("saveBtn");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      const footer = document.getElementById("footer");
+      const controls = document.querySelectorAll("button, .no-print");
+      const originalStates = new Map();
+
+      // Hide footer and buttons, store original display state
+      if (footer) {
+        originalStates.set(footer, footer.style.display);
+        footer.style.display = "none";
+      }
+      controls.forEach(el => {
+        originalStates.set(el, el.style.display);
+        el.style.display = "none";
+      });
+
+      const filename = "POWRA_v1.7-long_" + new Date().toISOString().slice(0,19).replace(/[:T]/g,"-") + ".pdf";
+
+      html2canvas(document.body, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jspdf.jsPDF("p", "pt", [canvas.width, canvas.height]);
+        pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+        pdf.save(filename);
+
+        // Restore all original states
+        originalStates.forEach((val, el) => {
+          el.style.display = val;
+        });
+      });
+    });
+  }
+});
+</script>
 </body></html>
