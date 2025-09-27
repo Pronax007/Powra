@@ -413,6 +413,7 @@ button:disabled {
 <button id="gpsButton" style="margin-left:5px">
   Get Current Location
 </button>
+<p id="gpsStatus" style="font-style:italic; color:#666; margin-top:6px;"></p>
 <span id="gpsHint" style="color: grey; font-size: 0.8em; margin-left:8px;">(Requires location permission)</span>
 <a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf" "="" id="gpsLink" style="display:none; font-size:0.9em; margin-left:10px;" target="_blank">View on Google Maps</a>
 </div></p>
@@ -737,203 +738,7 @@ button:disabled {
 </div>
 
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  window.RA_LIST = [
-    ["F-JHG-RA 01","Abrasive Wheels"],["F-JHG-RA 02","Access & Egress on Site"],["F-JHG-RA 03","Asbestos"],
-    ["F-JHG-RA 04","Auger Boring"],["F-JHG-RA 05","Avoidance of Underground Services"],["F-JHG-RA 06","Bitumen - Reinstatement"],
-    ["F-JHG-RA 07","Box Demolition/Brick & Block work"],["F-JHG-RA 08","Cabling and Jointing"],["F-JHG-RA 09","Confined Spaces"],
-    ["F-JHG-RA 10","Contaminated Land"],["F-JHG-RA 11","Deep Trench Excavations"],["F-JHG-RA 12","Driving"],["F-JHG-RA 13","Duct Laying"],
-    ["F-JHG-RA 14","Excavating Near Sub Stations"],["F-JHG-RA 15","Excavating Near Fuel Stations"],["F-JHG-RA 16","Excavations"],
-    ["F-JHG-RA 17","Fibre Cable Blowing"],["F-JHG-RA 18","Fibre Optics"],["F-JHG-RA 19","Fire"],["F-JHG-RA 20","Hand Tools"],
-    ["F-JHG-RA 21","Hazardous Substances – Refer to product specific MSDS & COSHH assessment"],
-    ["F-JHG-RA 22","Highly Flammable Liquids - Refer to product specific MSDS & COSHH assessment"],["F-JHG-RA 23","House Keeping"],
-    ["F-JHG-RA 24","Ladders & Stepladders"],["F-JHG-RA 25","Lifting Operations"],["F-JHG-RA 26","Lone Working"],["F-JHG-RA 27","Manual Handling"],
-    ["F-JHG-RA 28","Noise"],["F-JHG-RA 29","Operating Cable Winch"],["F-JHG-RA 30","Overhead Power Cables"],["F-JHG-RA 31","Pole Erection"],
-    ["F-JHG-RA 32","Portable Power Cables"],["F-JHG-RA 33","Provision of Temporary Service"],["F-JHG-RA 34","Sewage"],
-    ["F-JHG-RA 35","Vibrating Equipment"],["F-JHG-RA 36","Waste Disposal"],["F-JHG-RA 37","Weil’s Disease (Leptospirosis)"],
-    ["F-JHG-RA 38","Working in the hours of Darkness"],["F-JHG-RA 39","Working Near Railways"],["F-JHG-RA 40","Delivery of Materials to Site"],
-    ["F-JHG-RA 41","Drilling Through Walls (Core drilling)"],["F-JHG-RA 42","MEWP’S"],["F-JHG-RA 43","Risk to Members of the Public"],
-    ["F-JHG-RA 44","Weather Conditions"],["F-JHG-RA 45","Safe Use of Harness"],["F-JHG-RA 46","Falling Objects"],["F-JHG-RA 47","Banksman for MEWP"],
-    ["F-JHG-RA 48","Working Near Water"],["F-JHG-RA 49","Handling Creosote - Refer to product specific MSDS & COSHH assessment"],
-    ["F-JHG-RA 50","Handling Resin - Refer to product specific MSDS & COSHH assessment"],["F-JHG-RA 51","Traffic Management"],
-    ["F-JHG-RA 52","Storage & Transportation of Gas Cylinders"],["F-JHG-RA 53","Wildlife Awareness"],["F-JHG-RA 54","Working Near Trees"],
-    ["F-JHG-RA 55","Pollution control"]
-  ];
-  window.MS_TITLES = {
-    1:"Project Commencement /Arrival on Site",2:"Removal of Manhole/Joint Box Covers",3:"Excavation and Duct Laying",
-    4:"Box Building",5:"Testing and Clearing of Ducts, Brush and Mandrels Systems",6:"Directional Drilling",7:"Reinstatement Works",
-    8:"Cabinet Erection",9:"Drilling through Walls for Cable Opes",10:"Blown Fibre Tubing",11:"Blown Fibre Installation",12:"Fibre Splicing",
-    13:"Fibre Testing and Commissioning",14:"Fibre Preparation",15:"Use of MEWP [Mobile Elevated Work Platforms]",
-    16:"Safe Use of Ladders & Step ladders",17:"Traffic Management Setup",18:"Working in Close Proximity to Underground Services",
-    19:"Pole Installation",20:"Pole Removal",21:"Lifting Operations",22:"Testing a pole",23:"Confined Spaces",24:"Use of Machinery",
-    25:"Impact Moling",26:"Pulling in a Cable",27:"Safe Use of Winches",28:"Services Embedded in Concrete",
-    29:"Working Near Overhead Electric Services",30:"Identification of 110kv lines:",31:"Testing for the absence of Voltage",32:"Earthing Procedures",
-    33:"Climbing Techniques Wood poles/Pylons",34:"Material Handling",35:"wrapping fibre on conductors through tension sets &angle towers",
-    36:"wrapping fibre on conductors through pole sets",37:"Wrapping Fibre on conductor’s through-high (20+) pole sets",
-    38:"wrapping fibre on conductors using arm mounted brackets (winches hat)",39:"Wrapping fibre on an earth wire through 220kv Duel Circuit Tower",
-    40:"Wrapping fibre on a phase wire through 110kv Duel Circuit Tower",41:"Recovering Fibre",42:"Recovery of stranded Tug",
-    43:"Telemess –Procedures Proof of Readiness Site Completion",44:"Installation of Phase to Ground",45:"Stringing Mass Fibre",
-    46:"Use of ATV’s",47:"Use of GDU’s",48:"Core drilling of chambers"
-  };
-  window.RA_TO_MS = {
-    1:[24,9,48], 2:[1], 3:[], 4:[6], 5:[18], 6:[7], 7:[4], 8:[26,12,14], 9:[23],
-    10:[], 11:[3,25], 12:[], 13:[3], 14:[18,29], 15:[18], 16:[3,25], 17:[10,11],
-    18:[14,12,13], 19:[], 20:[24], 21:[], 22:[], 23:[1], 24:[16], 25:[21], 26:[1],
-    27:[34], 28:[24], 29:[27], 30:[29,30,31,32], 31:[19,22], 32:[24], 33:[26,12],
-    34:[23], 35:[24], 36:[7], 37:[], 38:[1], 39:[], 40:[40], 41:[9,48], 42:[15],
-    43:[17], 44:[], 45:[33], 46:[19], 47:[15], 48:[], 49:[], 50:[], 51:[17], 52:[],
-    53:[], 54:[7], 55:[]
-  };
 
-  function fileNameForMS(num, title){
-    const safe = (title || "").replace(/[^\\w\\s-]/g,"").trim().replace(/\\s+/g,"_");
-    return `MS${String(num).padStart(2,"0")}_${safe}.pdf`;
-  }
-  function renderLinks(msNums){
-    if (!msNums || !msNums.length) return "<em>No linked Method Statement found.</em>";
-    return msNums.map(n => {
-      const t = window.MS_TITLES[n];
-      if (t) {
-        const f = fileNameForMS(n, t);
-        return `<div><a href="https://github.com/Pronax007/Powra/raw/main/JHG%20Operations%20Method%20Statements.pdf"" target="_blank" rel="noopener">MS${String(n).padStart(2,"0")} ${t}</a></div>`;
-      }
-      return `<div>MS${String(n).padStart(2,"0")}</div>`;
-    }).join("");
-  }
-
-  const selStd = document.getElementById("raSelectStd");
-  if (selStd && selStd.options.length <= 1) {
-    window.RA_LIST.forEach(([code, title]) => {
-      const opt = document.createElement("option");
-      opt.value = code;
-      opt.textContent = code + " — " + title;
-      selStd.appendChild(opt);
-    });
-  }
-
-  const results = document.getElementById("msResults");
-  const label = document.getElementById("msLabel");
-  if (selStd && results) {
-    selStd.addEventListener("change", () => {
-      const idx = window.RA_LIST.findIndex(([c]) => c === selStd.value) + 1;
-      const msNums = window.RA_TO_MS[idx] || [];
-      results.innerHTML = `<div style="display:inline-block; text-align:left;">${renderLinks(msNums)}</div>`;
-      results.style.display = "block";
-      if (label) label.style.display = msNums.length ? "block" : "none";
-    });
-  }
-
-  const addTop = document.getElementById("addRowBtnLinkedTop");
-  const addBottom = document.getElementById("addRowBtnLinked");
-  const container = document.getElementById("riskAssessmentRows");
-
-  function addRow(){
-    if (!container) return;
-    const row = document.createElement("div");
-    row.className = "ra-row";
-    row.style.margin = "8px 0";
-    row.innerHTML = '*F-JHG-RA ';
-
-    const sel = document.createElement("select");
-    sel.className = "raSelectRow";
-    sel.style.cssText = "width:70%; padding:8px; border:1px solid #333; border-radius:6px;";
-    const def = document.createElement("option");
-    def.value = "";
-    def.textContent = "-- Select a Risk Assessment --";
-    sel.appendChild(def);
-    window.RA_LIST.forEach(([code, title]) => {
-      const opt = document.createElement("option");
-      opt.value = code;
-      opt.textContent = code + " — " + title;
-      sel.appendChild(opt);
-    });
-
-    const res = document.createElement("div");
-    res.className = "msRowResults";
-    res.style.cssText = "text-align:center; margin-top:6px; background:#f7f7f7; padding:8px; border:1px solid #ddd; border-radius:8px; display:none;";
-
-    sel.addEventListener("change", () => {
-      const idx = window.RA_LIST.findIndex(([c]) => c === sel.value) + 1;
-      const msNums = window.RA_TO_MS[idx] || [];
-      res.innerHTML = renderLinks(msNums);
-      res.style.display = "block";
-    });
-
-    row.appendChild(sel);
-    row.appendChild(res);
-    container.appendChild(row);
-    row.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-
-  if (addTop) addTop.addEventListener("click", addRow);
-  if (addBottom) addBottom.addEventListener("click", addRow);
-});
-</script>
-</div>
-<script id="ynna-exclusive-js">
-document.addEventListener('DOMContentLoaded', function(){
-  // Any checkbox with class 'ynna' participates; grouped by their data-group or name
-  const boxes = Array.from(document.querySelectorAll('input.ynna[type="checkbox"]'));
-  function groupKey(input){
-    return input.getAttribute('data-group') || input.getAttribute('name') || '';
-  }
-  // Attach listeners
-  boxes.forEach(box => {
-    box.addEventListener('change', () => {
-      const key = groupKey(box);
-      if (!key) return;
-      const sameGroup = boxes.filter(b => groupKey(b) === key);
-      if (box.checked){
-        // Disable the other two and uncheck them
-        sameGroup.forEach(b => {
-          if (b !== box){
-            b.checked = false;
-            b.disabled = true;
-            // Grey their labels
-            const lbl = b.closest('label');
-            if (lbl) lbl.style.opacity = '0.55';
-          }
-        });
-      } else {
-        // Re-enable others
-        sameGroup.forEach(b => {
-          if (b !== box){
-            b.disabled = false;
-            const lbl = b.closest('label');
-            if (lbl) lbl.style.opacity = '';
-          }
-        });
-      }
-    });
-  });
-});
-</script>
-<script>
-(function(){
-  function fillGPS(){
-    if (!navigator.geolocation) return;
-    navigator.geolocation.getCurrentPosition(function(pos){
-      var coords = pos.coords.latitude.toFixed(6) + ", " + pos.coords.longitude.toFixed(6);
-      var f = document.getElementById("gpsLocation");
-      if (f) f.value = coords;
-    }, function(err){ console.log("GPS error:", err && err.message); });
-  }
-  var btn = document.getElementById("gpsButton");
-  if (btn) btn.addEventListener("click", fillGPS);
-  window.addEventListener("load", fillGPS);
-
-  function fillDateTime(){
-    var now = new Date();
-    function pad(n){ return (n<10?'0':'') + n; }
-    var formatted = pad(now.getDate()) + "/" + pad(now.getMonth()+1) + "/" + now.getFullYear() +
-                    " " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
-    var span = document.getElementById("datetime");
-    if (span) span.textContent = formatted;
-  }
-  window.addEventListener("load", fillDateTime);
-})();
-</script>
 <hr>
 <hr>
 <h3>Signatures &amp; Declaration</h3>
@@ -974,747 +779,7 @@ document.addEventListener('DOMContentLoaded', function(){
       Declaration: All team members confirm they have inspected their climbing equipment and verified it is in-date.
     </p>
 
-<script>
-const msLinks = {
-  "RA02": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS01.pdf",
-  "RA05": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA06": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS07.pdf",
-  "RA07": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
-  "RA09": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS23.pdf",
-  "RA13": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS03.pdf",
-  "RA14": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-  "RA15": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-  "RA17": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
-  "RA18": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS10.pdf",
-  "RA21": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA22": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA24": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS16.pdf",
-  "RA25": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS21.pdf",
-  "RA26": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA27": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS34.pdf",
-  "RA29": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
-  "RA30": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-  "RA31": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS08.pdf",
-  "RA33": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
-  "RA37": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS37.pdf",
-  "RA38": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA39": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-  "RA40": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS01.pdf",
-  "RA41": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
-  "RA42": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS15.pdf",
-  "RA43": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
-  "RA45": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS16.pdf",
-  "RA47": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS09.pdf",
-  "RA48": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-  "RA49": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA50": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS18.pdf",
-  "RA51": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS17.pdf",
-  "RA52": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS02.pdf",
-  "RA54": "https://github.com/Pronax007/Powra/raw/main/F-JHG_MS29.pdf",
-};
 
-document.addEventListener("DOMContentLoaded", function() {
-  const dropdown = document.getElementById("riskAssessmentDropdown");
-  const linkDiv = document.getElementById("msLink");
-  if (dropdown && linkDiv) {
-    dropdown.addEventListener("change", function() {
-      const selected = this.value;
-      if (msLinks[selected]) {
-        linkDiv.innerHTML = `<a href="${msLinks[selected]}" target="_blank">📄 Open Related Method Statement</a>`;
-      } else {
-        linkDiv.innerHTML = "";
-      }
-    });
-  }
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Names that should disable the row
-  const NAMES = new Set([
-    "warren barron",
-    "bobby rehman",
-    "matt bodrovic",
-    "mick waine"
-  ]);
-
-  function norm(s){
-    return (s||"")
-      .toString()
-      .replace(/[“”]/g, '"')
-      .replace(/[‘’]/g, "'")
-      .replace(/\s+/g, ' ')
-      .trim()
-      .toLowerCase();
-  }
-
-  // Find CP dropdown by scanning for our names in options
-  function findCpSelect(){
-    const selects = Array.from(document.querySelectorAll("select"));
-    for (const sel of selects){
-      const opts = Array.from(sel.options || []);
-      const hasName = opts.some(o => NAMES.has(norm(o.text || o.value)));
-      if (hasName) return sel;
-    }
-    return null;
-  }
-
-  // Find the row by locating the exact span text and then its nearest row-like container
-  function findTargetRowAndCheckbox(){
-    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
-    const spans = Array.from(document.querySelectorAll('span.ynna-text'));
-    let targetSpan = spans.find(sp => norm(sp.textContent) === TARGET_TEXT)
-                   || spans.find(sp => norm(sp.textContent).includes(TARGET_TEXT));
-    if (!targetSpan) return null;
-
-    // Find a "row" container
-    const row = targetSpan.closest('tr, .form-row, .row, .grid, li, .form-group, .section, .flex, div');
-    if (!row) return null;
-
-    // Primary checkbox (as before) if needed for specific styling
-    let primaryCb = null;
-    // Check siblings first
-    const sibs = [targetSpan.previousElementSibling, targetSpan.nextElementSibling].filter(Boolean);
-    for (const s of sibs){
-      const cb = s.matches && s.matches('input[type="checkbox"]') ? s : s.querySelector && s.querySelector('input[type="checkbox"]');
-      if (cb){ primaryCb = cb; break; }
-    }
-    if (!primaryCb){
-      // search within row
-      primaryCb = row.querySelector('input[type="checkbox"]');
-    }
-
-    return { row, targetSpan, primaryCb };
-  }
-
-  // Enable/disable all checkboxes in row, and give a visual cue
-  function setRowDisabled(rowInfo, disabled){
-    if (!rowInfo) return;
-    const { row, targetSpan } = rowInfo;
-    const checkboxes = Array.from(row.querySelectorAll('input[type="checkbox"]'));
-    for (const cb of checkboxes){
-      cb.disabled = disabled;
-      if (disabled) cb.checked = false;
-    }
-    // Visual: dim the entire row and prevent pointer events on labels
-    row.style.opacity = disabled ? "0.55" : "";
-    const labels = Array.from(row.querySelectorAll('label, span.ynna-text'));
-    for (const el of labels){
-      el.style.pointerEvents = disabled ? "none" : "";
-    }
-    // Also dim the specific span for clarity
-    if (targetSpan){
-      targetSpan.style.opacity = disabled ? "0.55" : "";
-      targetSpan.style.pointerEvents = disabled ? "none" : "";
-    }
-  }
-
-  function applyRule(cpSel, rowInfo){
-    if (!cpSel || !rowInfo) return;
-    const sel = cpSel.options[cpSel.selectedIndex];
-    const val = norm((sel && sel.text) || cpSel.value || "");
-    const shouldDisable = NAMES.has(val);
-    setRowDisabled(rowInfo, shouldDisable);
-  }
-
-  // Init + observers
-  function init(){
-    const cpSel = findCpSelect();
-    const rowInfo = findTargetRowAndCheckbox();
-    if (!cpSel || !rowInfo) return;
-
-    // Bind change
-    cpSel.addEventListener("change", function(){ applyRule(cpSel, rowInfo); });
-
-    // Apply after render
-    setTimeout(() => applyRule(cpSel, rowInfo), 0);
-    setTimeout(() => applyRule(cpSel, rowInfo), 300);
-  }
-
-  const obs = new MutationObserver(() => init());
-  obs.observe(document.documentElement, {childList:true, subtree:true});
-  init();
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const EXPLICIT = [
-    ["warren","barron"],
-    ["bobby","rehman"],
-    ["mick","waine"]
-  ];
-  function norm(s){
-    return (s||"").toString().toLowerCase()
-      .replace(/[“”]/g, '"')
-      .replace(/[‘’]/g, "'")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-  function optionMatchesBlocked(valueText){
-    const t = norm(valueText);
-    if (EXPLICIT.some(([a,b]) => t.includes(a) && t.includes(b))) return true;
-    if ((t.includes("matt") || t.includes("matthew")) && t.includes("bodr")) return true;
-    return false;
-  }
-  function findCpSelect(){
-    return Array.from(document.querySelectorAll("select")).find(sel =>
-      Array.from(sel.options||[]).some(o => optionMatchesBlocked(o.text||o.value))
-    );
-  }
-  function findTargetRow(){
-    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
-    const spans = Array.from(document.querySelectorAll('span.ynna-text'));
-    let targetSpan = spans.find(sp => norm(sp.textContent).includes(TARGET_TEXT));
-    if (!targetSpan) return null;
-    const row = targetSpan.closest('tr, .form-row, .row, .grid, li, .form-group, .section, .flex, div') || targetSpan.parentElement;
-    return {row, targetSpan};
-  }
-  function setRowDisabled(rowInfo, disabled){
-    if (!rowInfo) return;
-    const { row, targetSpan } = rowInfo;
-    const cbs = Array.from(row.querySelectorAll('input[type="checkbox"]'));
-    for (const cb of cbs){ cb.disabled = disabled; if (disabled) cb.checked = false; }
-    row.style.opacity = disabled ? "0.55" : "";
-    const labels = Array.from(row.querySelectorAll('label, span.ynna-text'));
-    for (const el of labels){ el.style.pointerEvents = disabled ? "none" : ""; }
-    if (targetSpan){ targetSpan.style.opacity = disabled ? "0.55" : ""; targetSpan.style.pointerEvents = disabled ? "none" : ""; }
-  }
-  function applyRule(cpSel, rowInfo){
-    if (!cpSel || !rowInfo) return;
-    const sel = cpSel.options[cpSel.selectedIndex];
-    const val = norm((sel && sel.text) || cpSel.value || "");
-    setRowDisabled(rowInfo, optionMatchesBlocked(val));
-  }
-  function init(){
-    const cpSel = findCpSelect();
-    const rowInfo = findTargetRow();
-    if (!cpSel || !rowInfo) return;
-    applyRule(cpSel, rowInfo);
-    cpSel.addEventListener("change", () => applyRule(cpSel, rowInfo));
-  }
-  const obs = new MutationObserver(() => init());
-  obs.observe(document.documentElement, {childList:true, subtree:true});
-  init();
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const cpSel = document.getElementById("cpInCharge");
-  if (!cpSel) return;
-
-  const EXPLICIT = [
-    ["warren","barron"],
-    ["bobby","rehman"],
-    ["mick","waine"]
-  ];
-
-  function norm(s){
-    return (s||"").toString().toLowerCase()
-      .replace(/[“”]/g, '"')
-      .replace(/[‘’]/g, "'")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  function optionMatchesBlocked(valueText){
-    const t = norm(valueText);
-    if (EXPLICIT.some(([a,b]) => t.includes(a) && t.includes(b))) return true;
-    if (t.includes("matt") && t.includes("bod")) return true;
-    return false;
-  }
-
-  function findTargetSpan(){
-    const TARGET_TEXT = 'location has been logged onto using the "log on" system and acknowledged';
-    return Array.from(document.querySelectorAll('span.ynna-text')).find(sp => norm(sp.textContent).includes(TARGET_TEXT));
-  }
-
-  function setDisabled(span, disabled){
-    if (!span) return;
-    let container = span.closest('tr, div, li, section') || span.parentElement;
-    if (!container) return;
-    const cbs = Array.from(container.querySelectorAll('input[type="checkbox"]'));
-    for (const cb of cbs){ cb.disabled = disabled; if (disabled) cb.checked = false; }
-    container.style.opacity = disabled ? "0.55" : "";
-    const labels = Array.from(container.querySelectorAll('label, span.ynna-text'));
-    for (const el of labels){ el.style.pointerEvents = disabled ? "none" : ""; }
-  }
-
-  function applyRule(span){
-    const sel = cpSel.options[cpSel.selectedIndex];
-    const raw = (sel && sel.text) || cpSel.value || "";
-    const val = norm(raw);
-    const shouldDisable = optionMatchesBlocked(val);
-    setDisabled(span, shouldDisable);
-  }
-
-  function init(){
-    const span = findTargetSpan();
-    if (!span) return;
-    applyRule(span);
-    cpSel.addEventListener("change", () => applyRule(span));
-  }
-
-  init();
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const cpSel = document.getElementById("cpInCharge");
-  const BLOCKED = ["warren barron","bobby rehman","mick waine","matthew bodrozic"];
-
-  function norm(s){
-    return (s||"").toLowerCase().replace(/\s+/g," ").trim();
-  }
-
-  function setDisabled(disabled){
-    const span = document.getElementById("logonTarget");
-    if (!span) return;
-    // Assume checkboxes are in the next sibling cell
-    let checkboxCell = span.closest("td")?.nextElementSibling;
-    if (!checkboxCell) return;
-    const cbs = checkboxCell.querySelectorAll('input[type="checkbox"]');
-    cbs.forEach(cb => { cb.disabled = disabled; if (disabled) cb.checked = false; });
-    checkboxCell.style.opacity = disabled ? "0.55" : "";
-    span.style.opacity = disabled ? "0.55" : "";
-    checkboxCell.querySelectorAll('label, span.ynna-text').forEach(el => {
-      el.style.pointerEvents = disabled ? "none" : "";
-    });
-  }
-
-  function applyRule(){
-    const sel = cpSel?.options[cpSel.selectedIndex];
-    const raw = (sel && (sel.text || sel.value)) || "";
-    const shouldDisable = BLOCKED.some(n => norm(raw).includes(n));
-    setDisabled(shouldDisable);
-  }
-
-  if (cpSel) cpSel.addEventListener("change", applyRule);
-  applyRule();
-});
-</script>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const workType = document.getElementById("workType");
-  const section = document.getElementById("sectionAContainer");
-  if (!workType || !section) return;
-  function toggleSection(){
-    if (workType.value) {
-      section.style.display = "block";
-    } else {
-      section.style.display = "none";
-    }
-  }
-  workType.addEventListener("change", toggleSection);
-  toggleSection();
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const workType = document.getElementById("workType");
-
-  function toggleOverhead() {
-    const overheadItems = document.querySelectorAll(".overhead-hide");
-    overheadItems.forEach(span => {
-      const row = span.closest("tr") || span.parentElement;
-      if (!row) return;
-      if (workType.value === "Overhead") {
-        row.style.display = "none";
-      } else {
-        row.style.display = "";
-      }
-    });
-  }
-
-  if (workType) {
-    workType.addEventListener("change", toggleOverhead);
-    toggleOverhead(); // run once on load
-  }
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-  if (!form) return;
-
-  form.addEventListener("submit", (e) => {
-    let missing = [];
-    document.querySelectorAll("[data-required='true']").forEach(el => {
-      if ((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && !el.value.trim()) {
-        missing.push(el);
-      } else if (el.tagName === "SELECT" && !el.value.trim()) {
-        missing.push(el);
-      }
-    });
-
-    if (missing.length > 0) {
-      e.preventDefault();
-      alert("Please complete all required fields marked with *");
-      missing[0].focus();
-    }
-  });
-});
-</script><script>
-function initSignaturePads() {
-  document.querySelectorAll(".signature-pad").forEach(canvas => {
-    const ctx = canvas.getContext("2d");
-    let drawing = false;
-
-    canvas.addEventListener("mousedown", () => drawing = true);
-    canvas.addEventListener("mouseup", () => drawing = false);
-    canvas.addEventListener("mouseout", () => drawing = false);
-    canvas.addEventListener("mousemove", e => {
-      if (!drawing) return;
-      const rect = canvas.getBoundingClientRect();
-      ctx.fillStyle = "#000";
-      ctx.beginPath();
-      ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 1.5, 0, 2 * Math.PI);
-      ctx.fill();
-    });
-  });
-}
-function clearPad(btn) {
-  const canvas = btn.parentElement.querySelector("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-document.addEventListener("DOMContentLoaded", initSignaturePads);
-</script><script>
-function updateNameOptions() {
-  const selects = document.querySelectorAll('select[name="member_name[]"]');
-  const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
-
-  selects.forEach(select => {
-    Array.from(select.options).forEach(option => {
-      if (option.value && selectedValues.includes(option.value) && option.value !== select.value) {
-        option.disabled = true;
-      } else {
-        option.disabled = false;
-      }
-    });
-  });
-}
-
-document.addEventListener("change", function(e) {
-  if (e.target && e.target.name === "member_name[]") {
-    updateNameOptions();
-  }
-});
-
-document.addEventListener("DOMContentLoaded", updateNameOptions);
-</script><script>
-function addSignatureRow() {
-  const table = document.getElementById("signatureTable");
-  const row = table.insertRow(-1);
-
-  const cell1 = row.insertCell(0);
-  const cell2 = row.insertCell(1);
-  const cell3 = row.insertCell(2);
-
-  cell1.style.border = "1px solid #333";
-  cell1.style.padding = "6px";
-  cell2.style.border = "1px solid #333";
-  cell2.style.padding = "6px";
-  cell3.style.border = "1px solid #333";
-  cell3.style.padding = "6px";
-  cell3.style.textAlign = "center";
-  cell3.classList.add("equip-col");
-  cell3.style.display = "none"; // hidden by default, toggled by workType
-
-  cell1.innerHTML = '<select name="member_name[]" style="width:95%; padding:6px;">' +
-                    '<option value="">-- Select --</option>' +
-                    '<option>Warren Barron</option>' +
-                    '<option>Carl Carlisle</option>' +
-                    '<option>Joe Smith</option>' +
-                    '<option>Matthew Bodrozic</option>' +
-                    '<option>Bobby Rehman</option>' +
-                    '<option>Mick Waine</option>' +
-                    '</select>';
-  cell2.innerHTML = '<div style="text-align:center;">' +
-                    '<canvas class="signature-pad" width="230" height="80" style="width:230px; height:80px; border:1px solid #aaa; background:#fff;"></canvas><br>' +
-                    '<button type="button" onclick="clearPad(this)" style="margin-top:4px; padding:4px 8px;">Clear</button>' +
-                    '</div>';
-  cell3.innerHTML = '<input type="checkbox" class="equip-check" name="equipment_checked[]">';
-
-  initSignaturePads();
-  updateNameOptions();
-
-  // Ensure new checkbox respects current Work Type state
-  toggleEquipColumn(document.getElementById("workType").value);
-  updateRemoveButtons();
-}
-
-function initSignaturePads() {
-  document.querySelectorAll(".signature-pad").forEach(canvas => {
-    if (canvas.getAttribute("data-initialized")) return; // prevent re-binding
-    const ctx = canvas.getContext("2d");
-    let drawing = false;
-
-    canvas.addEventListener("mousedown", () => drawing = true);
-    canvas.addEventListener("mouseup", () => drawing = false);
-    canvas.addEventListener("mouseout", () => drawing = false);
-    canvas.addEventListener("mousemove", e => {
-      if (!drawing) return;
-      const rect = canvas.getBoundingClientRect();
-      ctx.fillStyle = "#000";
-      ctx.beginPath();
-      ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 1.2, 0, 2 * Math.PI);
-      ctx.fill();
-    });
-    canvas.setAttribute("data-initialized", "true");
-  });
-}
-
-function clearPad(btn) {
-  const canvas = btn.parentElement.querySelector("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function updateNameOptions() {
-  const selects = document.querySelectorAll('select[name="member_name[]"]');
-  const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
-
-  selects.forEach(select => {
-    Array.from(select.options).forEach(option => {
-      if (option.value && selectedValues.includes(option.value) && option.value !== select.value) {
-        option.disabled = true;
-      } else {
-        option.disabled = false;
-      }
-    });
-  });
-}
-
-function toggleEquipColumn(workTypeValue) {
-  const show = workTypeValue === "Overhead";
-  document.querySelectorAll(".equip-col").forEach(el => {
-    el.style.display = show ? "table-cell" : "none";
-  });
-  document.querySelectorAll(".equip-check").forEach(cb => {
-    cb.required = show; // mandatory only when Overhead
-    if (!show) cb.checked = false; // clear if hidden
-  });
-}
-
-// Validation before form submission
-function validateForm(e) {
-  const workTypeValue = document.getElementById("workType").value;
-  if (workTypeValue === "Overhead") {
-    const checks = document.querySelectorAll(".equip-check");
-    for (let cb of checks) {
-      if (!cb.checked) {
-        alert("Please confirm climbing equipment checked for all team members.");
-        e.preventDefault();
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  const workTypeSelect = document.getElementById("workType");
-  if (workTypeSelect) {
-    workTypeSelect.addEventListener("change", function() {
-      toggleEquipColumn(this.value);
-    });
-  }
-
-  // Attach validation to form submit
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", validateForm);
-  }
-
-  initSignaturePads();
-  updateNameOptions();
-});
-</script>
-<script>
-(function(){
-  const ALLOWED = ["Warren Barron","Carl Carlisle","Joe Smith"];
-  const OTHER_VALUE = "__OTHER__";
-
-  function nearestRow(el){ while(el && el.tagName && el.tagName.toLowerCase() !== "tr") el = el.parentElement; return el || null; }
-
-  function ensureOtherOption(select){
-    if (!select) return;
-    if (![...select.options].some(o => o.value === OTHER_VALUE)) {
-      const opt = document.createElement("option");
-      opt.value = OTHER_VALUE;
-      opt.textContent = "Other / Contractor…";
-      select.appendChild(opt);
-    }
-  }
-
-  function ensureCustomInput(select){
-    let input = select.parentElement.querySelector('input.member-custom');
-    if (!input) {
-      input = document.createElement("input");
-      input.type = "text";
-      input.name = "member_custom[]";
-      input.className = "member-custom";
-      input.placeholder = "Enter contractor name";
-      input.style.cssText = "margin-left:8px; width:160px; padding:4px; border:1px solid #333; border-radius:6px; display:none;";
-      select.parentElement.appendChild(input);
-      input.addEventListener("input", function(){ enforceRow(nearestRow(select)); });
-    }
-    input.style.display = (select.value === OTHER_VALUE) ? "" : "none";
-  }
-
-  function effectiveName(row){
-    const select = row && row.querySelector && row.querySelector('select[name="member_name[]"]');
-    if (!select) return "";
-    if (select.value === OTHER_VALUE) {
-      const custom = row.querySelector('input.member-custom');
-      return custom ? (custom.value || "").trim() : "";
-    }
-    return select.value || "";
-  }
-
-  function enforceRow(row){
-    if (!row) return;
-    const box = row.querySelector('input.equip-check[type="checkbox"]');
-    const select = row.querySelector('select[name="member_name[]"]');
-    if (!box || !select) return;
-
-    ensureOtherOption(select);
-    ensureCustomInput(select);
-
-    const name = effectiveName(row);
-    const allowed = ALLOWED.includes(name);
-
-    if (!allowed) {
-      box.checked = false;
-      box.disabled = true;
-      box.title = 'Only allowed for: ' + ALLOWED.join(', ');
-    } else {
-      box.disabled = false;
-      box.title = '';
-    }
-  }
-
-  function enforceAll(){ document.querySelectorAll('#signatureTable tr').forEach(enforceRow); }
-
-  function setupSelect(select){
-    ensureOtherOption(select);
-    ensureCustomInput(select);
-    select.addEventListener("change", function(){
-      ensureCustomInput(select);
-      enforceRow(nearestRow(select));
-    });
-  }
-
-  function setupAllSelects(){ document.querySelectorAll('select[name="member_name[]"]').forEach(setupSelect); }
-
-  document.addEventListener("DOMContentLoaded", function(){
-    setupAllSelects();
-    enforceAll();
-    // keep __OTHER__ enabled even if duplicate-disabling logic exists elsewhere
-    document.addEventListener("change", function(){
-      document.querySelectorAll('select[name="member_name[]"] option[value="__OTHER__"]').forEach(function(opt){ opt.disabled = false; });
-    });
-    const table = document.getElementById('signatureTable');
-    if (table && window.MutationObserver) {
-      new MutationObserver(function(){ setupAllSelects(); enforceAll(); }).observe(table, {childList:true, subtree:true});
-    }
-  });
-})();
-</script>
-
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  var wt = document.getElementById("workType");
-  var wrap = document.getElementById("belowWorkType");
-  function apply(){
-    if (!wrap) return;
-    var show = wt && wt.value && wt.value.trim() !== "";
-    wrap.style.display = show ? "" : "none";
-  }
-  if (wt) wt.addEventListener("change", apply);
-  apply();
-});
-</script>
-
-
-<script>
-(function(){
-  async function reverseGeocode(lat, lon) {
-    try {
-      const controller = new AbortController();
-      const t = setTimeout(()=>controller.abort(), 8000);
-      const url = `https://nominatim.openstreetmap.org/reverse?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&format=json&zoom=18&addressdetails=1`;
-      const res = await fetch(url, {
-        headers: {
-          'Accept': 'application/json',
-          'User-Agent': 'POWRA/1.0 (+contact: field-app)' // polite header
-        },
-        signal: controller.signal
-      });
-      clearTimeout(t);
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      return data && (data.display_name || (data.address && Object.values(data.address).join(', '))) || '';
-    } catch (e) {
-      return ''; // fail silently to avoid blocking coords
-    }
-  }
-
-  function setAddressText(txt){
-    var el = document.getElementById('gpsAddress');
-    if (!el) return;
-    el.textContent = txt ? (' — ' + txt) : '';
-    el.title = txt || '';
-  }
-
-  // Hook into the existing geolocation success logic if present
-  // We'll monkey-patch navigator.geolocation.getCurrentPosition usage by wrapping the success handler if we can find the field.
-  document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('gpsButton');
-    var latField = document.querySelector('input[name=\"gps_lat\"], #gpsLat, input#gpsLat');
-    var lonField = document.querySelector('input[name=\"gps_lon\"], #gpsLon, input#gpsLon');
-    var coordsField = document.querySelector('#gpsLocation, input[name=\"gps_location\"], input#gpsLocation');
-
-    async function afterCoords(lat, lon){
-      const addr = await reverseGeocode(lat, lon);
-      setAddressText(addr);
-    }
-
-    // If there is a handler already attached, we don't override it; we just listen for changes on fields
-    if (latField || lonField || coordsField) {
-      ['change','input'].forEach(evt => {
-        if (latField) latField.addEventListener(evt, ()=>{ if(latField.value && lonField && lonField.value){ afterCoords(latField.value, lonField.value); } });
-        if (lonField) lonField.addEventListener(evt, ()=>{ if(lonField.value && latField && latField.value){ afterCoords(latField.value, lonField.value); } });
-        if (coordsField) coordsField.addEventListener(evt, ()=>{
-          var m = (coordsField.value||'').match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
-          if (m) afterCoords(m[1], m[2]);
-        });
-      });
-    }
-
-    // Additionally, augment the click on the GPS button to fetch address after coordinates are set
-    if (btn && navigator.geolocation) {
-      var originalOnClick = btn.onclick;
-      btn.onclick = function(ev){
-        if (originalOnClick) try { originalOnClick.call(this, ev); } catch(e){}
-        // Give the page a tick to fill fields, then read and reverse geocode
-        setTimeout(function(){
-          var lat='', lon='';
-          if (latField && lonField) { lat = latField.value; lon = lonField.value; }
-          else if (coordsField) {
-            var m = (coordsField.value||'').match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
-            if (m) { lat = m[1]; lon = m[2]; }
-          }
-          if (lat && lon) afterCoords(lat, lon);
-        }, 300);
-      };
-    }
-  });
-})();
-</script>
 
 
 <script>
@@ -1910,6 +975,114 @@ document.addEventListener("DOMContentLoaded", function() {
   var msResults = document.getElementById("msResults");
   if (raSelect && msResults && !raSelect.value) {
     msResults.innerHTML = ""; // clear default MS links on load
+  }
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var gpsButton = document.getElementById('gpsButton');
+  if (!gpsButton) return;
+  var gpsStatus = document.getElementById('gpsStatus');
+  var gpsLocation = document.getElementById('gpsLocation');
+  var latitudeEl = document.getElementById('latitude');
+  var longitudeEl = document.getElementById('longitude');
+  var gpsLink = document.getElementById('gpsLink');
+  var gpsAddress = document.getElementById('gpsAddress');
+
+  var originalText = gpsButton.textContent || 'Get Current Location';
+
+  function setStatus(msg){ if (gpsStatus) gpsStatus.textContent = msg || ''; }
+
+  // Remove any existing click handlers (best-effort): replace the node with a clone
+  var newBtn = gpsButton.cloneNode(true);
+  gpsButton.parentNode.replaceChild(newBtn, gpsButton);
+  gpsButton = newBtn;
+
+  gpsButton.addEventListener('click', function(){
+    // Loading state
+    gpsButton.disabled = true;
+    gpsButton.textContent = 'Loading…';
+    setStatus('Retrieving GPS data…');
+    if (gpsAddress) gpsAddress.textContent = 'Loading location…';
+    if (gpsLink) gpsLink.style.display = 'none';
+    if (gpsLocation) gpsLocation.value = '';
+    if (latitudeEl) latitudeEl.value = '';
+    if (longitudeEl) longitudeEl.value = '';
+
+    if (!navigator.geolocation){
+      setStatus('Geolocation not supported by this browser.');
+      gpsButton.disabled = false;
+      gpsButton.textContent = originalText;
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+      enableHighAccuracy: false,   // faster on mobile
+      timeout: 10000,              // 10s max
+      maximumAge: 60000            // reuse recent fix up to 1 min
+    });
+  });
+
+  function onSuccess(pos){
+    var lat = pos.coords.latitude;
+    var lon = pos.coords.longitude;
+    if (gpsLocation) gpsLocation.value = lat.toFixed(6) + ', ' + lon.toFixed(6);
+    if (latitudeEl) latitudeEl.value = lat.toFixed(6);
+    if (longitudeEl) longitudeEl.value = lon.toFixed(6);
+
+    // Show Maps link if present
+    if (gpsLink){
+      gpsLink.href = 'https://www.google.com/maps/search/?api=1&query=' + lat + ',' + lon;
+      gpsLink.style.display = 'inline';
+    }
+
+    setStatus('Resolving address…');
+
+    // Try to resolve a human-friendly address if an address placeholder exists
+    var wantAddress = !!gpsAddress;
+    if (!wantAddress){
+      // Finish immediately
+      setStatus('');
+      gpsButton.disabled = false;
+      gpsButton.textContent = originalText;
+      return;
+    }
+
+    var url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + encodeURIComponent(lat) + '&lon=' + encodeURIComponent(lon);
+    fetch(url, { headers: { 'Accept': 'application/json' }})
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(data){
+        if (data && data.display_name){
+          gpsAddress.textContent = data.display_name;
+        } else {
+          gpsAddress.textContent = 'Address not found';
+        }
+      })
+      .catch(function(err){
+        console.warn('Reverse geocode failed', err);
+        gpsAddress.textContent = 'Unable to resolve address — coords shown.';
+      })
+      .finally(function(){
+        setStatus('');
+        gpsButton.disabled = false;
+        gpsButton.textContent = originalText;
+      });
+  }
+
+  function onError(err){
+    console.warn('Geolocation error', err);
+    var msg = 'Unable to get location.';
+    if (err && err.code){
+      if (err.code === err.PERMISSION_DENIED) msg = 'Permission denied — allow location access in your browser.';
+      else if (err.code === err.POSITION_UNAVAILABLE) msg = 'Position unavailable.';
+      else if (err.code === err.TIMEOUT) msg = 'Timeout — try again.';
+    }
+    setStatus(msg);
+    if (gpsAddress) gpsAddress.textContent = msg;
+    gpsButton.disabled = false;
+    gpsButton.textContent = originalText;
   }
 });
 </script>
