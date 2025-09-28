@@ -701,7 +701,13 @@ input[type="text"], textarea, select {
   width: 98%;
   box-sizing: border-box;
 }
-</style></head>
+</style>
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
 <body><div style="text-align:left; margin:8px 0;"></div>
 <div id="form-header" style="border-bottom:2px solid #000; padding:10px;">
 <div style="display:flex; justify-content:flex-start; align-items:center;">
@@ -2738,7 +2744,7 @@ function buildEmailBody(){
 <!-- Sticky Footer with Save button -->
 <div id="footer" style="position: fixed; bottom: 0px; left: 0px; width: 100%; background: rgb(47, 54, 64); color: rgb(255, 255, 255); text-align: center; border-top: 1px solid rgb(0, 0, 0); z-index: 999; padding: 3px; font-size: 11px;">
 <button id="saveBtn" style="background: rgb(47, 54, 64); border: 1px solid rgb(47, 54, 64); color: rgb(255, 255, 255); padding: 6px 12px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer;">💾 Save as PDF</button><button id="clearBtn" style="background: rgb(169, 50, 38); border: 1px solid rgb(169, 50, 38); color: rgb(255, 255, 255); padding: 6px 12px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; margin-left: 8px;">🗑 Clear Form</button>
-<div id="versionNote" style="margin-top:2px; font-size:10px; opacity:0.7;">POWRA v2.1 (MASTER) • Author: W.Barron</div></div>
+<div id="versionNote" style="margin-top:2px; font-size:10px; opacity:0.7;">POWRA v2.3 (MASTER) • Author: W.Barron</div></div>
 <!-- Add jsPDF, html2canvas, and Signature Pad libraries -->
 <script src="./updated_files/html2canvas.min.js.download"></script>
 <script src="./updated_files/jspdf.umd.min.js.download"></script>
