@@ -16,7 +16,7 @@
   input[type=text], textarea, select { width: 100%; padding: 6px; margin-top: 4px; }
   .checklist label { font-weight: normal; }
   .signature-pad { border: 1px solid #ccc; width: 100%; height: 150px; }
-  .sig-container { margin-top: 10px; }
+  .sig-container { margin-top: 4px; }
   /* replaced by unified style below */
 </style>
 <style id="ynna-css">
@@ -724,6 +724,11 @@ td.equip-col input[type="checkbox"] {
 <option value="Splicing/Testing">Splicing/Testing</option>
 <option value="Generic">Generic</option>
 </select>
+<div id="towerNumberWrapper" style="margin-top: 4px; display: none;"><label for="towerNumber" style="margin-right:6px;">Tower Number:</label><input id="towerNumber" name="towerNumber"
+         style="padding:6px; border:1px solid #333; border-radius:6px; width:200px;"
+         type="text">
+</div>
+
 <div id="workTypePrompt" style="color: red; font-style: italic; margin-top: 4px; display: block;">
   Please complete all required fields above before selecting a work type.
 </div>
@@ -875,11 +880,11 @@ td.equip-col input[type="checkbox"] {
 <div style="font-weight:bold; margin-bottom:6px;">Risk Assessment → Linked Method Statements</div>
 <select id="raSelectStd" style="width:100%; max-width:520px; padding:8px; border:1px solid #333; border-radius:6px;">
 <option value="">-- Select a Risk Assessment --</option>
-<option value="F-JHG-RA 01">F-JHG-RA 01 — Abrasive Wheels</option><option value="F-JHG-RA 02">F-JHG-RA 02 — Access &amp; Egress on Site</option><option value="F-JHG-RA 03">F-JHG-RA 03 — Asbestos</option><option value="F-JHG-RA 04">F-JHG-RA 04 — Auger Boring</option><option value="F-JHG-RA 05">F-JHG-RA 05 — Avoidance of Underground Services</option><option value="F-JHG-RA 06">F-JHG-RA 06 — Bitumen - Reinstatement</option><option value="F-JHG-RA 07">F-JHG-RA 07 — Box Demolition/Brick &amp; Block work</option><option value="F-JHG-RA 08">F-JHG-RA 08 — Cabling and Jointing</option><option value="F-JHG-RA 09">F-JHG-RA 09 — Confined Spaces</option><option value="F-JHG-RA 10">F-JHG-RA 10 — Contaminated Land</option><option value="F-JHG-RA 11">F-JHG-RA 11 — Deep Trench Excavations</option><option value="F-JHG-RA 12">F-JHG-RA 12 — Driving</option><option value="F-JHG-RA 13">F-JHG-RA 13 — Duct Laying</option><option value="F-JHG-RA 14">F-JHG-RA 14 — Excavating Near Sub Stations</option><option value="F-JHG-RA 15">F-JHG-RA 15 — Excavating Near Fuel Stations</option><option value="F-JHG-RA 16">F-JHG-RA 16 — Excavations</option><option value="F-JHG-RA 17">F-JHG-RA 17 — Fibre Cable Blowing</option><option value="F-JHG-RA 18">F-JHG-RA 18 — Fibre Optics</option><option value="F-JHG-RA 19">F-JHG-RA 19 — Fire</option><option value="F-JHG-RA 20">F-JHG-RA 20 — Hand Tools</option><option value="F-JHG-RA 21">F-JHG-RA 21 — Hazardous Substances – Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 22">F-JHG-RA 22 — Highly Flammable Liquids - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 23">F-JHG-RA 23 — House Keeping</option><option value="F-JHG-RA 24">F-JHG-RA 24 — Ladders &amp; Stepladders</option><option value="F-JHG-RA 25">F-JHG-RA 25 — Lifting Operations</option><option value="F-JHG-RA 26">F-JHG-RA 26 — Lone Working</option><option value="F-JHG-RA 27">F-JHG-RA 27 — Manual Handling</option><option value="F-JHG-RA 28">F-JHG-RA 28 — Noise</option><option value="F-JHG-RA 29">F-JHG-RA 29 — Operating Cable Winch</option><option value="F-JHG-RA 30">F-JHG-RA 30 — Overhead Power Cables</option><option value="F-JHG-RA 31">F-JHG-RA 31 — Pole Erection</option><option value="F-JHG-RA 32">F-JHG-RA 32 — Portable Power Cables</option><option value="F-JHG-RA 33">F-JHG-RA 33 — Provision of Temporary Service</option><option value="F-JHG-RA 34">F-JHG-RA 34 — Sewage</option><option value="F-JHG-RA 35">F-JHG-RA 35 — Vibrating Equipment</option><option value="F-JHG-RA 36">F-JHG-RA 36 — Waste Disposal</option><option value="F-JHG-RA 37">F-JHG-RA 37 — Weil’s Disease (Leptospirosis)</option><option value="F-JHG-RA 38">F-JHG-RA 38 — Working in the hours of Darkness</option><option value="F-JHG-RA 39">F-JHG-RA 39 — Working Near Railways</option><option value="F-JHG-RA 40">F-JHG-RA 40 — Delivery of Materials to Site</option><option value="F-JHG-RA 41">F-JHG-RA 41 — Drilling Through Walls (Core drilling)</option><option value="F-JHG-RA 42">F-JHG-RA 42 — MEWP’S</option><option value="F-JHG-RA 43">F-JHG-RA 43 — Risk to Members of the Public</option><option value="F-JHG-RA 44">F-JHG-RA 44 — Weather Conditions</option><option value="F-JHG-RA 45">F-JHG-RA 45 — Safe Use of Harness</option><option value="F-JHG-RA 46">F-JHG-RA 46 — Falling Objects</option><option value="F-JHG-RA 47">F-JHG-RA 47 — Banksman for MEWP</option><option value="F-JHG-RA 48">F-JHG-RA 48 — Working Near Water</option><option value="F-JHG-RA 49">F-JHG-RA 49 — Handling Creosote - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 50">F-JHG-RA 50 — Handling Resin - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 51">F-JHG-RA 51 — Traffic Management</option><option value="F-JHG-RA 52">F-JHG-RA 52 — Storage &amp; Transportation of Gas Cylinders</option><option value="F-JHG-RA 53">F-JHG-RA 53 — Wildlife Awareness</option><option value="F-JHG-RA 54">F-JHG-RA 54 — Working Near Trees</option><option value="F-JHG-RA 55">F-JHG-RA 55 — Pollution control</option></select><div id="msLabel" style="text-align: center; font-weight: 600; margin-top: 10px; display: block;">Linked Method Statements</div>
+<option value="F-JHG-RA 01">F-JHG-RA 01 — Abrasive Wheels</option><option value="F-JHG-RA 02">F-JHG-RA 02 — Access &amp; Egress on Site</option><option value="F-JHG-RA 03">F-JHG-RA 03 — Asbestos</option><option value="F-JHG-RA 04">F-JHG-RA 04 — Auger Boring</option><option value="F-JHG-RA 05">F-JHG-RA 05 — Avoidance of Underground Services</option><option value="F-JHG-RA 06">F-JHG-RA 06 — Bitumen - Reinstatement</option><option value="F-JHG-RA 07">F-JHG-RA 07 — Box Demolition/Brick &amp; Block work</option><option value="F-JHG-RA 08">F-JHG-RA 08 — Cabling and Jointing</option><option value="F-JHG-RA 09">F-JHG-RA 09 — Confined Spaces</option><option value="F-JHG-RA 10">F-JHG-RA 10 — Contaminated Land</option><option value="F-JHG-RA 11">F-JHG-RA 11 — Deep Trench Excavations</option><option value="F-JHG-RA 12">F-JHG-RA 12 — Driving</option><option value="F-JHG-RA 13">F-JHG-RA 13 — Duct Laying</option><option value="F-JHG-RA 14">F-JHG-RA 14 — Excavating Near Sub Stations</option><option value="F-JHG-RA 15">F-JHG-RA 15 — Excavating Near Fuel Stations</option><option value="F-JHG-RA 16">F-JHG-RA 16 — Excavations</option><option value="F-JHG-RA 17">F-JHG-RA 17 — Fibre Cable Blowing</option><option value="F-JHG-RA 18">F-JHG-RA 18 — Fibre Optics</option><option value="F-JHG-RA 19">F-JHG-RA 19 — Fire</option><option value="F-JHG-RA 20">F-JHG-RA 20 — Hand Tools</option><option value="F-JHG-RA 21">F-JHG-RA 21 — Hazardous Substances – Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 22">F-JHG-RA 22 — Highly Flammable Liquids - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 23">F-JHG-RA 23 — House Keeping</option><option value="F-JHG-RA 24">F-JHG-RA 24 — Ladders &amp; Stepladders</option><option value="F-JHG-RA 25">F-JHG-RA 25 — Lifting Operations</option><option value="F-JHG-RA 26">F-JHG-RA 26 — Lone Working</option><option value="F-JHG-RA 27">F-JHG-RA 27 — Manual Handling</option><option value="F-JHG-RA 28">F-JHG-RA 28 — Noise</option><option value="F-JHG-RA 29">F-JHG-RA 29 — Operating Cable Winch</option><option value="F-JHG-RA 30">F-JHG-RA 30 — Overhead Power Cables</option><option value="F-JHG-RA 31">F-JHG-RA 31 — Pole Erection</option><option value="F-JHG-RA 32">F-JHG-RA 32 — Portable Power Cables</option><option value="F-JHG-RA 33">F-JHG-RA 33 — Provision of Temporary Service</option><option value="F-JHG-RA 34">F-JHG-RA 34 — Sewage</option><option value="F-JHG-RA 35">F-JHG-RA 35 — Vibrating Equipment</option><option value="F-JHG-RA 36">F-JHG-RA 36 — Waste Disposal</option><option value="F-JHG-RA 37">F-JHG-RA 37 — Weil’s Disease (Leptospirosis)</option><option value="F-JHG-RA 38">F-JHG-RA 38 — Working in the hours of Darkness</option><option value="F-JHG-RA 39">F-JHG-RA 39 — Working Near Railways</option><option value="F-JHG-RA 40">F-JHG-RA 40 — Delivery of Materials to Site</option><option value="F-JHG-RA 41">F-JHG-RA 41 — Drilling Through Walls (Core drilling)</option><option value="F-JHG-RA 42">F-JHG-RA 42 — MEWP’S</option><option value="F-JHG-RA 43">F-JHG-RA 43 — Risk to Members of the Public</option><option value="F-JHG-RA 44">F-JHG-RA 44 — Weather Conditions</option><option value="F-JHG-RA 45">F-JHG-RA 45 — Safe Use of Harness</option><option value="F-JHG-RA 46">F-JHG-RA 46 — Falling Objects</option><option value="F-JHG-RA 47">F-JHG-RA 47 — Banksman for MEWP</option><option value="F-JHG-RA 48">F-JHG-RA 48 — Working Near Water</option><option value="F-JHG-RA 49">F-JHG-RA 49 — Handling Creosote - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 50">F-JHG-RA 50 — Handling Resin - Refer to product specific MSDS &amp; COSHH assessment</option><option value="F-JHG-RA 51">F-JHG-RA 51 — Traffic Management</option><option value="F-JHG-RA 52">F-JHG-RA 52 — Storage &amp; Transportation of Gas Cylinders</option><option value="F-JHG-RA 53">F-JHG-RA 53 — Wildlife Awareness</option><option value="F-JHG-RA 54">F-JHG-RA 54 — Working Near Trees</option><option value="F-JHG-RA 55">F-JHG-RA 55 — Pollution control</option></select><div id="msLabel" style="text-align: center; font-weight: 600; margin-top: 4px; display: block;">Linked Method Statements</div>
 <div id="msInfo" style="text-align: center; font-size: 13px; font-style: italic; color: #555; margin-top: 4px;">
   Note: Not every Risk Assessment has a mapped Method Statement. The ones shown here are linked based on known connections.
 </div>
-<div id="msResults" style="text-align: center; margin-top: 10px; background: rgb(247, 247, 247); padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 8px; display: block;"></div>
+<div id="msResults" style="text-align: center; margin-top: 4px; background: rgb(247, 247, 247); padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 8px; display: block;"></div>
 </div>
 <div id="riskAssessmentRows" style="margin-top:10px;"></div>
 </div>
@@ -3605,4 +3610,25 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const workType = document.getElementById("workType");
+  const towerWrapper = document.getElementById("towerNumberWrapper");
+
+  function toggleTower() {
+    if (workType.value === "Overhead") {
+      towerWrapper.style.display = "block";
+    } else {
+      towerWrapper.style.display = "none";
+    }
+  }
+
+  if (workType) {
+    workType.addEventListener("change", toggleTower);
+    toggleTower();
+  }
+});
+</script>
+
 </body></html>
